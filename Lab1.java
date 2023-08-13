@@ -224,7 +224,7 @@ class Cd {
 	}
 }
 
-public class Lab1pronto {
+public class Lab1 {
 	public static void main(String[] args) {
 
 		// criando os objetos exemplo de livros e imprimindo
