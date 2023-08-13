@@ -4,7 +4,7 @@
   funcionário que trabalha na bibliotéca.
 */
 
-package begin;
+//package begin;
 
 /*classe dedicada apenas aos livros*/
 class Livro {
@@ -226,7 +226,7 @@ class Cd {
 	}
 }
 
-public class Principal {
+public class Lab1pronto {
 	public static void main(String[] args) {
 
 		// criando os objetos exemplo de livros e imprimindo
