@@ -14,7 +14,7 @@ class Livro {
 	private String editora;
 	private int edicao;
 	private String categoria; // biografia, fantasia, infantil, etc
-	private boolean disponivel; // verdadeiro ou falso para a disponibilidade do livro para empréstimo
+	public boolean disponivel; // verdadeiro ou falso para a disponibilidade do livro para empréstimo
 
 	// construtor dedicado apenas aos livros
 	public Livro(String titulo, String autor, int registro, String editora, int edicao, String categoria,
