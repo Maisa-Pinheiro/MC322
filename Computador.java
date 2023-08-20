@@ -1,4 +1,5 @@
 /*pacote destinado apenas a classe computador, pois essa classe não se encaixa em nenhuma das outras*/
+/*contém apenas a classe computador*/
 
 package classeComputadores;
 
