@@ -90,4 +90,14 @@ public class Usuario {
 			}
 		}
 	}
+	public void qtsLivros() {
+	    int a=0;
+		for (int i = 0; i < 5; i++) {
+			if (livros_empres[i] != null) {
+				a= a + 1;
+			}
+			
+		}
+		System.out.println("O usuário " + nome + " emprestou " + a + " livros.");
+	}
 }
