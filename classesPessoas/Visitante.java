@@ -1,5 +1,6 @@
 package classesPessoas;
 
+/*teste fernanda*/
 /*classe dedicada apenas a visitantes - o visitante não pode fazer emprestimo de livros*/
 public class Visitante {
 	private String endereco;
