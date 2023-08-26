@@ -75,7 +75,7 @@ public class Emprestimo {
 
 	/* método para mostrar quais livros a pessoa emprestou */
 	public void ItensEmprestados() {
-		System.out.println("Itens emprestados para o usuário " + nome + ":");
+		System.out.println("Itens emprestados para o usuário " + pessoa.getnome() + ":");
 		for (Multimidia livro : itens_empres) {
 			if (livro != null) {
 				System.out.println("- " + livro.gettitulo());
@@ -83,7 +83,26 @@ public class Emprestimo {
 		}
 	}
 
-  /*
+  
+	public void emprestarItem(Multimidia livro) {
+		for (int i = 0; i < 5; i++) {
+			if (itens_empres[i] == null) {
+				itens_empres[i] = livro;
+				return;
+			}
+		}
+		System.out.println("O usuário " + pessoa.getnome() + " atingiu o limite de empréstimos.");
+	}
+
+	/* método para mostrar quais livros a pessoa emprestou */
+	public void ItensEmprestados() {
+		System.out.println("Itens emprestados para o usuário " + nome + ":");
+		for (Multimidia livro : itens_empres) {
+			if (livro != null) {
+				System.out.println("- " + livro.gettitulo());
+			}
+		}
+	}
 	public void qtsItens() {
 	    int a=0;
 		for (int i = 0; i < 5; i++) {
@@ -95,4 +114,4 @@ public class Emprestimo {
 		System.out.println("O usuário " + nome + " emprestou " + a + " itens.");
 	}
 }
-*/
+
