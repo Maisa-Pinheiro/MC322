@@ -15,23 +15,22 @@ import classesPessoas.Membros;
  */
 public class Emprestimo {
 	private Membro pessoa; // pessoa que fez o emprestimo
-  private int numero; // numero de registro do emprestimo na base de dados
+  	private int numero; // numero de registro do emprestimo na base de dados
 	private Multimidia[] itens_empres;// vetor que guarda os itens emprestados pelo usuário
 	private LocalDate retirada; // data de retirada dos itens
-  private LocalDate devolucao; // data de devolução dos itens
-  private int prazo; // prazo em dias
+	private LocalDate devolucao; // data de devolução dos itens
+	private int prazo; // prazo em dias
 	public boolean bloqueio; // membro pode ou nao fazer renovações(true- pode, false-não pode(possui atraso))
 
 
 	/* construtor dedicado apenas aos usuarios */
 	public Emprestimo(Membro pessoa,int numero, LocalDate retirada, int prazo, boolean bloqueio) {
 		this.pessoa = pessoa;
-    this.numero = numero;
+   	 	this.numero = numero;
 		this.retirada = retirada;
 		this.prazo = prazo;
 		this.devolucao = retirada.plusDays(prazo);
 		this.categoria = categoria;
-		this.prazo = prazo;
 		this.bloqueio = bloqueio;
 		this.itens_empres = new Multimidia[5];
 	}
@@ -56,9 +55,7 @@ public class Emprestimo {
 		return prazo;
 	}
 	
- 	 public String getbloqueio() {
-		return bloqueio;
-	}
+ 
 
 	/*
 	 * não possui setter pois os itens privados não serão mudados(seria outro empréstimo)
@@ -115,7 +112,9 @@ public class Emprestimo {
 	public int atraso() {
         LocalDate hoje = LocalDate.now();
         long diasAtraso = ChronoUnit.DAYS.between(devolucao, hoje);
-        
+        if(Math.max(0, diasAtraso)==0){
+		bloqueio = false;
+	}
         return Math.max(0, diasAtraso); // Retorna 0 se não houver atraso
     }
 	// calcular multa
@@ -132,5 +131,9 @@ public class Emprestimo {
 		}else{
 		    multa = (5/2) + 5 + (atraso-10)*2;
 		}
+		if(multa>0){
+			bloqueio = false;
+		}
+	}
 }
 
