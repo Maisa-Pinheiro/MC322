@@ -57,7 +57,7 @@ public class Funcionarios {
 	public String getacesso() {
 		return acesso;
 	}
-	public String getsalario() {
+	public float getsalario() {
 		return salario;
 	}
 
@@ -76,7 +76,7 @@ public class Funcionarios {
 	public void setendereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public void setsalario(String salario) {
+	public void setsalario(float salario) {
 		this.salario = salario;
 	}
 	public void setacesso(String acesso) {
@@ -86,4 +86,3 @@ public class Funcionarios {
 	
 	
 }
-
