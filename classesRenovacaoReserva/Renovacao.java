@@ -16,7 +16,7 @@ public class Renovacao {
 	
 	
 	/* construtor dedicado apenas aos usuarios */
-	public Renovacao(membro pessoa, boolean tipo, int registro) {
+	public Renovacao(Membro pessoa, boolean tipo, int registro) {
 		this.pessoa = pessoa;
 		this.tipo = tipo;
 		this.registro = registro;
@@ -30,7 +30,7 @@ public class Renovacao {
 
 
 
-	public int gettipo() {
+	public boolean gettipo() {
 		return tipo;
 	}
 
@@ -45,7 +45,7 @@ public class Renovacao {
 	    if(emprestimo.bloqueio==false){
 	        System.out.println("O usuário " + pessoa.getnome() + " não pode renovar o empréstimo " + emprestimo.getnumero() + " pois o mesmo está em atraso.");
 	    }else{
-	        emprestimo.prazo= emprestimo.prazo + 5;
+	        emprestimo.setprazo();
 	        System.out.println("O usuário " + pessoa.getnome() + " teve o prazo do empréstimo " + emprestimo.getnumero() + " aumentado em 5 dias.");
 	    }
 	}
@@ -56,10 +56,9 @@ public class Renovacao {
 	    if(item.disponivel>0){
 	        System.out.println("O livro está disponivel para empréstimo, não é permitido reservar");
 	    }else{
-	        livro.disponivel=livro.disponivel - 1;
+	        item.disponivel=item.disponivel - 1;
 	        System.out.println("O livro está reservado, o usuário será avisado quando o mesmo puder ser retirado");
 	    }
 	}
 	
 }
-
