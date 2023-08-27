@@ -20,7 +20,7 @@ public class Emprestimo {
 	private LocalDate retirada; // data de retirada dos itens
   private LocalDate devolucao; // data de devolução dos itens
   private int prazo; // prazo em dias
-	public boolean bloqueio; // membro pode ou nao fazer empréstimos
+	public boolean bloqueio; // membro pode ou nao fazer renovações(true- pode, false-não pode(possui atraso))
 
 
 	/* construtor dedicado apenas aos usuarios */
