@@ -10,7 +10,7 @@ public class Multimidia {
 	private String editora; // editora ou gravadora/estúdio
 	private int ano;// ano de publicação do cd/dvd ou edição do livro
 	private String categoria; // biografia, fantasia, infantil, rock, samba, etc
-	public int copias;// quantas cópias do item a biblioteca possui, para digitais, "não se aplica"
+	public int copias;// quantas cópias do item a biblioteca possui, para digitais,1
 	public int disponivel; // quantas cópias estão disponpiveis para empréstimo, para digitais "não se aplica"
 	private String tipo; // livro fisico, livro digital, cd, dvd
 
