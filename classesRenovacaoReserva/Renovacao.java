@@ -16,7 +16,7 @@ public class Renovacao {
 	
 	
 	/* construtor dedicado apenas aos usuarios */
-	public Penovacao(membro pessoa, boolean tipo, int registro) {
+	public Renovacao(membro pessoa, boolean tipo, int registro) {
 		this.pessoa = pessoa;
 		this.tipo = tipo;
 		this.registro = registro;
