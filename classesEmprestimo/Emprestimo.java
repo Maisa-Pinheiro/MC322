@@ -85,6 +85,7 @@ public class Emprestimo {
 		for (int i = 0; i < 5; i++) {
 			if (itens_empres[i] == null) {
 				itens_empres[i] = livro;
+				livro.disponivel--;
 				return;
 			}
 		}
