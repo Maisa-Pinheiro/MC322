@@ -30,7 +30,6 @@ public class Emprestimo {
 		this.retirada = retirada;
 		this.prazo = prazo;
 		this.devolucao = retirada.plusDays(prazo);
-		this.categoria = categoria;
 		this.bloqueio = bloqueio;
 		this.itens_empres = new Multimidia[5];
 	}
@@ -44,22 +43,24 @@ public class Emprestimo {
 		return numero;
 	}
 
-	public int getretirada() {
+	public LocalDate getretirada() {
 		return retirada;
 	}
 
-	public String getdevolucao() {
+	public LocalDate getdevolucao() {
 		return devolucao;
 	}
-	public String getprazo() {
+	public int getprazo() {
 		return prazo;
 	}
 	
  
 
-	/*
-	 *  setter de alteração de prazo
-	 */
+	//setter de alteração de prazo
+	public void setprazo() {
+		this.prazo= prazo + 5;
+	}
+	
 	
 	/*
 	 * implementação de um metodo para emprestar livros a um usuario(pode ser
@@ -89,15 +90,8 @@ public class Emprestimo {
 		System.out.println("O usuário " + pessoa.getnome() + " atingiu o limite de empréstimos.");
 	}
 
-	/* método para mostrar quais livros a pessoa emprestou */
-	public void ItensEmprestados() {
-		System.out.println("Itens emprestados para o usuário " + nome + ":");
-		for (Multimidia livro : itens_empres) {
-			if (livro != null) {
-				System.out.println("- " + livro.gettitulo());
-			}
-		}
-	}
+
+	
 	public void qtsItens() {
 	    int a=0;
 		for (int i = 0; i < 5; i++) {
@@ -106,19 +100,19 @@ public class Emprestimo {
 			}
 			
 		}
-		System.out.println("O usuário " + nome + " emprestou " + a + " itens.");
+		System.out.println("O usuário " + pessoa.getnome() + " emprestou " + a + " itens.");
 	}
 	// calcular atraso
 	public int atraso() {
         LocalDate hoje = LocalDate.now();
-        long diasAtraso = ChronoUnit.DAYS.between(devolucao, hoje);
+        int diasAtraso = (int) ChronoUnit.DAYS.between(devolucao, hoje);
         if(Math.max(0, diasAtraso)==0){
 		bloqueio = false;
 	}
         return Math.max(0, diasAtraso); // Retorna 0 se não houver atraso
     }
 	// calcular multa
-	public void getmulta(){
+	public float getmulta(){
 		// para os primeiros 5 dias, a multa é de R$0,50,
 		// para os dias de 6 a 10, a multa é de R$ 1,00,
 		// para os demais dias, a multa é de  R$ 2,00
@@ -134,6 +128,8 @@ public class Emprestimo {
 		if(multa>0){
 			bloqueio = false;
 		}
+		
+		return multa;
 	}
 }
 
