@@ -4,6 +4,7 @@
 // fazer método para atribuir os livros às pessoas
 package classesEmprestimo;
 
+import java.time.LocalDate;
 import classesObras.Multimidia;
 import classesPessoas.Membros;
 
@@ -16,20 +17,20 @@ public class Emprestimo {
 	private Membro pessoa; // pessoa que fez o emprestimo
   private int numero; // numero de registro do emprestimo na base de dados
 	private Multimidia[] itens_empres;// vetor que guarda os itens emprestados pelo usuário
-	private String retirada; // data de retirada dos itens
-  private String devolucao; // data de devolução dos itens
+	private LocalDate retirada; // data de retirada dos itens
+  private LocalDate devolucao; // data de devolução dos itens
   private int prazo; // prazo em dias
 	public int atraso; // o numero de atraso em dias
 	public boolean bloqueio; // membro pode ou nao fazer empréstimos
 
 
 	/* construtor dedicado apenas aos usuarios */
-	public Emprestimo(Membro pessoa,int numero, String retirada, String devolucao, int prazo, int atraso, boolean bloqueio) {
+	public Emprestimo(Membro pessoa,int numero, LocalDate retirada, int prazo, int atraso, boolean bloqueio) {
 		this.pessoa = pessoa;
     this.numero = numero;
 		this.retirada = retirada;
-		this.devolucao = devolucao;
 		this.prazo = prazo;
+		this.devolucao = retirada.plusDays(prazo);
 		this.categoria = categoria;
 		this.prazo = prazo;
 		this.atraso = atraso;
