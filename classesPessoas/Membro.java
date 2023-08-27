@@ -10,7 +10,7 @@ import classesObras.Multimidia;
  * com frequência e podem ser acessados por outras classes sem necessidade de
  * getters e setters
  */
-public class Membros {
+public class Membro {
 	private String nome;
 	private int cpf;
 	private int registro;
@@ -22,7 +22,7 @@ public class Membros {
 	private String endereco; 
 
 	/* construtor dedicado apenas aos usuarios */
-	public membros(String nome, int cpf, int registro, int emprestimo, String categoria, String prazo, int atraso, int idade,
+	public Membro(String nome, int cpf, int registro, int emprestimo, String categoria, String prazo, int atraso, int idade,
 			String endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
@@ -56,9 +56,7 @@ public class Membros {
 	public String getcategoria() {
 		return categoria;
 	}
-	public String getsalario() {
-		return salario;
-	}
+
 
 	/*
 	 * setters dos atributos que não mudam com frequência(atributos que não serão
@@ -75,10 +73,8 @@ public class Membros {
 	public void setendereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public void setsalario(String salario) {
-		this.salario = salario;
-	}
+	
 
-	/
+	
 	
 }
