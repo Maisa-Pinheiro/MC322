@@ -3,7 +3,7 @@
 
 // fazer método para atribuir os livros às pessoas
 package classesEmprestimo;
-
+import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
 import classesObras.Multimidia;
 import classesPessoas.Membros;
@@ -58,7 +58,7 @@ public class Emprestimo {
  
 
 	/*
-	 * não possui setter pois os itens privados não serão mudados(seria outro empréstimo)
+	 *  setter de alteração de prazo
 	 */
 	
 	/*
