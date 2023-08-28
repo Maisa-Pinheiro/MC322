@@ -2,8 +2,6 @@
 
 package classesFuncionarios;
 
-
-
 /*
  * classe dedicada apenas aos funcionários, os atributos publicos são os que mudam
  * com frequência e podem ser acessados por outras classes sem necessidade de
@@ -13,16 +11,19 @@ public class Funcionarios {
 	private String nome;
 	private int cpf;
 	private int registro;
-	public String cargo; //cargo do funcionário( bibliotecário, gerente, segurança, equipe de limpeza)
-	
-	private String acesso; /* nivel de acesso aos sistemas( Consulta(somente visualizar informações sobre itens de emprestimo), 
-                        	Adm acervo(modificar informaçoes sobre itens de emprestimo), 
-                        	Adm emprestimo e renovacao(modificar emprestimos e renovações),
-                        	Adm geral(modificar todos os dados))*/
+	public String cargo; // cargo do funcionário( bibliotecário, gerente, segurança, equipe de limpeza)
 
-	private float salario; 
-	public int idade;  
-	private String endereco; 
+	private String acesso; /*
+							 * nivel de acesso aos sistemas( Consulta(somente visualizar informações sobre
+							 * itens de emprestimo),
+							 * Adm acervo(modificar informaçoes sobre itens de emprestimo),
+							 * Adm emprestimo e renovacao(modificar emprestimos e renovações),
+							 * Adm geral(modificar todos os dados))
+							 */
+
+	private float salario;
+	public int idade;
+	private String endereco;
 
 	/* construtor dedicado apenas aos funcionarios */
 	public Funcionarios(String nome, int cpf, int registro, float salario, String cargo, String acesso, int idade,
@@ -35,7 +36,11 @@ public class Funcionarios {
 		this.acesso = acesso;
 		this.idade = idade;
 		this.endereco = endereco;
-		
+
+	}
+
+	public Funcionarios(String nome2, int cpf2, int registro2, double d, String cargo2, String acesso2, int idade2,
+			String endereco2) {
 	}
 
 	/* getters para os atributos privados */
@@ -54,9 +59,11 @@ public class Funcionarios {
 	public String getendereco() {
 		return endereco;
 	}
+
 	public String getacesso() {
 		return acesso;
 	}
+
 	public float getsalario() {
 		return salario;
 	}
@@ -76,13 +83,12 @@ public class Funcionarios {
 	public void setendereco(String endereco) {
 		this.endereco = endereco;
 	}
+
 	public void setsalario(float salario) {
 		this.salario = salario;
 	}
+
 	public void setacesso(String acesso) {
 		this.acesso = acesso;
 	}
-
-	
-	
 }
