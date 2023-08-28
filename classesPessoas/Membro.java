@@ -2,8 +2,6 @@
 
 package classesPessoas;
 
-import classesObras.Multimidia;
-
 /*
  * classe dedicada apenas aos membros, considerando que tanto alunos e professores como funcionários podem
  * emprestar livrod, os atributos publicos são os que mudam
@@ -16,25 +14,22 @@ public class Membro {
 	private int registro;
 	public int emprestimo; // quantos livros o usuario tem emprestado
 	private String categoria; // aluno grad, aluno pos, funcionário ou professor
-	public String prazo; // prazo de devolucao
-	public int atraso; // o numero de atraso em dias
-	public int idade; // idade do usuario
-	private String endereco; 
+	private Boolean atraso; // boolean se o aluno tem ou não livros em atraso
+	private int idade; // idade do usuario
+	private String endereco;
 
 	/* construtor dedicado apenas aos usuarios */
-	public Membro(String nome, int cpf, int registro, int emprestimo, String categoria, String prazo, int atraso, int idade,
+	public Membro(String nome, int cpf, int registro, int emprestimo, String categoria, String prazo, Boolean atraso,
+			int idade,
 			String endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.registro = registro;
 		this.emprestimo = emprestimo;
 		this.categoria = categoria;
-		this.prazo = prazo;
 		this.atraso = atraso;
 		this.idade = idade;
 		this.endereco = endereco;
-	
-		
 	}
 
 	/* getters para os atributos privados */
@@ -50,13 +45,21 @@ public class Membro {
 		return registro;
 	}
 
-	public String getendereco() {
-		return endereco;
-	}
 	public String getcategoria() {
 		return categoria;
 	}
 
+	public Boolean getatraso() {
+		return atraso;
+	}
+
+	public int getidade() {
+		return idade;
+	}
+
+	public String getendereco() {
+		return endereco;
+	}
 
 	/*
 	 * setters dos atributos que não mudam com frequência(atributos que não serão
@@ -73,8 +76,4 @@ public class Membro {
 	public void setendereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
-
-	
-	
 }
