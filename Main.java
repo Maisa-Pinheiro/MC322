@@ -1,91 +1,81 @@
-/*pacote destinado apenas a classe main*/
-/*change*/
+//package Main;
 
+import java.time.LocalDate;
 
-
-import classesPessoas.Usuario;
-import classesPessoas.Funcionario;
-import classesPessoas.Visitante;
-import classesObras.Cd;
-import classesObras.Livro;
-import classesObras.Revista;
-import classesObras.Academico;
-import classeComputadores.Computador;
+import classesEmprestimo.Emprestimo;
+import classesFuncionarios.Funcionarios;
+import classesObras.Multimidia;
+import classesPessoas.Membro;
+import classesRelatorio.Relatorio;
+//import classesRenovacaoReserva.Renovacao;
 
 public class Main {
-	public static void main(String[] args) {
-		/*criando os objetos exemplo de livros e imprimindo*/
-		Livro livro1 = new Livro("Harry Potter", "JK Rowling", 1234, "Rocco", 1, "fantasia", 3, 3);
-		System.out.println("Informacoes do livro:\n");
-		System.out.println(livro1.gettitulo() + "; " + livro1.getautor() + "; " + livro1.getregistro() + "; "
-				+ livro1.geteditora() + "; " + livro1.getedicao() + "; " + livro1.getcategoria() + "; " + livro1.copias
-				+ "; " + livro1.disponivel);
-		System.out.println("\n");
+    public static void main(String[] args) {
 
-		/* criando os objetos exemplo de usuários e imprimindo */
-		Usuario pessoa = new Usuario("Maria", 123456789, 3698, 5, "12/05/2024", 0, 25, "Rua Jose de Alencar, 123");
-		System.out.println("Informacoes do usuario:\n");
-		System.out.println(pessoa.getnome() + "; " + pessoa.getcpf() + "; " + pessoa.getregistro() + "; "
-				+ pessoa.emprestimo + "; " + pessoa.prazo + "; " + pessoa.atraso + "; " + pessoa.idade + "; "
-				+ pessoa.getendereco());
-		System.out.println("\n");
+        // Criando um usuário (Membro)
+        Membro membro = new Membro("Maria", 123456789, 3698, 5, "Aluno de graduação", null, false, 25,
+                "Rua Jose de Alencar, 123");
+        System.out.println("Informações sobre o membro:");
+        System.out.println(membro.getnome() + "; " + membro.getcpf() + "; " + membro.getregistro() + "; "
+                + membro.emprestimo + "; " + "; " + membro.getatraso() + "; " + membro.getidade() + "; "
+                + membro.getendereco());
+        System.out.println();
 
-		/* criando os objetos exemplo de funcionarios e imprimindo */
-		Funcionario trabalhador1 = new Funcionario("Karl", 895456789, 7898, "7h30 as 17h15", "Bibliotecario", 3000, 27,
-				"Avenida Marechal Rondon, 13");
-		System.out.println("Informacoes do funcionario:\n");
-		System.out.println(trabalhador1.getnome() + "; " + trabalhador1.getcpf() + "; " + trabalhador1.getregistro()
-				+ "; " + trabalhador1.gethorario() + "; " + trabalhador1.getcargo() + "; " + trabalhador1.getsalario()
-				+ "; " + trabalhador1.idade + "; " + trabalhador1.getendereco());
-		System.out.println("\n");
+        // Criando dois exemplos de Multimidia
+        Multimidia cd = new Multimidia("Pagodes", "Turma do Pagode", 123, "Gravadora", 2023, "Música", 3, 3, "CD");
+        Multimidia livro = new Multimidia("O poder do hábito", "Charles Duhingg", 456, "Objetiva", 2012, "Livro", 10, 7,
+                "Livro Fisico");
 
-		/* criando os objetos exemplo de CDs/DVDs e imprimindo */
-		Cd dvd1 = new Cd("DVD", 5866, "Alice no Pais das Maravilhas", "Tim Burton", 2010, true);
-		System.out.println("Informacoes do CD ou DVD:\n");
-		System.out.println(dvd1.getnome() + "; " + dvd1.gettipo() + "; " + dvd1.getregistro() + "; " + dvd1.getautor()
-				+ "; " + dvd1.getano() + "; " + dvd1.disponivel);
-		System.out.println("\n");
+        // Criando um empréstimo e emprestando o CD ao usuário
+        // Esse é um exemplo de aplicações de gregação onde um usuário pode ter mais que
+        // um objeto de emprestimo, conceito de "um para muitos"
+        Emprestimo emprestimo = new Emprestimo(membro, 1, LocalDate.now(), 7, false);
+        emprestimo.emprestarItem(cd);
+        emprestimo.emprestarItem(livro);
 
-		/* criando os objetos exemplo de Computadores */
-		Computador comp1 = new Computador("3AA", 9988, "biblioteca01", "comp9988", 1, true);
-		System.out.println("Informacoes do Computador:\n");
-		System.out.println(comp1.getlocal() + "; " + comp1.getregistro() + "; " + comp1.getlogin() + "; "
-				+ comp1.getsenha() + "; " + comp1.gettempo() + "; " + comp1.disponivel);
-		System.out.println("\n");
+        // Imprimindo os itens emprestados pelo usuário
+        emprestimo.ItensEmprestados();
+        System.out.println();
 
-		/* criando os objetos exemplo de revistas */
-		Revista revista1 = new Revista("automotivo", 5006, "Auto Esporte", "Globo", "janeiro de 2023", true);
-		System.out.println("Informacoes da Revista:\n");
-		System.out.println(revista1.getnome() + "; " + revista1.getcategoria() + "; " + revista1.getregistro() + "; "
-				+ revista1.geteditora() + "; " + revista1.getedicao() + "; " + revista1.disponivel);
-		System.out.println("\n");
+        // Exemplo de objeto da classe funcionário
+        Funcionarios funcionario = new Funcionarios("Paulo Luiz", 123456, 12345, 1000, "Bibliotecário", "Geral", 25,
+                "Rua Benedito Correia");
+        System.out.println("Informações sobre o funcionario:");
+        System.out.println(funcionario.getnome() + "; " + funcionario.getcpf() + "; " + funcionario.getregistro() + "; "
+                + funcionario.getsalario() + "; " + funcionario.cargo + "; " + funcionario.getacesso());
+        System.out.println();
 
-		/* criando os objetos exemplo de Acadêmicos */
-		Academico acad = new Academico("Ginástica Laboral: Um meio para a Promoção da Qualidade de Vida", 5336,
-				"Poliana Carvalho", "universidade Estadual de Campinas", true);
-		System.out.println("Informacoes do CD ou DVD:\n");
-		System.out.println(acad.gettitulo() + "; " + acad.getautor() + "; " + acad.getregistro() + "; "
-				+ acad.getinstituicao() + "; " + acad.disponivel);
-		System.out.println("\n");
+        // Criando um objeto exemplo de relatório
+        System.out.println("Informações sobre o relatório:");
+        Relatorio relatorio = new Relatorio(LocalDate.now(), 1);
+        System.out.println("Relatório emitido em: " + relatorio.getdata());
+        System.out.println("Número do relatório: " + relatorio.getnumero());
 
-		/* criando os objetos exemplo de visitantes */
-		Visitante vis1 = new Visitante("Av Bruxelas, 1", 22, "Marcos", 555889994);
-		System.out.println("Informacoes do Visitante:\n");
-		System.out.println(vis1.getnome() + "; " + vis1.getidade() + "; " + vis1.getendereco() + "; " + vis1.getcpf());
-		System.out.println("\n");
-
-		/*teste dos setters*/
-		System.out.println("Mudança de senha do computador:\n");
-		comp1.setsenha("comp1senhanova");
-		System.out.println("Informacoes do Computador:\n");
-		System.out.println(comp1.getlocal() + "; " + comp1.getregistro() + "; " + comp1.getlogin() + "; "
-				+ comp1.getsenha() + "; " + comp1.gettempo() + "; " + comp1.disponivel);
-		System.out.println("\n");
-
-		/*empréstimo de livros ao usuário*/
-
-		pessoa.emprestarLivro(livro1);
-		pessoa.livrosEmprestados();
-
-	}
+        // objetos de exemplo para o relatório
+        // um exemplo de Multimidia
+        Multimidia dvd = new Multimidia("Turma da Monica", "Mauricio de Souza", 3504, "Turma da Monica", 1980,
+                "Infantil", 40, 30, "DVD");
+        relatorio.addItem(dvd);
+        relatorio.qtdlivros();
+        // dois exemplos de membros
+        Membro user1 = new Membro("Carlos Alberto", 24815238, 1259, 2, "Estudante", null, false, 21,
+                "Rua Olavio de Carvalho 123");
+        Membro user2 = new Membro("Fabiana Santos", 24815238, 1259, 2, "Estudante", null, false, 17,
+                "Rua Olavio de Carvalho 123");
+        relatorio.addMembro(user1);
+        relatorio.addMembro(user2);
+        relatorio.membro();
+        // um exemplo de funcionario
+        Funcionarios func1 = new Funcionarios("Lucas Sampaio", 4567845, 24589, 1.500, "Auxiliar de Limpeza", "Consulta",
+                32, "Rua Antonio Silveira 587");
+        relatorio.addFuncionario(func1);
+        relatorio.funcionarios();
+        // um exemplo de renovação
+        // Renovacao Renov = new Renovacao(false, 123, user1);
+        // relatorio.addRenovacao(Renov);
+        // relatorio.reservas();
+        // exemplo de emprestimo
+        // relatorio.addEmprestimo(emprestimo);
+        // relatorio.EmprestimosAtrasados();
+    }
 }
