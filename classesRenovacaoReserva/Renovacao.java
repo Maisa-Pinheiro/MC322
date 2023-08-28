@@ -3,7 +3,7 @@
 package classesRenovacaoReserva;
 
 import classesObras.Multimidia;
-import classesPessoas.Membros;
+import classesPessoas.Membro;
 import classesEmprestimo.Emprestimo;
 
 /*
@@ -12,15 +12,14 @@ import classesEmprestimo.Emprestimo;
 public class Renovacao {
 	private boolean tipo; // true - renovação, false- reserva
 	private int registro; // registro da renovação ou reserva
-	private Membro pessoa; //pessoa que está fazendo a renovação ou reserva
-	
-	
+	private Membro pessoa; // pessoa que está fazendo a renovação ou reserva
+
 	/* construtor dedicado apenas aos usuarios */
-	public Renovacao(Membro pessoa, boolean tipo, int registro) {
+	public Renovacao(boolean tipo, int registro, Membro pessoa) {
 		this.pessoa = pessoa;
 		this.tipo = tipo;
 		this.registro = registro;
-		
+
 	}
 
 	/* getters para os atributos privados */
@@ -28,37 +27,38 @@ public class Renovacao {
 		return pessoa.getnome();
 	}
 
-
-
 	public boolean gettipo() {
 		return tipo;
+	}
+
+	public int getregistro() {
+		return registro;
 	}
 
 	/*
 	 * a classe não tem setters pois os atributos não podem ser mudados
 	 */
 
-
 	// renovação
-	
-	public void renovar(Emprestimo emprestimo){
-	    if(emprestimo.bloqueio==false){
-	        System.out.println("O usuário " + pessoa.getnome() + " não pode renovar o empréstimo " + emprestimo.getnumero() + " pois o mesmo está em atraso.");
-	    }else{
-	        emprestimo.setprazo();
-	        System.out.println("O usuário " + pessoa.getnome() + " teve o prazo do empréstimo " + emprestimo.getnumero() + " aumentado em 5 dias.");
-	    }
+
+	public void renovar(Emprestimo emprestimo) {
+		if (emprestimo.bloqueio == false) {
+			System.out.println("O usuário " + pessoa.getnome() + " não pode renovar o empréstimo "
+					+ emprestimo.getnumero() + " pois o mesmo está em atraso.");
+		} else {
+			emprestimo.setprazo();
+			System.out.println("O usuário " + pessoa.getnome() + " teve o prazo do empréstimo " + emprestimo.getnumero()
+					+ " aumentado em 5 dias.");
+		}
 	}
-	
-	//reserva
-	
-	public void reservar(Multimidia item){
-	    if(item.disponivel>0){
-	        System.out.println("O livro está disponivel para empréstimo, não é permitido reservar");
-	    }else{
-	        item.disponivel=item.disponivel - 1;
-	        System.out.println("O livro está reservado, o usuário será avisado quando o mesmo puder ser retirado");
-	    }
+
+	// reserva
+	public void reservar(Multimidia item) {
+		if (item.disponivel > 0) {
+			System.out.println("O livro está disponivel para empréstimo, não é permitido reservar");
+		} else {
+			item.disponivel = item.disponivel - 1;
+			System.out.println("O livro está reservado, o usuário será avisado quando o mesmo puder ser retirado");
+		}
 	}
-	
 }
