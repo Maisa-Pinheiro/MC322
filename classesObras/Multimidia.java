@@ -5,8 +5,7 @@ package classesObras;
 /*classe dedicada apenas aos itens multimidia*/
 public class Multimidia {
 	private String titulo; // titulo da obra
-	private String autor;// autor do livro/ cantor ou banda do cd/ diretor do filme(dvd)
-	private int registro; // registro do item para a bibliotéca
+	private String autor;// autor (ou artista) da multimidia
 	private String editora; // editora ou gravadora/estúdio
 	private int ano;// ano de publicação do cd/dvd ou edição do livro
 	private String categoria; // biografia, fantasia, infantil, rock, samba, etc
@@ -20,7 +19,6 @@ public class Multimidia {
 			int disponivel, String tipo) {
 		this.titulo = titulo;
 		this.autor = autor;
-		this.registro = registro;
 		this.editora = editora;
 		this.ano = ano;
 		this.categoria = categoria;
@@ -42,11 +40,7 @@ public class Multimidia {
 	public String getautor() {
 		return autor;
 	}
-
-	public int getregistro() {
-		return registro;
-	}
-
+	
 	public String geteditora() {
 		return editora;
 	}
