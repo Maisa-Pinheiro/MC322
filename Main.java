@@ -8,7 +8,7 @@ class Emprestimo{
     private int registro;
     public LocalDate prazo;// prazo de devolução
     
-    private Emprestimo(LocalDate prazo, int registro){// deixar o construtor privado pos só Administradores e Atendentes podem criar
+    private Emprestimo(LocalDate prazo, int registro){// deixar o construtor privado pois só Administradores e Atendentes podem criar
         this.prazo= prazo;
         this.registro=registro;
     }
