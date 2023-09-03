@@ -6,7 +6,23 @@ import emprestimoPackage.Emprestimo;
 import emprestimoPackage.GerenciadorEmprestimos; // Importe a classe GerenciadorEmprestimos
 
 public class Relatorio {
-    // Resto do código
+
+    private int numeroRelatorio; // número sequencial para controle de geração de relatórios
+    private LocalDate dataRelatorio; // data em que o relatório foi gerado
+
+    public Relatorio(int numeroRelatorio, LocalDate dataRelatorio){
+        this.numeroRelatorio = numeroRelatorio;
+        this.dataRelatorio = dataRelatorio;
+    }
+
+    public int getnumeroRelatorio(){
+        return numeroRelatorio;
+    }
+    
+    public LocalDate getdataRelatorio(){
+        return dataRelatorio;
+    }
+
 
     public int contarEmprestimosNoPeriodo(LocalDate inicio, LocalDate fim) {
         int contador = 0;
