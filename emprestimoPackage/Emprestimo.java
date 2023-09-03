@@ -47,14 +47,14 @@ public class Emprestimo {
         Perfil perfil = pessoasPackage.Pessoa.getperfil();
         int limiteEmprestimo;
         int prazoDias;
-        float multa;
+        //float multa;
 
         switch (perfil) {
             case ESTUDANTE_GRADUACAO:
                 limiteEmprestimo = 3;
                 prazoDias = 15;
-                multa = 1.00f;
-                if(pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimo){
+                //multa = 1.00f;
+                if (pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimo) {
                     System.out.println("Limite de empréstimos atingido.");
                     return null;
                 }
@@ -63,26 +63,38 @@ public class Emprestimo {
             case ESTUDANTE_POS_GRADUACAO:
                 limiteEmprestimo = 5;
                 prazoDias = 20;
-                multa = 1.00f;
+                //multa = 1.00f;
+                if (pessoasPackage.AlunoPosGraduacao.contarEmprestimos() >= limiteEmprestimo) {
+                    System.out.println("Limite de empréstimos atingido.");
+                    return null;
+                }
                 break;
 
             case PROFESSOR:
                 limiteEmprestimo = 7;
                 prazoDias = 30;
-                multa = 0.50f;
+                //multa = 0.50f;
+                if (pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimo) {
+                    System.out.println("Limite de empréstimos atingido.");
+                    return null;
+                }
                 break;
 
             case FUNCIONARIO:
                 limiteEmprestimo = 4;
                 prazoDias = 20;
-                multa = 0.75f;
+                //multa = 0.75f;
+                if (pessoasPackage.FuncionarioBiblioteca.contarEmprestimos() >= limiteEmprestimo) {
+                    System.out.println("Limite de empréstimos atingido.");
+                    return null;
+                }
                 break;
-
             default:
                 return null;
-
         }
+        // Calcula a data de vencimento com base no prazo
+        LocalDate dataDevolucao = LocalDate.now().plusDays(prazoDias);
 
+        return new Emprestimo(dataDevolucao, registro);
     }
-
 }

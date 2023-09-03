@@ -11,7 +11,7 @@ public class FuncionarioBiblioteca extends Pessoa {
     private String cargo;
     private float salario;
     private String horario;// horário de trabalho (ex: das 9h30 às 18h30)
-    private List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo aluno
+    private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo aluno
     private List<Renovacao> renovacoes; // A lista de renovações
     private String acesso;// tipo de acesso, será verificado nas operações de classes que exigem certo
                           // nível de acesso
@@ -19,12 +19,13 @@ public class FuncionarioBiblioteca extends Pessoa {
     // Construtor da classe Funcionário da Biblioteca(é publico pois precisa-se de
     // pelo menos um funcionário criado sem permissão para criar os outros)
     public FuncionarioBiblioteca(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
+            Perfil perfil,
             String cargo, float salario, String horario, String acesso) {
-        super(nome, data, registro, contato, idade, endereco);
+        super(nome, data, registro, contato, idade, endereco, perfil);
         this.cargo = cargo;
         this.salario = salario;
         this.horario = horario;
-        this.emprestimos = new ArrayList<>();
+        FuncionarioBiblioteca.emprestimos = new ArrayList<>();
         this.renovacoes = new ArrayList<>();
         this.acesso = acesso;// gerente, atendente, administrador
     }
@@ -61,12 +62,18 @@ public class FuncionarioBiblioteca extends Pessoa {
         return salario;
     }
 
+    /* descrição dos emprestimos */
     public void getemprestimos() {
         System.out.println("empréstimos do aluno:");
         for (Emprestimo emprestimo : emprestimos) {
             System.out.println(emprestimo.getregistro());
         }
         System.out.println("\n");
+    }
+
+    /* quantidade de emprestimos */
+    public static int contarEmprestimos() {
+        return emprestimos.size();
     }
 
     public void getrenovacoes() {
@@ -88,11 +95,12 @@ public class FuncionarioBiblioteca extends Pessoa {
     }
 
     public static FuncionarioBiblioteca criarFuncionarioAprovacao(String nome, LocalDate data, int registro,
-            String contato, int idade, String endereco,
+            String contato, int idade, String endereco, Perfil perfil,
             String cargo, float salario, String horario, String acesso, FuncionarioBiblioteca funcionario) {
         String acess = funcionario.getacesso();
         if ("Administrador".equals(acess)) {
-            return new FuncionarioBiblioteca(nome, data, registro, contato, idade, endereco, cargo, salario, horario,
+            return new FuncionarioBiblioteca(nome, data, registro, contato, idade, endereco, perfil, cargo, salario,
+                    horario,
                     acesso);
         } else {
             System.out.println("Funcionário não autorizado a criar um Funcionário.");
