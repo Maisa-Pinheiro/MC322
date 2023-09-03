@@ -9,6 +9,7 @@ import pessoasPackage.Professor;
 import pessoasPackage.FuncionarioBiblioteca;
 import emprestimoPackage.Emprestimo;
 //import multimidiaPackage.Multimidia;;
+import multimidiaPackage.Multimidia;
 
 public class Renovacao { // classe dedicada a renovações e reservas inteligentes
     private boolean tipo; // true - renovação, false- reserva
@@ -86,20 +87,21 @@ public class Renovacao { // classe dedicada a renovações e reservas inteligent
     }
 
     // reserva
-    /*public void reservar(Multimidia item) {
+    public void reservar(Multimidia item) {
+        int copias = Multimidia.getnumCopiasDisponiveis();
         if (item.disponibilidade == true) {
             System.out.println("A cópia desejada do livro está disponivel para empréstimo, não é permitido reservá-la");
         } else {
-            if (item.disponibilidade > 0) {
+            if (copias > 0) {
                 System.out.println(
                         "Outras cópias do livro estão disponiveis para empréstimo, não é permitido reservar uma cópia em específico");
             } else {
-                item.disponibilidade = item.disponibilidade - 1;
+                copias = copias - 1;
                 System.out.println("O livro está reservado para " + pessoa.getnome()
                         + ", o usuário será avisado quando o mesmo puder ser retirado");
             }
         }
-    }*/
+    }
 
     public static Renovacao criarRenovacaoAprovacao(boolean tipo, int registro, Pessoa pessoa,
             FuncionarioBiblioteca funcionario) {

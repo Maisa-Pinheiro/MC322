@@ -6,19 +6,18 @@ public class DVD_Video extends Multimidia {
     private String elenco;
     private Duration duracao;
     private int numCopias;
-    private int numCopiasDisponiveis;
     private String legendasAudio; // Legendas e Áudio Disponíveis
     private String estadoConservacao;
 
     public DVD_Video(String titulo, int registro, String autor, String editora, int anoPublicacao,
-                     String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade,
-                     String elenco, Duration duracao, int numCopias, int numCopiasDisponiveis,
-                     String legendasAudio, String estadoConservacao) {
-        super(titulo, registro, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade);
+            String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade,
+            String elenco, Duration duracao, int numCopias,
+            String legendasAudio, String estadoConservacao) {
+        super(titulo, registro, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
+                numCopiasDisponiveis);
         this.elenco = elenco;
         this.duracao = duracao;
         this.numCopias = numCopias;
-        this.numCopiasDisponiveis = numCopiasDisponiveis;
         this.legendasAudio = legendasAudio;
         this.estadoConservacao = estadoConservacao;
     }
@@ -40,10 +39,6 @@ public class DVD_Video extends Multimidia {
         return numCopias;
     }
 
-    public int getnumCopiasDisponiveis() {
-        return numCopiasDisponiveis;
-    }
-
     public String getlegendasAudio() {
         return legendasAudio;
     }
@@ -52,11 +47,3 @@ public class DVD_Video extends Multimidia {
         return estadoConservacao;
     }
 }
-
-
-
-
-
-
-
-

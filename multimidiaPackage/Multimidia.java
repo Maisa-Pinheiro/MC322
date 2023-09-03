@@ -12,9 +12,10 @@ public class Multimidia {
     private String historicoEmprestimo; // a ideia desse atributo é implementar algo para conter o historico de
                                         // emprestimo objeto multimidia do acervo
     public boolean disponibilidade; // true se a cópia em questão está disponível, false se não está
+    public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
 
     public Multimidia(String titulo, int registro, String autor, String editora, int anoPublicacao, String sinopse,
-            String capa, String historicoEmprestimo, boolean disponibilidade) {
+            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopiasDisponiveis) {
         this.titulo = titulo;
         this.registro = registro;
         this.autor = autor;
@@ -24,6 +25,7 @@ public class Multimidia {
         this.capa = capa;
         this.historicoEmprestimo = historicoEmprestimo;
         this.disponibilidade = disponibilidade;
+        Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
     }
 
     public String gettitulo() {
@@ -56,5 +58,9 @@ public class Multimidia {
 
     public String gethistoricoEmprestimo() {
         return historicoEmprestimo;
+    }
+
+    public static int getnumCopiasDisponiveis() {
+        return numCopiasDisponiveis;
     }
 }
