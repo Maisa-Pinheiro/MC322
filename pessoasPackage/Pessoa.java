@@ -50,12 +50,27 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
         return endereco;
     }
 
-    /*Estrutura de dados para perfil de pessoa*/
+    /* Estrutura de dados para perfil de pessoa */
     public enum Perfil {
         ESTUDANTE_GRADUACAO,
         ESTUDANTE_POS_GRADUACAO,
         PROFESSOR,
-        FUNCIONARIO
+        FUNCIONARIO;
+
+        public static Perfil fromString(String perfilStr) {
+            switch (perfilStr) {
+                case "ESTUDANTE_GRADUACAO":
+                    return ESTUDANTE_GRADUACAO;
+                case "ESTUDANTE_POS_GRADUACAO":
+                    return ESTUDANTE_POS_GRADUACAO;
+                case "PROFESSOR":
+                    return PROFESSOR;
+                case "FUNCIONARIO":
+                    return FUNCIONARIO;
+                default:
+                    throw new IllegalArgumentException("Perfil não reconhecido: " + perfilStr);
+            }
+        }
     }
 
     public static Perfil getperfil() {

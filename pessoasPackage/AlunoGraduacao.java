@@ -83,11 +83,4 @@ public class AlunoGraduacao extends Pessoa {
             return null;
         }
     }
-
-    /* condições de emprestimo para o perfil de Aluno de Graduação */
-    public static AlunoGraduacao controleEmprestimoPerfil(String nome, LocalDate data, int registro, String contato,
-            int idade, String endereco, Perfil perfil,
-            int ra, String curso) {
-        return new AlunoGraduacao(nome, data, registro, contato, idade, endereco, perfil, ra, curso);
-    }
 }
