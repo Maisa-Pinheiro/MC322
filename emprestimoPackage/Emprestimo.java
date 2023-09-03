@@ -1,6 +1,7 @@
 package emprestimoPackage;
 
 import java.time.LocalDate;
+import pessoasPackage.FuncionarioBiblioteca;
 
 public class Emprestimo {
     private int registro;
