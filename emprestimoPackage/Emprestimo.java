@@ -2,6 +2,7 @@ package emprestimoPackage;
 
 import java.time.LocalDate;
 import pessoasPackage.FuncionarioBiblioteca;
+import pessoasPackage.Pessoa.Perfil;
 
 public class Emprestimo {
     private int registro;
@@ -24,21 +25,11 @@ public class Emprestimo {
     public LocalDate getprazo() {
         return prazo;
     }
-    
+
     // mudar o tipo ↓↓↓↓ de acordo com as classes que você criar
     public static Emprestimo criarEmprestimoComAprovacao(LocalDate prazo, int registro,
             FuncionarioBiblioteca funcionario) {// colocar atributos, deixar esse ultimo no final->,
-                                                // FuncionarioBiblioteca funcionario
-
-        // - essa parte do código faz com que só seja possivel chamar um objeto dessa
-        // classe se tiver um funcionário com o tipo de acesso certo, coloca em todas as
-        // classes que você criar
-        // - só tire ||"Atendente".equals(acess) de multimidia e relatórios, essas
-        // classes são só para Administradores
-        // - se tiver duvida de como criar o objeto exemplo na main é só olhar o exemplo
-        // "joão"
-        // -apaga esses comentários depois
-
+        // FuncionarioBiblioteca funcionario
         String acess = funcionario.getacesso();
         if ("Administrador".equals(acess) || "Atendente".equals(acess)) {
             // Se o valor da variável "acess" for igual a "Administrador" ou "Atendente",
@@ -51,6 +42,47 @@ public class Emprestimo {
         }
     }
 
-        /*condições de acesso de acordo com o perfil de pessoa*/
-        
+    /* condições de acesso de acordo com o perfil de pessoa */
+    public static Emprestimo criarEmprestimoPerfil(LocalDate prazo, int registro) {
+        Perfil perfil = pessoasPackage.Pessoa.getperfil();
+        int limiteEmprestimo;
+        int prazoDias;
+        float multa;
+
+        switch (perfil) {
+            case ESTUDANTE_GRADUACAO:
+                limiteEmprestimo = 3;
+                prazoDias = 15;
+                multa = 1.00f;
+                if(pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimo){
+                    System.out.println("Limite de empréstimos atingido.");
+                    return null;
+                }
+                break;
+
+            case ESTUDANTE_POS_GRADUACAO:
+                limiteEmprestimo = 5;
+                prazoDias = 20;
+                multa = 1.00f;
+                break;
+
+            case PROFESSOR:
+                limiteEmprestimo = 7;
+                prazoDias = 30;
+                multa = 0.50f;
+                break;
+
+            case FUNCIONARIO:
+                limiteEmprestimo = 4;
+                prazoDias = 20;
+                multa = 0.75f;
+                break;
+
+            default:
+                return null;
+
+        }
+
+    }
+
 }

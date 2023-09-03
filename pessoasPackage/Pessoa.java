@@ -11,15 +11,18 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
     private String contato; // e-mail ou telefone
     private int idade;
     private String endereco;
+    private static Perfil perfil;
 
     /* construtor dedicado apenas aos usuarios */
-    public Pessoa(String nome, LocalDate data, int registro, String contato, int idade, String endereco) {
+    public Pessoa(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
+            Perfil perfil) {
         this.nome = nome;
         this.data = data;
         this.registro = registro;
         this.contato = contato;
         this.idade = idade;
         this.endereco = endereco;
+        Pessoa.perfil = perfil;
     }
 
     /* getters para os atributos privados */
@@ -45,6 +48,18 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
 
     public String getendereco() {
         return endereco;
+    }
+
+    /*Estrutura de dados para perfil de pessoa*/
+    public enum Perfil {
+        ESTUDANTE_GRADUACAO,
+        ESTUDANTE_POS_GRADUACAO,
+        PROFESSOR,
+        FUNCIONARIO
+    }
+
+    public static Perfil getperfil() {
+        return perfil;
     }
 
     /*
