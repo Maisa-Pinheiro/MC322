@@ -1,9 +1,12 @@
 import java.time.LocalDate;
 
+import emprestimoPackage.Emprestimo;
+import multimidiaPackage.LivroFisico;
 import pessoasPackage.AlunoGraduacao;
 import pessoasPackage.AlunoPosGraduacao;
 import pessoasPackage.FuncionarioBiblioteca;
 import pessoasPackage.Professor;
+import relatorioPackage.Relatorio;
 import pessoasPackage.Pessoa.Perfil;
 
 public class Main {
@@ -40,10 +43,41 @@ public class Main {
 
         System.out.println("Professor: (criado por um funcionario com o tipo de acesso administrador)\n");
         Perfil perfil4 = Perfil.fromString("PROFESSOR");
-        Professor professor = Professor.criarProfessorAprovacao("Bruno", LocalDate.now(), 45056, "bruno@dac.unicamp.br", 38, "Rua Campos Vale 789", perfil4, "IC - Instituto de Computação", funcionario);
+        Professor professor = Professor.criarProfessorAprovacao("Bruno", LocalDate.now(), 45056, "bruno@dac.unicamp.br",
+                38, "Rua Campos Vale 789", perfil4, "IC - Instituto de Computação", funcionario);
 
         System.out.println(
-                "Nome do aluno: " + professor.getnome() + "\n" + "Registro do professor: " + professor.getregistro() + "\n" + "Instituto do professor: " + professor.getInstituto() + "\n");
+                "Nome do aluno: " + professor.getnome() + "\n" + "Registro do professor: " + professor.getregistro()
+                        + "\n" + "Instituto do professor: " + professor.getInstituto() + "\n");
+
+        System.out.println("Exemplos de instâncias de Multimidia:\n");
+        System.out.println("Livro Físico:\n");
+
+        LivroFisico livro = new LivroFisico("Calculo 1", 568, "James Stweart", "Cengage Learning", 1980,
+                "Livro de Calculo 1: Limites, Derivadas e Integrais", null, null, true, 1749855545, 0, 0, 10,
+                "Estante 4 - Prateleira 2", "Bom");
+        System.out.println("Titulo do Livro: " + livro.gettitulo() + "\n" + "Autor do Livro: " + livro.getautor() + "\n"
+                + "Registro do Livro: " + livro.getregistro() + "\n" + "ISBN do livro: " + livro.getisbn() + "\n");
+
+        /*Gerando um emprestimo exemplo */
+        Emprestimo emprestimo = Emprestimo.criarEmprestimoComAprovacao(0001,
+                LocalDate.of(2023, 9, 15), null, 124, funcionario);
+        aluno.novoEmprestimo(emprestimo);
+
+        /* Gerando um relatório de exemplo */
+        Relatorio relatorio = new Relatorio(1, LocalDate.now());
+
+        LocalDate inicioPeriodo = LocalDate.of(2023, 1, 1);
+        LocalDate fimPeriodo = LocalDate.of(2023, 12, 31);
+
+        int emprestimosNoPeriodo = relatorio.contarEmprestimosNoPeriodo(inicioPeriodo, fimPeriodo);
+        int devolucoesNoPeriodo = relatorio.contarDevolucoesNoPeriodo(inicioPeriodo, fimPeriodo);
+        float multasNoPeriodo = relatorio.calcularMultasNoPeriodo(inicioPeriodo, fimPeriodo);
+
+        System.out.println("Relatório #" + relatorio.getnumeroRelatorio() + " - Data: " + relatorio.getdataRelatorio());
+        System.out.println("Total de Empréstimos no Período: " + emprestimosNoPeriodo);
+        System.out.println("Total de Devoluções no Período: " + devolucoesNoPeriodo);
+        System.out.println("Total de Multas no Período: R$" + multasNoPeriodo);
 
     }
 }
