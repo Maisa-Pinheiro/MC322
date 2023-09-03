@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import emprestimoPackage.Emprestimo;
+import renovacaoReservaPackage.Renovacao;
 
 // Classe Funcionário da Biblioteca que herda de Pessoa
 public class FuncionarioBiblioteca extends Pessoa {
@@ -47,13 +48,17 @@ public class FuncionarioBiblioteca extends Pessoa {
 
     }
 
-    public float getsalario() {
-        return salario;
+    public String gethorario() {
+        return horario;
     }
 
     public void setsalario(float salario) {
         this.salario = salario;
 
+    }
+
+    public float getsalario() {
+        return salario;
     }
 
     public void getemprestimos() {
