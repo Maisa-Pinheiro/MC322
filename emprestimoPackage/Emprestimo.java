@@ -1,6 +1,8 @@
 package emprestimoPackage;
 
 import java.time.LocalDate;
+
+import multimidiaPackage.Multimidia;
 import pessoasPackage.FuncionarioBiblioteca;
 import pessoasPackage.Pessoa.Perfil;
 
@@ -9,17 +11,20 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private float multa;
+    private static Multimidia multimidia;
 
-    private Emprestimo(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao, float multa) {// deixar o
-                                                                                                      // construtor
-                                                                                                      // privado pois só
-                                                                                                      // Administradores
-                                                                                                      // e
+    private Emprestimo(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao, float multa,
+            Multimidia multimidia) {// deixar o
+        // construtor
+        // privado pois só
+        // Administradores
+        // e
         // Atendentes podem criar
         this.registro = registro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.multa = multa;
+        Emprestimo.multimidia = multimidia;
     }
 
     public int getregistro() {
@@ -50,16 +55,22 @@ public class Emprestimo {
         this.multa = multa;
     }
 
+    public Multimidia geMultimidia() {
+        return multimidia;
+    }
+
     // mudar o tipo ↓↓↓↓ de acordo com as classes que você criar
     public static Emprestimo criarEmprestimoComAprovacao(int registro, LocalDate dataEmprestimo,
             LocalDate dataDevolucao, float multa,
             FuncionarioBiblioteca funcionario) {// colocar atributos, deixar esse ultimo no final->,
         // FuncionarioBiblioteca funcionario
         String acess = funcionario.getacesso();
+        Perfil perfil = pessoasPackage.Pessoa.getperfil();
         if ("Administrador".equals(acess) || "Atendente".equals(acess)) {
-            // Se o valor da variável "acess" for igual a "Administrador" ou "Atendente",
-            // execute o seguinte bloco de código.
-            Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa);
+            if(perfil == ESTUDANTE_GRADUACAO){
+                
+            }
+            Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa, multimidia);
             GerenciadorEmprestimos.adicionarEmprestimo(emprestimo); // Adicione o empréstimo à lista
             return emprestimo;
         } else {
@@ -72,7 +83,7 @@ public class Emprestimo {
     /* condições de acesso de acordo com o perfil de pessoa */
     public static Emprestimo criarEmprestimoPerfil(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao,
             float multa) {
-        Perfil perfil = pessoasPackage.Pessoa.getperfil();
+        //Perfil perfil = pessoasPackage.Pessoa.getperfil();
         int limiteEmprestimo;
         int prazoDias;
         // float multa;
@@ -123,7 +134,7 @@ public class Emprestimo {
         // Calcula a data de vencimento com base no prazo
         dataDevolucao = LocalDate.now().plusDays(prazoDias);
 
-        Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa);
+        Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa, multimidia);
         GerenciadorEmprestimos.adicionarEmprestimo(emprestimo); // Adicione o empréstimo à lista
         return emprestimo;
     }
