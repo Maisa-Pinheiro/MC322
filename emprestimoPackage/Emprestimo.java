@@ -6,12 +6,20 @@ import pessoasPackage.Pessoa.Perfil;
 
 public class Emprestimo {
     private int registro;
-    public LocalDate prazo; // prazo de devolução
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
+    private float multa;
 
-    private Emprestimo(LocalDate prazo, int registro) {// deixar o construtor privado pois só Administradores e
-                                                       // Atendentes podem criar
-        this.prazo = prazo;
+    private Emprestimo(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao, float multa) {// deixar o
+                                                                                                      // construtor
+                                                                                                      // privado pois só
+                                                                                                      // Administradores
+                                                                                                      // e
+        // Atendentes podem criar
         this.registro = registro;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
+        this.multa = multa;
     }
 
     public int getregistro() {
@@ -22,19 +30,38 @@ public class Emprestimo {
         this.registro = registro;
     }
 
-    public LocalDate getprazo() {
-        return prazo;
+    public LocalDate getdataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public LocalDate getdataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public float getmulta() {
+        return multa;
+    }
+
+    public void setMulta(float multa) {
+        this.multa = multa;
     }
 
     // mudar o tipo ↓↓↓↓ de acordo com as classes que você criar
-    public static Emprestimo criarEmprestimoComAprovacao(LocalDate prazo, int registro,
+    public static Emprestimo criarEmprestimoComAprovacao(int registro, LocalDate dataEmprestimo,
+            LocalDate dataDevolucao, float multa,
             FuncionarioBiblioteca funcionario) {// colocar atributos, deixar esse ultimo no final->,
         // FuncionarioBiblioteca funcionario
         String acess = funcionario.getacesso();
         if ("Administrador".equals(acess) || "Atendente".equals(acess)) {
             // Se o valor da variável "acess" for igual a "Administrador" ou "Atendente",
             // execute o seguinte bloco de código.
-            return new Emprestimo(prazo, registro); // Crie um objeto Emprestimo e retorne-o
+            Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa);
+            GerenciadorEmprestimos.adicionarEmprestimo(emprestimo); // Adicione o empréstimo à lista
+            return emprestimo;
         } else {
             // Caso contrário, execute o seguinte bloco de código.
             System.out.println("Funcionário não autorizado a criar um empréstimo.");
@@ -43,17 +70,18 @@ public class Emprestimo {
     }
 
     /* condições de acesso de acordo com o perfil de pessoa */
-    public static Emprestimo criarEmprestimoPerfil(LocalDate prazo, int registro) {
+    public static Emprestimo criarEmprestimoPerfil(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao,
+            float multa) {
         Perfil perfil = pessoasPackage.Pessoa.getperfil();
         int limiteEmprestimo;
         int prazoDias;
-        //float multa;
+        // float multa;
 
         switch (perfil) {
             case ESTUDANTE_GRADUACAO:
                 limiteEmprestimo = 3;
                 prazoDias = 15;
-                //multa = 1.00f;
+                // multa = 1.00f;
                 if (pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimo) {
                     System.out.println("Limite de empréstimos atingido.");
                     return null;
@@ -63,7 +91,7 @@ public class Emprestimo {
             case ESTUDANTE_POS_GRADUACAO:
                 limiteEmprestimo = 5;
                 prazoDias = 20;
-                //multa = 1.00f;
+                // multa = 1.00f;
                 if (pessoasPackage.AlunoPosGraduacao.contarEmprestimos() >= limiteEmprestimo) {
                     System.out.println("Limite de empréstimos atingido.");
                     return null;
@@ -73,7 +101,7 @@ public class Emprestimo {
             case PROFESSOR:
                 limiteEmprestimo = 7;
                 prazoDias = 30;
-                //multa = 0.50f;
+                // multa = 0.50f;
                 if (pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimo) {
                     System.out.println("Limite de empréstimos atingido.");
                     return null;
@@ -83,7 +111,7 @@ public class Emprestimo {
             case FUNCIONARIO:
                 limiteEmprestimo = 4;
                 prazoDias = 20;
-                //multa = 0.75f;
+                // multa = 0.75f;
                 if (pessoasPackage.FuncionarioBiblioteca.contarEmprestimos() >= limiteEmprestimo) {
                     System.out.println("Limite de empréstimos atingido.");
                     return null;
@@ -93,8 +121,10 @@ public class Emprestimo {
                 return null;
         }
         // Calcula a data de vencimento com base no prazo
-        LocalDate dataDevolucao = LocalDate.now().plusDays(prazoDias);
+        dataDevolucao = LocalDate.now().plusDays(prazoDias);
 
-        return new Emprestimo(dataDevolucao, registro);
+        Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa);
+        GerenciadorEmprestimos.adicionarEmprestimo(emprestimo); // Adicione o empréstimo à lista
+        return emprestimo;
     }
 }
