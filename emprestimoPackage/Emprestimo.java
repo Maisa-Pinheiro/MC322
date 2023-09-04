@@ -54,12 +54,12 @@ public class Emprestimo {
         this.multa = multa;
     }
 
-    public Multimidia getMultimidia() {
-        return multimidia;
+    public String getMultimidia() {
+        return multimidia.gettitulo();
     }
 
-    public Pessoa getpessoa() {
-        return pessoa;
+    public String getpessoa() {
+        return pessoa.getnome();
     }
 
     /* condições para criar um emprestimo */

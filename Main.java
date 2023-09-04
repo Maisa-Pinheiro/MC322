@@ -7,6 +7,7 @@ import pessoasPackage.AlunoPosGraduacao;
 import pessoasPackage.FuncionarioBiblioteca;
 import pessoasPackage.Professor;
 import relatorioPackage.Relatorio;
+import renovacaoReservaPackage.Renovacao;
 import pessoasPackage.Pessoa.Perfil;
 
 public class Main {
@@ -59,10 +60,25 @@ public class Main {
         System.out.println("Titulo do Livro: " + livro.gettitulo() + "\n" + "Autor do Livro: " + livro.getautor() + "\n"
                 + "Registro do Livro: " + livro.getregistro() + "\n" + "ISBN do livro: " + livro.getisbn() + "\n");
 
-        /*Gerando um emprestimo exemplo */
+        /* Gerando um emprestimo exemplo */
         Emprestimo emprestimo = Emprestimo.criarEmprestimoComAprovacao(0001,
-                LocalDate.of(2023, 9, 15), null, 124, funcionario);
+                LocalDate.of(2023, 9, 15), LocalDate.of(2023, 9, 30), 124, funcionario);
         aluno.novoEmprestimo(emprestimo);
+        System.out.println("Exemplo de empréstimo:\n");
+        System.out.println("Registro: " + emprestimo.getregistro());
+        System.out.println("Datade empréstimo: " + emprestimo.getdataEmprestimo());
+        System.out.println("Data de devolução: " + emprestimo.getdataDevolucao());
+        System.out.println("Multa: " + emprestimo.getmulta());
+        System.out.println("\n");
+
+        /* Gerando um exemplo de renovação */
+        System.out.println("Exemplo de Renovação:\n");
+        Renovacao renovacao = Renovacao.criarRenovacaoAprovacao(true, 1266, alunopos, funcionario);
+        System.out.println("Nome do usuário: " + renovacao.getpessoa());
+        System.out.println("Tipo de processo(renovação-true/reserva-false): " + renovacao.gettipo());
+        System.out.println("Registro: " + renovacao.getregistro());
+        renovacao.renovar(emprestimo);
+        System.out.println("\n");
 
         /* Gerando um relatório de exemplo */
         Relatorio relatorio = new Relatorio(1, LocalDate.now());
