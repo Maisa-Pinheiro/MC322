@@ -5,6 +5,8 @@ import java.util.List; // Importe a classe List
 import emprestimoPackage.Emprestimo;
 import emprestimoPackage.GerenciadorEmprestimos; // Importe a classe GerenciadorEmprestimos
 
+
+/*ainda não foram implementadas todas as funcionalidades nessa classe */
 public class Relatorio {
 
     private int numeroRelatorio; // número sequencial para controle de geração de relatórios
