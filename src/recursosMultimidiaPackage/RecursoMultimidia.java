@@ -38,7 +38,7 @@ public class RecursoMultimidia {
     }
 
     public class Video {
-        private int id; // número de identificação para o recurso de 
+        private int id; // número de identificação para o recurso de
         private String titulo; // titulo do recurso de multimidia
         private String tipo; // qual o tipo de recurso de audio (ex.: CDs, podcast, gravações e etc)
         private String resumo; // um breve resumo sobre o que se trata o recurso de multimidia
@@ -62,7 +62,6 @@ public class RecursoMultimidia {
             return titulo;
         }
 
-
         public String tipo() {
             return tipo;
         }
@@ -70,8 +69,9 @@ public class RecursoMultimidia {
         public String resumo() {
             return resumo;
         }
+    }
 
-        public class Software {
+    public class Software {
         private int id; // número de identificação do SW
         private int licenseNumber; // número de licensa do SW
         private String titulo; // "nome" do SW
@@ -102,7 +102,6 @@ public class RecursoMultimidia {
             return titulo;
         }
 
-
         public String tipo() {
             return tipo;
         }
@@ -110,8 +109,11 @@ public class RecursoMultimidia {
         public String resumo() {
             return resumo;
         }
-
     }
 
-}
+    public enum FormatoMultimidia {
+        AUDIO,
+        VIDEO,
+        SOFTWARE
+    }
 }
