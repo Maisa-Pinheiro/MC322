@@ -56,21 +56,6 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
         ESTUDANTE_POS_GRADUACAO,
         PROFESSOR,
         FUNCIONARIO;
-
-        public static Perfil fromString(String perfilStr) {
-            switch (perfilStr) {
-                case "ESTUDANTE_GRADUACAO":
-                    return ESTUDANTE_GRADUACAO;
-                case "ESTUDANTE_POS_GRADUACAO":
-                    return ESTUDANTE_POS_GRADUACAO;
-                case "PROFESSOR":
-                    return PROFESSOR;
-                case "FUNCIONARIO":
-                    return FUNCIONARIO;
-                default:
-                    throw new IllegalArgumentException("Perfil não reconhecido: " + perfilStr);
-            }
-        }
     }
 
     public static Perfil getperfil() {
