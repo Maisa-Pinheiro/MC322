@@ -4,24 +4,35 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 
 public class EventosBiblioteca {
+    private int id; // número de identificação da palestra
+    public String local; // local da palestra
+
+    public EventosBiblioteca(int id, String local){
+        this.id = id;
+        this.local = local;
+    }
+
+    public int getid(){
+        return id;
+    }
+    public String getlocal(){
+        return local;
+    }
 
     /* definição das classes internas */
     public class Palestra {//atributos públicos estão sujeitos à possíveis mudanças
-        private int id; // número de identificação da palestra
+        
         private String palestrante; // nome do palestrante
         private String topico; // tema principal da palestra
-        public String local; // local da palestra
         public LocalTime hora; // horario de inicio da palestra
         private int duracao; // duração, em horas, da palestra
         public LocalDate data; // data da palestra
 
         /* construtor da classe interna */
 
-        public Palestra(int id, String palestrante, String topico, String local, LocalTime hora, int duracao, LocalDate data) {
-            this.id = id;
+        public Palestra( String palestrante, String topico, LocalTime hora, int duracao, LocalDate data) {
             this.palestrante = palestrante;
             this.topico = topico;
-            this.local = local;
             this.hora = hora;
             this.duracao = duracao;
             this.data = data;
@@ -29,9 +40,7 @@ public class EventosBiblioteca {
 
         /* getters dos atributos privados classe interna, eles não possuem setters pois, se mudasses, seria outra palestra */
 
-        public int getid() {
-            return id;
-        }
+      
 
         public String getpalestrante() {
             return palestrante;
@@ -47,10 +56,9 @@ public class EventosBiblioteca {
     }
 
     public class Workshop {//atributos públicos estão sujeitos à possíveis mudanças
-        private int id; // número de identificação do workshop
+    
         private String instrutor; // nome do instrutor
         private String topico; // tema principal do workshop
-        public String local; // local do workshop
         public LocalTime hora; // horario de inicio do workshop
         private int duracao; // duração, em horas, do workshop
         public LocalDate data; // data do workshop
@@ -58,11 +66,9 @@ public class EventosBiblioteca {
 
         /* construtor da classe interna */
 
-        public Workshop(int id, String instrutor, String topico, String local, LocalTime hora, int duracao, LocalDate data, String materiaisNecessarios) {
-            this.id = id;
+        public Workshop( String instrutor, String topico,  LocalTime hora, int duracao, LocalDate data, String materiaisNecessarios) {
             this.instrutor = instrutor;
             this.topico = topico;
-            this.local = local;
             this.hora = hora;
             this.duracao = duracao;
             this.data = data;
@@ -70,10 +76,6 @@ public class EventosBiblioteca {
         }
 
         /* getters dos atributos privados classe interna, eles não possuem setters pois, se mudasses, seria outro workshop */
-
-        public int getid() {
-            return id;
-        }
 
         public String getinstrutor() {
             return instrutor;
@@ -92,10 +94,8 @@ public class EventosBiblioteca {
     }
 
     public class Exposicao {//atributos públicos estão sujeitos à possíveis mudanças
-        private int id; // número de identificação do workshop
         private String expositor; // nome da empresa ou das pessoas responsáveis pela exposição
         private String topico; // tema principal da exposição
-        public String local; // local da exposição
         public LocalTime horainicio; // horario de inicio da exposição
         public LocalTime horafim; // horario de encerramento da exposição
         public int duracao; // duração, em dias, da exposição
@@ -104,11 +104,9 @@ public class EventosBiblioteca {
 
         /* construtor da classe interna */
 
-        public Exposicao(int id, String expositor, String topico, String local,LocalTime horainicio , LocalTime horafim, int duracao, LocalDate data, String detalhes) {
-            this.id = id;
+        public Exposicao( String expositor, String topico, LocalTime horainicio , LocalTime horafim, int duracao, LocalDate data, String detalhes) {
             this.expositor = expositor;
             this.topico = topico;
-            this.local = local;
             this.horainicio = horainicio;
             this.horafim = horafim;
             this.duracao = duracao;
@@ -117,10 +115,6 @@ public class EventosBiblioteca {
         }
 
         /* getters dos atributos privados classe interna, eles não possuem setters pois, se mudasses, seria outro workshop */
-
-        public int getid() {
-            return id;
-        }
 
         public String getexpositor() {
             return expositor;
