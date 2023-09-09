@@ -5,19 +5,17 @@ import java.time.Duration;
 public class DVD_Video extends Multimidia {
     private String elenco;
     private Duration duracao;
-    private int numCopias;
     private String legendasAudio; // Legendas e Áudio Disponíveis
     private String estadoConservacao;
 
     public DVD_Video(String titulo, int registro, String autor, String editora, int anoPublicacao,
-            String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade,
-            String elenco, Duration duracao, int numCopias,
-            String legendasAudio, String estadoConservacao) {
+            String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
+            int numCopiasDisponiveis,
+            String elenco, Duration duracao, String legendasAudio, String estadoConservacao) {
         super(titulo, registro, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
-                numCopiasDisponiveis);
+                numCopias, numCopiasDisponiveis);
         this.elenco = elenco;
         this.duracao = duracao;
-        this.numCopias = numCopias;
         this.legendasAudio = legendasAudio;
         this.estadoConservacao = estadoConservacao;
     }
@@ -33,10 +31,6 @@ public class DVD_Video extends Multimidia {
 
     public void setDuracao(Duration duracao) {
         this.duracao = duracao;
-    }
-
-    public int getnumCopias() {
-        return numCopias;
     }
 
     public String getlegendasAudio() {
