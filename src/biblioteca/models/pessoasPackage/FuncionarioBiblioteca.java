@@ -1,10 +1,10 @@
-package pessoasPackage;
+package biblioteca.models.pessoasPackage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import emprestimoPackage.Emprestimo;
-import renovacaoReservaPackage.Renovacao;
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.renovacaoReservaPackage.Renovacao;
 
 // Classe Funcionário da Biblioteca que herda de Pessoa
 public class FuncionarioBiblioteca extends Pessoa {

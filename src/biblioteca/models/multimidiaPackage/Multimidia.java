@@ -1,4 +1,4 @@
-package multimidiaPackage;
+package biblioteca.models.multimidiaPackage;
 
 /*classe principal "Multimidia" que ira conter subclasses*/
 public class Multimidia {

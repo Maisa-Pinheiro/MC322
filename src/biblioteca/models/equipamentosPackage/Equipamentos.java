@@ -1,4 +1,4 @@
-package equipamentosPackage;
+package biblioteca.models.equipamentosPackage;
 
 public class Equipamentos {
 

@@ -1,4 +1,4 @@
-package emprestimoPackage;
+package biblioteca.models.emprestimoPackage;
 
 import java.util.ArrayList;
 import java.util.List;

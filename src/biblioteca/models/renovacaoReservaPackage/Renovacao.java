@@ -1,15 +1,15 @@
-package renovacaoReservaPackage;
+package biblioteca.models.renovacaoReservaPackage;
 
 import java.time.LocalDate;
 
-import pessoasPackage.Pessoa;
-import pessoasPackage.AlunoGraduacao;
-import pessoasPackage.AlunoPosGraduacao;
-import pessoasPackage.Professor;
-import pessoasPackage.FuncionarioBiblioteca;
-import emprestimoPackage.Emprestimo;
+import biblioteca.models.pessoasPackage.Pessoa;
+import biblioteca.models.pessoasPackage.AlunoGraduacao;
+import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
+import biblioteca.models.pessoasPackage.Professor;
+import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
+import biblioteca.models.emprestimoPackage.Emprestimo;
 //import multimidiaPackage.Multimidia;;
-import multimidiaPackage.Multimidia;
+import biblioteca.models.multimidiaPackage.Multimidia;
 
 public class Renovacao { // classe dedicada a renovações e reservas inteligentes
     private boolean tipo; // true - renovação, false- reserva

@@ -1,4 +1,4 @@
-package multimidiaPackage;
+package biblioteca.models.multimidiaPackage;
 
 public class Outros extends Multimidia {
     private String tipo;

@@ -1,10 +1,10 @@
-package pessoasPackage;
+package biblioteca.models.pessoasPackage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import emprestimoPackage.Emprestimo;
-import renovacaoReservaPackage.Renovacao;
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.renovacaoReservaPackage.Renovacao;
 
 public class AlunoGraduacao extends Pessoa {
     private int ra;

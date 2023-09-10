@@ -1,4 +1,4 @@
-package reservaSalaPackage;
+package biblioteca.models.reservaSalaPackage;
 
 import java.time.LocalTime;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package eventosPackage;
+package biblioteca.models.eventosPackage;
 
 import java.time.LocalTime;
 import java.time.LocalDate;

@@ -1,11 +1,11 @@
-package emprestimoPackage;
+package biblioteca.models.emprestimoPackage;
 
 import java.time.LocalDate;
 
-import multimidiaPackage.Multimidia;
-import pessoasPackage.FuncionarioBiblioteca;
-import pessoasPackage.Pessoa;
-import pessoasPackage.Pessoa.Perfil;
+import biblioteca.models.multimidiaPackage.Multimidia;
+import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
+import biblioteca.models.pessoasPackage.Pessoa;
+import biblioteca.models.pessoasPackage.Pessoa.Perfil;
 
 public class Emprestimo {
     private int registro;
@@ -67,7 +67,7 @@ public class Emprestimo {
             LocalDate dataDevolucao, float multa,
             FuncionarioBiblioteca funcionario) {
         String acesso = funcionario.getacesso();
-        Perfil perfil = pessoasPackage.Pessoa.getperfil();
+        Perfil perfil = biblioteca.models.pessoasPackage.Pessoa.getperfil();
 
         // Verifique se o usuário tem acesso de "Administrador" ou "Atendente"
         if ("Administrador".equals(acesso) || "Atendente".equals(acesso)) {
@@ -77,7 +77,7 @@ public class Emprestimo {
                     // Lógica específica para estudantes de graduação
                     // Por exemplo:
                     int limiteEmprestimoEstudanteGraduacao = 3;
-                    if (pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
+                    if (biblioteca.models.pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
                         System.out.println("Limite de empréstimos para estudantes de graduação atingido.");
                         return null;
                     }
@@ -87,7 +87,7 @@ public class Emprestimo {
                     // Lógica específica para estudantes de pós-graduação
                     // Por exemplo:
                     int limiteEmprestimoEstudantePosGraduacao = 5;
-                    if (pessoasPackage.AlunoPosGraduacao.contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
+                    if (biblioteca.models.pessoasPackage.AlunoPosGraduacao.contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
                         System.out.println("Limite de empréstimos para estudantes de pós-graduação atingido.");
                         return null;
                     }
@@ -97,7 +97,7 @@ public class Emprestimo {
                     // Lógica específica para professores
                     // Por exemplo:
                     int limiteEmprestimoProfessor = 7;
-                    if (pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimoProfessor) {
+                    if (biblioteca.models.pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimoProfessor) {
                         System.out.println("Limite de empréstimos para professores atingido.");
                         return null;
                     }
@@ -107,7 +107,7 @@ public class Emprestimo {
                     // Lógica específica para funcionários
                     // Por exemplo:
                     int limiteEmprestimoFuncionario = 4;
-                    if (pessoasPackage.FuncionarioBiblioteca.contarEmprestimos() >= limiteEmprestimoFuncionario) {
+                    if (biblioteca.models.pessoasPackage.FuncionarioBiblioteca.contarEmprestimos() >= limiteEmprestimoFuncionario) {
                         System.out.println("Limite de empréstimos para funcionários atingido.");
                         return null;
                     }
@@ -125,7 +125,7 @@ public class Emprestimo {
         } else {
             // Caso contrário, execute o seguinte bloco de código.
             System.out.println("Funcionário não autorizado a criar um empréstimo.");
-            return null; // Retorne null 
+            return null; // Retorne null
         }
     }
 }

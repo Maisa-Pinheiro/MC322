@@ -1,4 +1,4 @@
-package pessoasPackage;
+package biblioteca.models.pessoasPackage;
 
 import java.time.LocalDate;
 

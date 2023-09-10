@@ -1,113 +1,130 @@
-package recursosMultimidiaPackage;
+package biblioteca.models.recursosMultimidiaPackage;
+
+import java.time.LocalDate;
 
 public class RecursoMultimidia {
 
+    private int id; // número de identificação para o recurso de multimidia
+    private String titulo; // titulo do recurso de multimidia
+    private String tipo; // qual o tipo de recurso de multimidia
+    private String resumo; // um breve resumo sobre o que se trata o recurso de multimidia
+
+    /* construtor da classe externa */
+
+    public RecursoMultimidia(int id, String titulo, String tipo, String resumo) {
+        this.id = id;
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.resumo = resumo;
+    }
+
+    /* getters da classe externa */
+
+    public int getid() {
+        return id;
+    }
+
+    public String gettitulo() {
+        return titulo;
+    }
+
+    public String gettipo() {
+        return tipo;
+    }
+
+    public String getresumo() {
+        return resumo;
+    }
+
     /* definição das classes internas */
     public class Audio {
-        private int id; // número de identificação para o recurso de multimidia
-        private String titulo; // titulo do recurso de multimidia
-        private String tipo; // qual o tipo de recurso de audio (ex.: CDs, podcast, gravações e etc)
-        private String resumo; // um breve resumo sobre o que se trata o recurso de multimidia
+        private String categoria; // qual a categoria do item de Audio (Ex.: infantil, adulto, estudos, etc.)
+        private String programa; // se necessitar, qual é o programa usado para acessar o recurso de Audio
+        private LocalDate data; // data de gravação do recurso
 
         /* construtor da classe interna */
 
-        public Audio(int id, String titulo, String tipo, String resumo) {
-            this.id = id;
-            this.titulo = titulo;
-            this.tipo = tipo;
-            this.resumo = resumo;
+        public Audio(String categoria, String programa, LocalDate data) {
+            this.categoria = categoria;
+            this.programa = programa;
+            this.data = data;
         }
 
         /* getters da classe interna */
 
-        public int getid() {
-            return id;
+        public String getcategoria() {
+            return categoria;
         }
 
-        public String gettitulo() {
-            return titulo;
+        public String getprograma() {
+            return programa;
         }
 
-        public String tipo() {
-            return tipo;
-        }
-
-        public String resumo() {
-            return resumo;
+        public LocalDate getdata() {
+            return data;
         }
     }
 
     public class Video {
-        private int id; // número de identificação para o recurso de
-        private String titulo; // titulo do recurso de multimidia
-        private String tipo; // qual o tipo de recurso de audio (ex.: CDs, podcast, gravações e etc)
-        private String resumo; // um breve resumo sobre o que se trata o recurso de multimidia
+        private String categoria; // qual a categoria do item de Video (Ex.: infantil, adulto, estudos, etc.)
+        private String programa; // se necessitar, qual é o programa usado para acessar o recurso de Video
+        private String qualidadeImagem; // qualidade da imagem do recurso de video
 
         /* construtor da classe interna */
 
-        public Video(int id, String titulo, String tipo, String resumo) {
-            this.id = id;
-            this.titulo = titulo;
-            this.tipo = tipo;
-            this.resumo = resumo;
+        public Video(String categoria, String programa, String qualidadeImagem) {
+            this.categoria = categoria;
+            this.programa = programa;
+            this.qualidadeImagem = qualidadeImagem;
         }
 
         /* getters da classe interna */
 
-        public int getid() {
-            return id;
+        public String getcategoria() {
+            return categoria;
         }
 
-        public String gettitulo() {
-            return titulo;
+        public String getprograma() {
+            return programa;
         }
 
-        public String tipo() {
-            return tipo;
-        }
-
-        public String resumo() {
-            return resumo;
+        public String getqualidadeImagem() {
+            return qualidadeImagem;
         }
     }
 
     public class Software {
-        private int id; // número de identificação do SW
         private int licenseNumber; // número de licensa do SW
-        private String titulo; // "nome" do SW
-        private String tipo; // qual o tipo de SW (ex.: SW educacionais, programa de simulação, CAD e etc)
-        private String resumo; // um breve resumo sobre o que se trata e para que serve o SW
+        private int version; // versão de SW
+        private String licenseType; // se a licenca e do tipo perpetua ou se necessita de renovação, ne necessitar
+                                    // de renovação qual é a data de renovação
+        private String compatibilidade; // qual tipo de sistema operacional e configurações de computador exige o SW
 
         /* construtor da classe interna */
 
-        public Software(int id, int licenseNumber, String titulo, String tipo, String resumo) {
-            this.id = id;
+        public Software(int licenseNumber, int version, String licenseType, String compatibilidade) {
             this.licenseNumber = licenseNumber;
-            this.titulo = titulo;
-            this.tipo = tipo;
-            this.resumo = resumo;
+            this.version = version;
+            this.licenseType = licenseType;
+            this.compatibilidade = compatibilidade;
         }
 
         /* getters da classe interna */
-
-        public int getid() {
-            return id;
-        }
 
         public int getlicenseNumber() {
             return licenseNumber;
         }
 
-        public String gettitulo() {
-            return titulo;
+        public int getversion() {
+            return version;
         }
 
-        public String tipo() {
-            return tipo;
+        public String getlicenseType() {
+            return licenseType;
         }
 
-        public String resumo() {
-            return resumo;
+        public String getcompatibilidade() {
+            return compatibilidade;
         }
     }
 
