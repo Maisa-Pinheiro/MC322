@@ -12,9 +12,8 @@ public class AlunoGraduacao extends Pessoa {
     private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo aluno
     private List<Renovacao> renovacoes; // A lista de renovações
 
-    // Construtor da classe Aluno de Graduação(é privado pois só funcionarios tem
-    // acesso)
-    private AlunoGraduacao(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
+    // Construtor da classe Aluno de Graduação
+    public AlunoGraduacao(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
             Perfil perfil,
             int ra, String curso) {
         super(nome, data, registro, contato, idade, endereco, perfil);
@@ -72,15 +71,5 @@ public class AlunoGraduacao extends Pessoa {
     }
 
     /* condições para o funcionario "criar" uma aluno de graduação */
-    public static AlunoGraduacao criarAlunoGraduacaoComAprovacao(String nome, LocalDate data, int registro,
-            String contato, int idade, String endereco, Perfil perfil, int ra, String curso,
-            FuncionarioBiblioteca funcionario) {
-        String acesso = funcionario.getacesso();
-        if ("Administrador".equals(acesso)) {
-            return new AlunoGraduacao(nome, data, registro, contato, idade, endereco, perfil, ra, curso);
-        } else {
-            System.out.println("Funcionário não autorizado a criar um aluno de graduação.");
-            return null;
-        }
-    }
+   
 }
