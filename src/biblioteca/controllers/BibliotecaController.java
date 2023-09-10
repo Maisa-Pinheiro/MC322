@@ -2,7 +2,7 @@ package biblioteca.controllers;
 
 import java.util.List;
 
-import biblioteca.models.ItemMultimidia;
+import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.Membro;
 import biblioteca.views.BibliotecaView;
 
