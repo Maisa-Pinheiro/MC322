@@ -12,8 +12,8 @@ public class Professor extends Pessoa {
     private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo aluno
     private List<Renovacao> renovacoes; // A lista de renovações
 
-    // Construtor da classe Professor(é privado pois só funcionarios tem acesso)
-    private Professor(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
+    // Construtor da classe Professor
+    public Professor(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
             Perfil perfil, String instituto) {
         super(nome, data, registro, contato, idade, endereco, perfil);
         this.instituto = instituto;
@@ -62,15 +62,5 @@ public class Professor extends Pessoa {
         emprestimos.add(emprestimo);
     }
 
-    public static Professor criarProfessorAprovacao(String nome, LocalDate data, int registro, String contato,
-            int idade,
-            String endereco, Perfil perfil, String instituto, FuncionarioBiblioteca funcionario) {
-        String acesso = funcionario.getacesso();
-        if ("Administrador".equals(acesso)) {
-            return new Professor(nome, data, registro, contato, idade, endereco, perfil, instituto);
-        } else {
-            System.out.println("Funcionário não autorizado a criar um professor.");
-            return null; // Ou você pode lançar uma exceção se preferir
-        }
-    }
+    
 }
