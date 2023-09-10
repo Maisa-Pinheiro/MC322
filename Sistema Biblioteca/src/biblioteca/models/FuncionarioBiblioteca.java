@@ -16,8 +16,7 @@ public class FuncionarioBiblioteca extends Pessoa {
     private String acesso;// tipo de acesso, será verificado nas operações de classes que exigem certo
                           // nível de acesso
 
-    // Construtor da classe Funcionário da Biblioteca(é publico pois precisa-se de
-    // pelo menos um funcionário criado sem permissão para criar os outros)
+    // Construtor da classe Funcionário da Biblioteca
     public FuncionarioBiblioteca(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
             Perfil perfil,
             String cargo, float salario, String horario, String acesso) {
@@ -94,17 +93,5 @@ public class FuncionarioBiblioteca extends Pessoa {
         emprestimos.add(emprestimo);
     }
 
-    public static FuncionarioBiblioteca criarFuncionarioAprovacao(String nome, LocalDate data, int registro,
-            String contato, int idade, String endereco, Perfil perfil,
-            String cargo, float salario, String horario, String acesso, FuncionarioBiblioteca funcionario) {
-        String acess = funcionario.getacesso();
-        if ("Administrador".equals(acess)) {
-            return new FuncionarioBiblioteca(nome, data, registro, contato, idade, endereco, perfil, cargo, salario,
-                    horario,
-                    acesso);
-        } else {
-            System.out.println("Funcionário não autorizado a criar um Funcionário.");
-            return null; // Ou você pode lançar uma exceção se preferir
-        }
-    }
+    
 }
