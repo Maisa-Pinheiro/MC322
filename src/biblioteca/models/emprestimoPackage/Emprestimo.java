@@ -3,7 +3,7 @@ package biblioteca.models.emprestimoPackage;
 import java.time.LocalDate;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
-import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
+//import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
 import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.models.pessoasPackage.Pessoa.Perfil;
 
@@ -12,18 +12,68 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private float multa;
-    private static Multimidia multimidia;
-    private static Pessoa pessoa;
+    private Multimidia multimidia;
+    private Pessoa pessoa;
 
     /* construtor privado, pois só administradores podem criar */
     private Emprestimo(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao, float multa,
             Multimidia multimidia, Pessoa pessoa) {
+        Perfil perfil = biblioteca.models.pessoasPackage.Pessoa.getperfil();
+        // Verifique o perfil do usuário
+        switch (perfil) {
+            case ESTUDANTE_GRADUACAO:
+                // Lógica específica para estudantes de graduação
+                // Por exemplo:
+                int limiteEmprestimoEstudanteGraduacao = 3;
+                if (biblioteca.models.pessoasPackage.AlunoGraduacao
+                        .contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
+                    throw new IllegalArgumentException("Limite de empréstimos para estudantes de graduação atingido.");
+
+                }
+                break;
+
+            case ESTUDANTE_POS_GRADUACAO:
+                // Lógica específica para estudantes de pós-graduação
+                // Por exemplo:
+                int limiteEmprestimoEstudantePosGraduacao = 5;
+                if (biblioteca.models.pessoasPackage.AlunoPosGraduacao
+                        .contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
+                    throw new IllegalArgumentException(
+                            "Limite de empréstimos para estudantes de pós-graduação atingido.");
+                }
+                break;
+
+            case PROFESSOR:
+                // Lógica específica para professores
+                // Por exemplo:
+                int limiteEmprestimoProfessor = 7;
+                if (biblioteca.models.pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimoProfessor) {
+                    throw new IllegalArgumentException("Limite de empréstimos para professores atingido.");
+
+                }
+                break;
+
+            case FUNCIONARIO:
+                // Lógica específica para funcionários
+                // Por exemplo:
+                int limiteEmprestimoFuncionario = 4;
+                if (biblioteca.models.pessoasPackage.FuncionarioBiblioteca
+                        .contarEmprestimos() >= limiteEmprestimoFuncionario) {
+                    throw new IllegalArgumentException("Limite de empréstimos para funcionários atingido.");
+
+                }
+                break;
+
+            default:
+
+                break;
+        }
         this.registro = registro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.multa = multa;
-        Emprestimo.multimidia = multimidia;
-        Emprestimo.pessoa = pessoa;
+        this.multimidia = multimidia;
+        this.pessoa = pessoa;
     }
 
     public int getregistro() {
@@ -62,70 +112,4 @@ public class Emprestimo {
         return pessoa.getnome();
     }
 
-    /* condições para criar um emprestimo */
-    public static Emprestimo criarEmprestimoComAprovacao(int registro, LocalDate dataEmprestimo,
-            LocalDate dataDevolucao, float multa,
-            FuncionarioBiblioteca funcionario) {
-        String acesso = funcionario.getacesso();
-        Perfil perfil = biblioteca.models.pessoasPackage.Pessoa.getperfil();
-
-        // Verifique se o usuário tem acesso de "Administrador" ou "Atendente"
-        if ("Administrador".equals(acesso) || "Atendente".equals(acesso)) {
-            // Verifique o perfil do usuário
-            switch (perfil) {
-                case ESTUDANTE_GRADUACAO:
-                    // Lógica específica para estudantes de graduação
-                    // Por exemplo:
-                    int limiteEmprestimoEstudanteGraduacao = 3;
-                    if (biblioteca.models.pessoasPackage.AlunoGraduacao.contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
-                        System.out.println("Limite de empréstimos para estudantes de graduação atingido.");
-                        return null;
-                    }
-                    break;
-
-                case ESTUDANTE_POS_GRADUACAO:
-                    // Lógica específica para estudantes de pós-graduação
-                    // Por exemplo:
-                    int limiteEmprestimoEstudantePosGraduacao = 5;
-                    if (biblioteca.models.pessoasPackage.AlunoPosGraduacao.contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
-                        System.out.println("Limite de empréstimos para estudantes de pós-graduação atingido.");
-                        return null;
-                    }
-                    break;
-
-                case PROFESSOR:
-                    // Lógica específica para professores
-                    // Por exemplo:
-                    int limiteEmprestimoProfessor = 7;
-                    if (biblioteca.models.pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimoProfessor) {
-                        System.out.println("Limite de empréstimos para professores atingido.");
-                        return null;
-                    }
-                    break;
-
-                case FUNCIONARIO:
-                    // Lógica específica para funcionários
-                    // Por exemplo:
-                    int limiteEmprestimoFuncionario = 4;
-                    if (biblioteca.models.pessoasPackage.FuncionarioBiblioteca.contarEmprestimos() >= limiteEmprestimoFuncionario) {
-                        System.out.println("Limite de empréstimos para funcionários atingido.");
-                        return null;
-                    }
-                    break;
-
-                default:
-                    // havera outros perfis? como limitar o numero de emprestimos deles?
-                    break;
-            }
-
-            // Se passar por todas as verificações, crie o empréstimo
-            Emprestimo emprestimo = new Emprestimo(registro, dataEmprestimo, dataDevolucao, multa, multimidia, pessoa);
-            GerenciadorEmprestimos.adicionarEmprestimo(emprestimo); // Adicione o empréstimo à lista
-            return emprestimo;
-        } else {
-            // Caso contrário, execute o seguinte bloco de código.
-            System.out.println("Funcionário não autorizado a criar um empréstimo.");
-            return null; // Retorne null
-        }
-    }
 }
