@@ -1,4 +1,4 @@
-package multimidiaPackage;
+package biblioteca.models.multimidiaPackage;
 
 import java.time.Duration;
 

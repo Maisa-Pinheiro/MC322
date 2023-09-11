@@ -1,9 +1,9 @@
-package relatorioPackage;
+package biblioteca.models.relatorioPackage;
 
 import java.time.LocalDate;
 import java.util.List; // Importe a classe List
-import emprestimoPackage.Emprestimo;
-import emprestimoPackage.GerenciadorEmprestimos; // Importe a classe GerenciadorEmprestimos
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.emprestimoPackage.GerenciadorEmprestimos; // Importe a classe GerenciadorEmprestimos
 
 
 /*ainda não foram implementadas todas as funcionalidades nessa classe */

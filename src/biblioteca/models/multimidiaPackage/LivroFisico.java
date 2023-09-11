@@ -1,4 +1,4 @@
-package multimidiaPackage;
+package biblioteca.models.multimidiaPackage;
 
 /*subclasse de Multimidia "LivroFisico"*/
 public class LivroFisico extends Multimidia {
