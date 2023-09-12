@@ -12,6 +12,7 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
     private int idade;
     private String endereco;
     private static Perfil perfil;
+    // criar um atributo vertor para adicionar os membros --> ver com a Maisa se posso mudar "registro para ID" para fazer busca
 
     /* construtor dedicado apenas aos usuarios */
     public Pessoa(String nome, LocalDate data, int registro, String contato, int idade, String endereco,
@@ -73,4 +74,6 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
     public void setendereco(String endereco) {
         this.endereco = endereco;
     }
+
+    // criar três metodos: adição de membro, remoção de membro e busca de membro por ID
 }
