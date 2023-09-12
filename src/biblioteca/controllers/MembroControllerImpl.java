@@ -8,7 +8,7 @@ import biblioteca.models.pessoasPackage.Professor;
 import biblioteca.models.pessoasPackage.AlunoGraduacao;
 import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
 import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
-import biblioteca.views.MembroView;*/
+import biblioteca.views.MembroView;
 
 /*public class MembroControllerImpl implements MembroController {
     private List<Pessoa> membros;
