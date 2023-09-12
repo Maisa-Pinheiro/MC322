@@ -1,7 +1,9 @@
 package main;
 
-import biblioteca.controllers.*;
+/*import biblioteca.controllers.*;
 import biblioteca.models.*;
+import biblioteca.models.multimidiaPackage.Multimidia;
+import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.views.*;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class BibliotecaMain {
 
         BibliotecaView bibliotecaView = new BibliotecaViewImpl(bibliotecaController);
         MembroView membroView = new MembroViewImpl(membroController);
-        RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
+        //RelatorioView relatorioView = new RelatorioViewImpl(relatorioController);
 
         Scanner scanner = new Scanner(System.in);
         
@@ -49,7 +51,7 @@ public class BibliotecaMain {
                     break;
                 case 3:
                     // Menu de Geração de Relatórios e Estatísticas
-                    menuRelatoriosEstatisticas(scanner, relatorioView);
+                    //menuRelatoriosEstatisticas(scanner, relatorioView);
                     break;
                 case 4:
                     // Menu de Administração de Funcionários
@@ -86,8 +88,8 @@ public class BibliotecaMain {
 
             switch (opcaoItens) {
                 case 1:
-                    List<ItemMultimidia> itens = bibliotecaController.consultarItensDisponiveis();
-                    bibliotecaView.mostrarItensDisponiveis(itens);
+                    List<Multimidia> itens = bibliotecaController.consultarItensDisponiveis();
+                    //bibliotecaView.mostrarItensDisponiveis(itens);
                     break;
                 case 2:
                     adicionarItem(scanner);
@@ -133,8 +135,8 @@ public class BibliotecaMain {
 
             switch (opcaoMembros) {
                 case 1:
-                    List<Membro> membros = membroController.listarMembros();
-                    membroView.mostrarListaMembros(membros);
+                    List<Pessoa> membros = membroController.listarMembros();
+                    //membroView.mostrarListaMembros(membros);
                     break;
                 case 2:
                     adicionarMembro(scanner);
@@ -153,7 +155,7 @@ public class BibliotecaMain {
         }
     }
 
-    private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
+    /*private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
         while (true) {
             System.out.println("---- Menu Relatórios e Estatísticas ----");
             System.out.println();
@@ -294,7 +296,7 @@ public class BibliotecaMain {
     }
 
     // Métodos para gerar relatórios e estatísticas
-    private static void gerarRelatorioAtividadesMembros() {
+    /*private static void gerarRelatorioAtividadesMembros() {
         // Lógica para gerar o Relatório de Atividades de Membros
         System.out.println("Gerando Relatório de Atividades de Membros");
     }
@@ -323,4 +325,4 @@ public class BibliotecaMain {
         // Lógica para gerar o Relatório de Itens Mais Populares
         System.out.println("Gerando Relatório de Itens Mais Populares");
     }
-}
+}*/

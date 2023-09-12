@@ -1,16 +1,16 @@
-package biblioteca.controllers;
+/*package biblioteca.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import biblioteca.models.pessoasPackage.Pessoa;
-//import biblioteca.models.pessoasPackage.Professor;
-//import biblioteca.models.pessoasPackage.AlunoGraduacao;
-//import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
-//import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
-//import biblioteca.views.MembroView;
+import biblioteca.models.pessoasPackage.Professor;
+import biblioteca.models.pessoasPackage.AlunoGraduacao;
+import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
+import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
+import biblioteca.views.MembroView;*/
 
-public class MembroControllerImpl implements MembroController {
+/*public class MembroControllerImpl implements MembroController {
     private List<Pessoa> membros;
 
     public MembroControllerImpl() {
@@ -22,7 +22,7 @@ public class MembroControllerImpl implements MembroController {
         return membros;
     }
 
-    @Override
+    //@Override
     public Pessoa buscarMembroPorIdentificacao(int  registro) {
         for (Pessoa membro : membros) {
             if (membro.getregistro().equals(registro)) {
@@ -31,4 +31,4 @@ public class MembroControllerImpl implements MembroController {
         }
         return null; // Retorna null se a pessoa não for encontrada
     }
-}
+}*/
