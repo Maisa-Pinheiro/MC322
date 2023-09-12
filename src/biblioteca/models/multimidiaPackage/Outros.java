@@ -6,11 +6,11 @@ public class Outros extends Multimidia {
     private String local; // se for tipo fisico qual sua localização da biblioteca
     private String estadoConservacao;
 
-    public Outros(String titulo, int registro, String autor, String editora, int anoPublicacao,
+    public Outros(String titulo, int id, String autor, String editora, int anoPublicacao,
             String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String tipo, String formato, String local,
             String estadoConservacao) {
-        super(titulo, registro, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
+        super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
                 numCopias, numCopiasDisponiveis);
         this.tipo = tipo;
         this.formato = formato;

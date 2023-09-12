@@ -83,6 +83,13 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
     /* Criação de metodos */
     /* Metodo para adicionar pessoa a lista */
     public void addPessoa(Pessoa pessoa) {
+        int idpessoa = pessoa.getid();
+        for (Pessoa membro : listaPessoas) {
+            if (membro.getid() == idpessoa) {
+                System.out.println("Erro: Não é possivel adicionar essa pessoa a lista, pois já existe uma pessoa com o mesmo ID");
+                return;
+            }
+        }
         listaPessoas.add(pessoa);
     }
 

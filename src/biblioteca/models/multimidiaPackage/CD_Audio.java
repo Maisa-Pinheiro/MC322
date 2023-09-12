@@ -7,10 +7,10 @@ public class CD_Audio extends Multimidia {
     private Duration duracao; // Atributo para armazenar a duração do CD de áudio
     private String estadoConservacao;
 
-    public CD_Audio(String titulo, int registro, String autor, String editora, int anoPublicacao,
+    public CD_Audio(String titulo, int id, String autor, String editora, int anoPublicacao,
             String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
             String listaFaixas, Duration duracao, String estadoConservacao) {
-        super(titulo, registro, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade, numCopias, numCopiasDisponiveis);
+        super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade, numCopias, numCopiasDisponiveis);
         this.listaFaixas = listaFaixas;
         this.duracao = duracao;
         this.estadoConservacao = estadoConservacao;
