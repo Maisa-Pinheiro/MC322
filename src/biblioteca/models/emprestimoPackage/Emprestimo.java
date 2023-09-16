@@ -106,12 +106,29 @@ public class Emprestimo {
         return multa;
     }
 
-    public void setMulta(float multa) {
+    public void setMulta(int atraso) {
+        float multiplicador = 1.0f;
+        switch (pessoa.getPerfil()) {
+            case ALUNO_GRADUACAO:
+            case ALUNO_POS_GRADUACAO:
+                multiplicador = 1.0f;
+                break;
+            case PROFESSOR:
+                multiplicador = 0.5f;
+                break;
+            case FUNCIONARIO:
+                multiplicador = 0.75f;
+                break;
+            default:
+                // Trate qualquer outro caso aqui, se necessário
+                break;
+        }
+        multa = (multiplicador * atraso);
         this.multa = multa;
     }
 
-    public String getMultimidia() {
-        return multimidia.gettitulo();
+    public Multimidia getMultimidia() {
+        return multimidia;
     }
 
     public String getpessoa() {
