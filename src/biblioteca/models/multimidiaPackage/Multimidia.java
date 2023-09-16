@@ -1,4 +1,5 @@
 package biblioteca.models.multimidiaPackage;
+import java.util.LinkedList;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ abstract public class Multimidia {
     private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
-    private List<Renovacao> reservas; //lista com a ordem de reservas do livro em questão
+    private LinkedList<Renovacao> reservas; //lista com a ordem de reservas do livro em questão
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis, Categoria categoria) {
@@ -46,7 +47,7 @@ abstract public class Multimidia {
         Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
         this.mapMultimidia = new HashMap<>(); 
         this.comentarios = new ArrayList<>();
-        this.reservas = new ArrayList<>();
+        this.reservas = new LinkedList<>();
         this.categoria = categoria;
         inicializarCategoriasDisponiveis(); 
     }
@@ -73,7 +74,7 @@ abstract public class Multimidia {
         return categoria;
     }
 
-    public List<Renovacao> getreservas(){
+    public LinkedList<Renovacao> getreservas(){
         return reservas;
     }
 
