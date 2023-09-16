@@ -21,9 +21,11 @@ import biblioteca.models.pessoasPackage.Pessoa;
 public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
 
-    boolean emprestarItem(Pessoa membro, Multimidia item);
+    void emprestarItem(Pessoa membro, Multimidia item);
 
-    boolean devolverItem(Pessoa membro, Multimidia item);
+    void devolverItem(Pessoa membro, Multimidia item);
+    
+    void liberacao(Pessoa pessoa);
 
     Set<Multimidia.Categoria> getTodasAsCategorias();
     
