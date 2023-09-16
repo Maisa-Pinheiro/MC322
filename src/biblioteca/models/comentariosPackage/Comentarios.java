@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import multimidiaPackage.Multimidia;
 import pessoasPackage.Pessoa;
-import pessoasPackage.Pessoa.Perfil;
+//import pessoasPackage.Pessoa.Perfil;
 
 public class Comentarios {
     private LocalDate data;
@@ -25,8 +25,8 @@ public class Comentarios {
         return data;
     }
 
-    public void setcomentario(String comentario)) { // o comentário pode ser alterado por decisão do usuário ou caso a biblioteac o considere inapropriado
-        this.comentario = dataDevolucaocomentario;
+    public void setcomentario(String comentario) { // o comentário pode ser alterado por decisão do usuário ou caso a biblioteac o considere inapropriado
+        this.comentario = comentario;
     }
 
 
