@@ -11,7 +11,6 @@ public class FuncionarioBiblioteca extends Pessoa {
     private String cargo;
     private float salario;
     private String horario;// horário de trabalho (ex: das 9h30 às 18h30)
-    private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo aluno
     private List<Renovacao> renovacoes; // A lista de renovações
     private String acesso;// tipo de acesso, será verificado nas operações de classes que exigem certo
                           // nível de acesso
@@ -24,7 +23,6 @@ public class FuncionarioBiblioteca extends Pessoa {
         this.cargo = cargo;
         this.salario = salario;
         this.horario = horario;
-        FuncionarioBiblioteca.emprestimos = new ArrayList<>();
         this.renovacoes = new ArrayList<>();
         this.acesso = acesso;// gerente, atendente, administrador
     }
@@ -61,19 +59,6 @@ public class FuncionarioBiblioteca extends Pessoa {
         return salario;
     }
 
-    /* descrição dos emprestimos */
-    public void getemprestimos() {
-        System.out.println("empréstimos do aluno:");
-        for (Emprestimo emprestimo : emprestimos) {
-            System.out.println(emprestimo.getregistro());
-        }
-        System.out.println("\n");
-    }
-
-    /* quantidade de emprestimos */
-    public static int contarEmprestimos() {
-        return emprestimos.size();
-    }
 
     public void getrenovacoes() {
         System.out.println("renovações do aluno:");
@@ -88,10 +73,4 @@ public class FuncionarioBiblioteca extends Pessoa {
         renovacoes.add(renovacao);
     }
 
-    // adicionar empréstimo
-    public void novoEmprestimo(Emprestimo emprestimo) {
-        emprestimos.add(emprestimo);
-    }
-
-    
 }
