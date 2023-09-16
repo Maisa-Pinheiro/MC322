@@ -2,10 +2,10 @@ package biblioteca.views;
 
 import java.util.List;
 
-import biblioteca.models.ItemMultimidia;
+import biblioteca.models.multimidiaPackage.Multimidia;
 
 public interface BibliotecaView {
-    void mostrarItensDisponiveis(List<ItemMultimidia> itens);
+    void mostrarItensDisponiveis(List<Multimidia> itens);
     void mostrarEmprestimoStatus(boolean sucesso);
     void mostrarDevolucaoStatus(boolean sucesso);
 }

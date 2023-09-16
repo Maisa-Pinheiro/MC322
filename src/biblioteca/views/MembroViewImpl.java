@@ -1,6 +1,6 @@
 package biblioteca.views;
 
-import java.util.List;
+/*import java.util.List;
 
 import biblioteca.controllers.MembroController;
 import biblioteca.models.Membro;
@@ -21,4 +21,4 @@ public class MembroViewImpl implements MembroView {
     public void mostrarDetalhesMembro(Membro membro) {
         // Implementação da exibição dos detalhes de um membro
     }
-}
+}*/

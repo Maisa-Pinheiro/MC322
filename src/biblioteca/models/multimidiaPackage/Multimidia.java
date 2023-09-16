@@ -1,9 +1,12 @@
 package biblioteca.models.multimidiaPackage;
 
-/*classe principal "Multimidia" que ira conter subclasses*/
-public class Multimidia {
+import java.util.Map;
+import java.util.HashMap;
+
+/*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
+abstract public class Multimidia {
     private String titulo; // título
-    private int registro; // número de registro do livro para biblioteca
+    private int id; // número de registro do livro para biblioteca
     private String autor; // autor ou artista do item do acervo
     private String editora; // editora ou gravadora do item
     private int anoPublicacao; // o ano referente a publicação da obra
@@ -14,11 +17,12 @@ public class Multimidia {
     public boolean disponibilidade; // true se a cópia em questão está disponível, false se não está
     private int numCopias; // número de cópias que tem esse item
     public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
+    private Map<Integer, Multimidia> mapMultimidia;
 
-    public Multimidia(String titulo, int registro, String autor, String editora, int anoPublicacao, String sinopse,
+    public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis) {
         this.titulo = titulo;
-        this.registro = registro;
+        this.id = id;
         this.autor = autor;
         this.editora = editora;
         this.anoPublicacao = anoPublicacao;
@@ -28,14 +32,15 @@ public class Multimidia {
         this.disponibilidade = disponibilidade;
         this.numCopias = numCopias;
         Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
+        this.mapMultimidia = new HashMap<>(); 
     }
 
     public String gettitulo() {
         return titulo;
     }
 
-    public int getregistro() {
-        return registro;
+    public int getid() {
+        return id;
     }
 
     public String getautor() {
