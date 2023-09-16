@@ -16,6 +16,8 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     private static Perfil perfil;
     private List<Pessoa> listaPessoas;
      private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
+    private boolean podeemprestar; // true -pode, false- não pode, bloqueado por atraso
+    private List<Multimidia> historico; // histórico de itens emprestados
 
     /* construtor dedicado apenas aos usuarios */
     public Pessoa(String nome, LocalDate data, int id, String contato, int idade, String endereco,
@@ -29,6 +31,8 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         Pessoa.perfil = perfil;
         this.listaPessoas = new ArrayList<>();
         this.emprestimos  = new ArrayList<>();
+        this.historico = new ArrayList<>();
+        this.podeemprestar = true;
     }
 
     /* getters para os atributos privados */
@@ -54,6 +58,10 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
 
     public String getendereco() {
         return endereco;
+    }
+
+    public void setpodeemprestar(Boolean opcao){
+        this.podeemprestar = opcao;
     }
 
     /* Estrutura de dados para perfil de pessoa */
