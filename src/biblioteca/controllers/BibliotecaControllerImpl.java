@@ -53,7 +53,11 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     @Override
     public void emprestarItem(Pessoa membro, Multimidia item) {
         int qtddisponivel = item.getnumCopiasDisponiveis();
-
+        Boolean liberado = membro.getpodeemprestar();
+        if(liberado == false){
+            System.out.println("O membro está bloqueado e não pode fazer empréstimos, favor requisitar liberação");
+            return;
+        }
         if(qtddisponivel>0){
             Emprestimo emprestimo = new Emprestimo(LocalDate.now(), item, membro);
             item.numCopiasDisponiveis--;
@@ -65,6 +69,11 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             System.ou.println("o item foi reservado com sucesso");
             
         }
+    }
+
+    @Override
+    public void liberacao(Pessoa pessoa){
+        //implementar lógica
     }
 
     @Override
