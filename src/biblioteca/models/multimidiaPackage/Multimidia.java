@@ -6,6 +6,13 @@ import biblioteca.models.comentariosPackage.Comentarios;
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
+
+    enum Categoria{
+        ACAO, COMEDIA, AVENTURA, FANTASIA, HORROR, TERROR, SUSPENSE,
+        BIOGRAFIA,HISTORIA, GEOGRAFIA, CALCULO_AFINS, FISICA_AFINS,
+        SOCIOLOGIA, FILOSOFIA, ARTE, ECONOMIA, ENGENHARIA, LIGUAGENS,
+        POESIA, ROMANCE, AUTOAJUDA, ESPIRITUAL, JORNALISTICO, INFORMATIVO, ACADEMICO
+    }
     private String titulo; // título
     private int id; // número de registro do livro para biblioteca
     private String autor; // autor ou artista do item do acervo
