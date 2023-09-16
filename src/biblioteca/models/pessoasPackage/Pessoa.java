@@ -64,6 +64,10 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         this.podeemprestar = opcao;
     }
 
+    public Boolean getpodeemprestar(){
+        return podeemprestar;
+    }
+
     /* Estrutura de dados para perfil de pessoa */
     public enum Perfil {
         ESTUDANTE_GRADUACAO,
@@ -150,6 +154,14 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
    public List<Emprestimos> getemprestimos(){
      return emprestimos;
    }
+
+    public void addhistorico(Multimidia item){
+        historico.add(item);
+    } 
+
+    public List<Multimidia> gethistorico(){
+        return historico;
+    }
 
 
 }
