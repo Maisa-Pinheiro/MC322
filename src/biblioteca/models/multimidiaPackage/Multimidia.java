@@ -7,7 +7,11 @@ import biblioteca.models.comentariosPackage.Comentarios;
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
 
-    
+    public enum Categoria {
+        POESIA, ROMANCE, ACAO, FICCAO, FANTASIA, HISTORIA, ARTE, ACADEMICO, TECNOLOGIA, LINGUAGENS,
+        BIOGRAFIA, SUSPENSE, FISICA_AFINS, CALCULO_AFINS, SOCIOLOGIA, ECONOMIA, FILOSOFIA, BIOLOGIA,
+        JORNALISTICO, INFORMATIVO, REVISTA, TTERROR, INFANTIL, LEGISLACAO, DIVERSOS
+    }
     private String titulo; // título
     private int id; // número de registro do livro para biblioteca
     private String autor; // autor ou artista do item do acervo
@@ -22,10 +26,11 @@ abstract public class Multimidia {
     public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
     private Map<Integer, Multimidia> mapMultimidia;
     private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
-    private String categoria;// ação, fantasia, romance, biografia, etc
+    private Categoria categoria;// ação, fantasia, romance, biografia, etc
+    private Set<Categoria> categoriasDisponiveis;
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
-            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis, String categoria) {
+            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis, Categoria categoria) {
         this.titulo = titulo;
         this.id = id;
         this.autor = autor;
@@ -40,6 +45,13 @@ abstract public class Multimidia {
         this.mapMultimidia = new HashMap<>(); 
         this.comentarios = new ArrayList<>();
         this.categoria = categoria;
+        inicializarCategoriasDisponiveis(); 
+    }
+
+     private void inicializarCategoriasDisponiveis() {
+        for (Categoria categoria : Categoria.values()) {
+            categoriasDisponiveis.add(categoria);
+        }
     }
 
     public String gettitulo() {
@@ -88,5 +100,9 @@ abstract public class Multimidia {
 
      public void addcomentario(Comentario comentario) {
         listaPessoas.add(comentario);
+    }
+
+    public Categoria getcategoria() {
+        return categoria;
     }
 }
