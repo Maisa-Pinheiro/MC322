@@ -2,16 +2,19 @@ package biblioteca.models.eventosPackage;
 
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.util.List;
 
 public class EventosBiblioteca {
     private int id; // número de identificação da palestra
     public String local; // local da palestra
     private String topico; // tema principal da palestra
+    public List<Pessoa> membros; // participantes do evento, é publico por que pode variar ao longo do tempo
 
     public EventosBiblioteca(int id, String local, String topico) {
         this.id = id;
         this.local = local;
         this.topico = topico;
+        this.membros = new ArrayList<>();
     }
 
     // getters dos atributos privados classe interna, eles não possuem setters pois,
@@ -26,6 +29,10 @@ public class EventosBiblioteca {
 
     public String gettopico() {
         return topico;
+    }
+
+    public void addparticipantes(Pessoa participante){
+        membro.add(participante);
     }
 
     /* definição das classes internas */
