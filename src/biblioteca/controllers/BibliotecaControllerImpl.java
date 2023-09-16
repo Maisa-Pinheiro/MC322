@@ -32,7 +32,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         this.categoriasusadas = new HashSet<>();
         inicializarCategorias();
     }
-    @Override
+   
     private void inicializarCategorias() {
         for (Multimidia item : itens) {
             categorias.add(multimidia.getCategoria());
