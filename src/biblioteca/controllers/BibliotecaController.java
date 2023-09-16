@@ -1,6 +1,7 @@
 package biblioteca.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
 //import biblioteca.models.multimidiaPackage.CD_Audio;
@@ -23,4 +24,8 @@ public interface BibliotecaController {
     boolean emprestarItem(Pessoa membro, Multimidia item);
 
     boolean devolverItem(Pessoa membro, Multimidia item);
+
+    Set<Multimidia.Categoria> getTodasAsCategorias();
+    
+    Set<String> getCategoriasUsadas();
 }
