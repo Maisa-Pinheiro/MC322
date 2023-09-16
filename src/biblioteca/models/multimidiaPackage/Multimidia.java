@@ -2,7 +2,8 @@ package biblioteca.models.multimidiaPackage;
 
 import java.util.Map;
 import java.util.HashMap;
-import biblioteca.models.comentariosPackage.Comentarios; 
+import biblioteca.models.comentariosPackage.Comentarios;
+import biblioteca.models.renovacaoReservaPackage.Renovacao; 
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
@@ -28,6 +29,7 @@ abstract public class Multimidia {
     private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
+    private List<Renovacao> reservas; //lista com a ordem de reservas do livro em questão
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis, Categoria categoria) {
@@ -44,6 +46,7 @@ abstract public class Multimidia {
         Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
         this.mapMultimidia = new HashMap<>(); 
         this.comentarios = new ArrayList<>();
+        this.reservas = new ArrayList<>();
         this.categoria = categoria;
         inicializarCategoriasDisponiveis(); 
     }
@@ -70,6 +73,14 @@ abstract public class Multimidia {
         return categoria;
     }
 
+    public List<Renovacao> getreservas(){
+        return reservas;
+    }
+
+    public void addreservas( Renovacao reserva){
+        reservas.add(reserva);
+    }
+    
     public String geteditora() {
         return editora;
     }
