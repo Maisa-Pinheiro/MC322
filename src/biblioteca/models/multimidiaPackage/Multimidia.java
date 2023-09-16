@@ -2,6 +2,7 @@ package biblioteca.models.multimidiaPackage;
 
 import java.util.Map;
 import java.util.HashMap;
+import biblioteca.models.comentariosPackage.Comentarios; 
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
@@ -18,6 +19,7 @@ abstract public class Multimidia {
     private int numCopias; // número de cópias que tem esse item
     public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
     private Map<Integer, Multimidia> mapMultimidia;
+    private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis) {
@@ -33,6 +35,7 @@ abstract public class Multimidia {
         this.numCopias = numCopias;
         Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
         this.mapMultimidia = new HashMap<>(); 
+        this.comentarios = new ArrayList<>();
     }
 
     public String gettitulo() {
@@ -73,5 +76,9 @@ abstract public class Multimidia {
 
     public static int getnumCopiasDisponiveis() {
         return numCopiasDisponiveis;
+    }
+
+     public void addcomentario(Comentario comentario) {
+        listaPessoas.add(comentario);
     }
 }
