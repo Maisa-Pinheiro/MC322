@@ -2,7 +2,7 @@ package biblioteca.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
@@ -22,12 +22,26 @@ import biblioteca.models.pessoasPackage.Pessoa;
 
 public class BibliotecaControllerImpl implements BibliotecaController {
     private List<Multimidia> itens;
-    private Set<Multimidia.Categoria> categoria; // categoria da biblioteca
+    private Set<Multimidia.Categoria> categoriasusadas; /* categorias de itens presentes na biblioteca, o enum categoria
+    possui todas as categorias possíveis, mas este atributo reúne as categorias de livros que estão na biblioteca
+    pode não ter nenhum item de certa categoria do enum, por exempo*/
     
 
     public BibliotecaControllerImpl() {
         itens = new ArrayList<>();
-        categoria = EnumSet.allOf(Multimidia.Categoria.class);
+        this.categoriasusadas = new HashSet<>();
+        inicializarCategorias();
+    }
+    @Override
+    private void inicializarCategorias() {
+        for (Multimidia item : itens) {
+            categorias.add(multimidia.getCategoria());
+        }
+    }
+
+    @Override
+    public Set<Multimidia.Categoria> getTodasAsCategorias() {
+        return todasAsCategorias;
     }
 
     @Override
@@ -48,7 +62,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public Set<String> getcategorias(){
-        return categorias;
+    public Set<String> getcategoriasusadas(){
+        return categoriasusadas;
     }
 }
