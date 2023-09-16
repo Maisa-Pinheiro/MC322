@@ -21,6 +21,7 @@ import biblioteca.models.pessoasPackage.Pessoa;
 //import biblioteca.views.BibliotecaView;
 
 public class BibliotecaControllerImpl implements BibliotecaController {
+    
     private List<Multimidia> itens;
     private Set<Multimidia.Categoria> categoriasusadas; /* categorias de itens presentes na biblioteca, o enum categoria
     possui todas as categorias possíveis, mas este atributo reúne as categorias de livros que estão na biblioteca
@@ -50,19 +51,50 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public boolean emprestarItem(Pessoa membro, Multimidia item) {
+    public void emprestarItem(Pessoa membro, Multimidia item) {
         int qtddisponivel = item.getnumCopiasDisponiveis();
 
         if(qtddisponivel>0){
-            Emprestimo emprestimo = new Emprestimo(
-        
-        return true;
+            Emprestimo emprestimo = new Emprestimo(LocalDate.now(), item, membro);
+            item.numCopiasDisponiveis--;
+            membro.novoEmprestimo(emprestimo);
+        System.ou.println("o item foi emprestado com sucesso");
+        }else{
+            Renovacao reserva = new Renovacao(false, membro);
+            reserva.reservar(item);
+            System.ou.println("o item foi reservado com sucesso");
+            
+        }
     }
 
     @Override
-    public boolean devolverItem(Pessoa membro, Multimidia item) {
-        // Lógica de devolução
-        return true;
+    public void devolverItem(Pessoa membro, Multimidia item) {
+        for (Emprestimo emprestimo : membro.getemprestimos()) {
+                if (emprestimo.getMultimidia().equals(item)) {
+                    int prazo= emprestimo.getdataDevolucao();
+                    LocalDate today = Localdate.now();
+                    if(prazo.isbefore(today)){
+                        int atraso= ChronoUnit.DAYS.between(today,prazo);
+                        
+                        membro.setpodemeprestar(false);
+                        emprestimo.setmulta(atraso);
+                        System.out.println("O membro devolveu o empréstimo com atraso, logo, não pode fazer empréstimos pelos próximos 20 dias, devendo pedir a liberação ao final desse prazo, junto ao pagamento da multa, de R$ " + emprestimo.getmulta());
+                         membro.removeremprestimo(emprestimo); 
+                        break;
+                    } else{
+                        membro.removeremprestimo(emprestimo);
+                        if(item.listareservas.size==0){
+                            item.numCopiasDisponiveis++;
+                            System.ou.println("O item foi devolvido com sucesso e emprestado ao membro ");
+                    }else{
+                            emprestarItem(listareservas.get(0).getpessoa(), item);
+                    }
+                    System.ou.println("O item foi devolvido com sucesso e emprestado ao membro " +  listareservas.get(0).getpessoa().getnome());  
+                    break;
+                    }
+        }
+        }
+        
     }
 
     @Override
