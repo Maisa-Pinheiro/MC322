@@ -25,7 +25,7 @@ public class Renovacao { // classe dedicada a renovações e reservas inteligent
     }
 
     /* getters para os atributos privados */
-    public String getpessoa() {
+    public Pessoa getpessoa() {
         return pessoa;
     }
 
