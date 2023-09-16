@@ -7,12 +7,7 @@ import biblioteca.models.comentariosPackage.Comentarios;
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
 
-    enum Categoria{
-        ACAO, COMEDIA, AVENTURA, FANTASIA, HORROR, TERROR, SUSPENSE,
-        BIOGRAFIA,HISTORIA, GEOGRAFIA, CALCULO_AFINS, FISICA_AFINS,
-        SOCIOLOGIA, FILOSOFIA, ARTE, ECONOMIA, ENGENHARIA, LIGUAGENS,
-        POESIA, ROMANCE, AUTOAJUDA, ESPIRITUAL, JORNALISTICO, INFORMATIVO, ACADEMICO
-    }
+    
     private String titulo; // título
     private int id; // número de registro do livro para biblioteca
     private String autor; // autor ou artista do item do acervo
@@ -27,9 +22,10 @@ abstract public class Multimidia {
     public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
     private Map<Integer, Multimidia> mapMultimidia;
     private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
+    private String categoria;// ação, fantasia, romance, biografia, etc
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
-            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis) {
+            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis, String categoria) {
         this.titulo = titulo;
         this.id = id;
         this.autor = autor;
@@ -43,6 +39,7 @@ abstract public class Multimidia {
         Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
         this.mapMultimidia = new HashMap<>(); 
         this.comentarios = new ArrayList<>();
+        this.categoria = categoria;
     }
 
     public String gettitulo() {
@@ -55,6 +52,10 @@ abstract public class Multimidia {
 
     public String getautor() {
         return autor;
+    }
+
+      public String getcategoria() {
+        return categoria;
     }
 
     public String geteditora() {
