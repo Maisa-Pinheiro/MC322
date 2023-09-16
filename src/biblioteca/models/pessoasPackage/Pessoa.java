@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import biblioteca.models.emprestimosPackage.Emprestimo; 
+import biblioteca.models.multimidiaPackage.Multimidia; 
+
 /* classe "mãe" */
 public abstract class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe, ela passa a ser abstrata
     private String nome;
