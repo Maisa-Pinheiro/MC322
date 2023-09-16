@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LinkedList;
 
 import biblioteca.models.emprestimosPackage.Emprestimo; 
 import biblioteca.models.multimidiaPackage.Multimidia; 
@@ -18,7 +19,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     private String endereco;
     private static Perfil perfil;
     private List<Pessoa> listaPessoas;
-     private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
+     private static LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
     private boolean podeemprestar; // true -pode, false- não pode, bloqueado por atraso
     private List<Multimidia> historico; // histórico de itens emprestados
 
@@ -33,7 +34,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         this.endereco = endereco;
         Pessoa.perfil = perfil;
         this.listaPessoas = new ArrayList<>();
-        this.emprestimos  = new ArrayList<>();
+        this.emprestimos  = new LinkedList<>();
         this.historico = new ArrayList<>();
         this.podeemprestar = true;
     }
@@ -154,7 +155,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     }
 
    // retornar a lista de emprestimos
-   public List<Emprestimos> getemprestimos(){
+   public LinkedList<Emprestimos> getemprestimos(){
      return emprestimos;
    }
 
