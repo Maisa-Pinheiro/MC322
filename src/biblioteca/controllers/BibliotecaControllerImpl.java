@@ -66,6 +66,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         }else{
             Renovacao reserva = new Renovacao(false, membro);
             reserva.reservar(item);
+            item.addreserva(reserva);
             System.ou.println("o item foi reservado com sucesso");
             
         }
@@ -97,6 +98,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                             System.ou.println("O item foi devolvido com sucesso e emprestado ao membro ");
                     }else{
                             emprestarItem(listareservas.get(0).getpessoa(), item);
+                            listareservas.remove(0);
                     }
                     System.ou.println("O item foi devolvido com sucesso e emprestado ao membro " +  listareservas.get(0).getpessoa().getnome());  
                     break;
