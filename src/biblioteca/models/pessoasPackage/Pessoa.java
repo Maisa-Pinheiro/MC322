@@ -6,9 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /* classe "mãe" */
-public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa pode não ser nem, aluno,
-                      // nem professor, nem funcionário, mas ainda estar na biblioteca(um visitante,
-                      // por exemplo)
+public abstract class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe, ela passa a ser abstrata
     private String nome;
     private LocalDate data;// Data de Registro
     private int id;// Número de Identificação interno da Universidade
@@ -17,6 +15,7 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
     private String endereco;
     private static Perfil perfil;
     private List<Pessoa> listaPessoas;
+     private static List<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
 
     /* construtor dedicado apenas aos usuarios */
     public Pessoa(String nome, LocalDate data, int id, String contato, int idade, String endereco,
@@ -29,6 +28,7 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
         this.endereco = endereco;
         Pessoa.perfil = perfil;
         this.listaPessoas = new ArrayList<>();
+        this.emprestimos  = new ArrayList<>();
     }
 
     /* getters para os atributos privados */
@@ -121,5 +121,27 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
         }
         System.out.println("Pessoa com ID " + id + " não encontrada na lista.");
     }
+   public void getemprestimosid() {
+        System.out.println("empréstimos do membro:");
+        for (Emprestimo emprestimo : emprestimos) {
+            System.out.println(emprestimo.getregistro());
+        }
+        System.out.println("\n");
+    }
+
+    /* quantidade de emprestimos */
+    public static int contarEmprestimos() {
+        return emprestimos.size();
+    }
+  // adicionar empréstimo
+    public void novoEmprestimo(Emprestimo emprestimo) {
+        emprestimos.add(emprestimo);
+    }
+
+   // retornar a lista de emprestimos
+   public List<Emprestimos> getemprestimos(){
+     return emprestimos;
+   }
+
 
 }
