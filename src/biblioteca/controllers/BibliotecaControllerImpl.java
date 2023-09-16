@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
-//import biblioteca.models.multimidiaPackage.CD_Audio;
-//import biblioteca.models.multimidiaPackage.Capa;
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.renovacaoReservaPackage.Renovacao;
 //import biblioteca.models.multimidiaPackage.DVD_Video;
 //import biblioteca.models.multimidiaPackage.LivroEletronico;
 //import biblioteca.models.multimidiaPackage.LivroFisico;
@@ -51,7 +51,11 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     @Override
     public boolean emprestarItem(Pessoa membro, Multimidia item) {
-        // Lógica de empréstimo
+        int qtddisponivel = item.getnumCopiasDisponiveis();
+
+        if(qtddisponivel>0){
+            Emprestimo emprestimo = new Emprestimo(
+        
         return true;
     }
 
