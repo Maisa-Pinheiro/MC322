@@ -17,8 +17,8 @@ public class Renovacao { // classe dedicada a renovações e reservas inteligent
     private int registro; // registro de identificação renovação ou reserva
     private Pessoa pessoa; // pessoa que está fazendo a renovação ou reserva
 
-    /* construtor dedicado apenas às usuarios */
-    private Renovacao(boolean tipo, Pessoa pessoa) {
+    /* construtor dedicado apenas às renovações*/
+    public Renovacao(boolean tipo, Pessoa pessoa) {
         this.pessoa = pessoa;
         this.tipo = tipo;
         this.registro = proximoregistro++;
@@ -89,7 +89,7 @@ public class Renovacao { // classe dedicada a renovações e reservas inteligent
 
     // reserva
     public void reservar(Multimidia item) {
-        int copias = Multimidia.getnumCopiasDisponiveis();
+        int copias = item.getnumCopiasDisponiveis();
             if (copias > 0) {
                 System.out.println(
                         "Outras cópias do livro estão disponiveis para empréstimo, não é permitido reservar uma cópia em específico");
@@ -99,14 +99,4 @@ public class Renovacao { // classe dedicada a renovações e reservas inteligent
             } 
     }
 
-    public static Renovacao criarRenovacaoAprovacao(boolean tipo, int registro, Pessoa pessoa,
-            FuncionarioBiblioteca funcionario) {
-        String acess = funcionario.getacesso();
-        if ("Administrador".equals(acess) || "Atendente".equals(acess)) {
-            return new Renovacao(tipo, registro, pessoa);
-        } else {
-            System.out.println("Funcionário não autorizado a criar uma renovação/reserva.");
-            return null; // Ou você pode lançar uma exceção se preferir
-        }
-    }
 }
