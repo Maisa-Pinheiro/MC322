@@ -12,7 +12,7 @@ public class LivroEletronico extends Multimidia {
     public LivroEletronico(String titulo, int id, String autor, String editora, int anoPublicacao,
             String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String formato, URL url, String requisitosLeitura,
-            LocalDate dataDisponibilidade) {
+            LocalDate dataDisponibilidade, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
                 numCopias, numCopiasDisponiveis, categoria);
         this.formato = formato;

@@ -6,20 +6,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 
-import biblioteca.models.emprestimoPackage.Emprestimo; 
-import biblioteca.models.multimidiaPackage.Multimidia; 
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.multimidiaPackage.Multimidia;
 
 /* classe "mãe" */
-public abstract class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe, ela passa a ser abstrata
+public abstract class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe,
+                               // ela passa a ser abstrata
     private String nome;
     private LocalDate data;// Data de Registro
     private int id;// Número de Identificação interno da Universidade
     private String contato; // e-mail ou telefone
     private int idade;
     private String endereco;
-    private static Perfil perfil;
+    private Perfil perfil;
     private List<Pessoa> listaPessoas;
-     private  LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
+    private LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
     private boolean podeemprestar; // true -pode, false- não pode, bloqueado por atraso
     private List<Multimidia> historico; // histórico de itens emprestados
 
@@ -32,9 +33,9 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         this.contato = contato;
         this.idade = idade;
         this.endereco = endereco;
-        Pessoa.perfil = perfil;
+        this.perfil = perfil;
         this.listaPessoas = new ArrayList<>();
-        this.emprestimos  = new LinkedList<>();
+        this.emprestimos = new LinkedList<>();
         this.historico = new ArrayList<>();
         this.podeemprestar = true;
     }
@@ -64,11 +65,11 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         return endereco;
     }
 
-    public void setpodeemprestar(boolean podeemprestar){
+    public void setpodeemprestar(boolean podeemprestar) {
         this.podeemprestar = podeemprestar;
     }
 
-    public Boolean getpodeemprestar(){
+    public Boolean getpodeemprestar() {
         return podeemprestar;
     }
 
@@ -80,7 +81,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         FUNCIONARIO;
     }
 
-    public static Perfil getperfil() {
+    public Perfil getperfil() {
         return perfil;
     }
 
@@ -102,7 +103,8 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         int idpessoa = pessoa.getid();
         for (Pessoa membro : listaPessoas) {
             if (membro.getid() == idpessoa) {
-                System.out.println("Erro: Não é possivel adicionar essa pessoa a lista, pois já existe uma pessoa com o mesmo ID");
+                System.out.println(
+                        "Erro: Não é possivel adicionar essa pessoa a lista, pois já existe uma pessoa com o mesmo ID");
                 return;
             }
         }
@@ -137,7 +139,8 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         }
         System.out.println("Pessoa com ID " + id + " não encontrada na lista.");
     }
-   public void getemprestimosid() {
+
+    public void getemprestimosid() {
         System.out.println("empréstimos do membro:");
         for (Emprestimo emprestimo : emprestimos) {
             System.out.println(emprestimo.getregistro());
@@ -146,30 +149,30 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     }
 
     /* quantidade de emprestimos */
-    public  int contarEmprestimos() {
+    public int contarEmprestimos() {
         return emprestimos.size();
     }
-  // adicionar empréstimo
+
+    // adicionar empréstimo
     public void novoEmprestimo(Emprestimo emprestimo) {
         emprestimos.add(emprestimo);
     }
 
-   // retornar a lista de emprestimos
-   public LinkedList<Emprestimo> getemprestimos(){
-     return emprestimos;
-   }
+    // retornar a lista de emprestimos
+    public LinkedList<Emprestimo> getemprestimos() {
+        return emprestimos;
+    }
 
-    public void addhistorico(Multimidia item){
+    public void addhistorico(Multimidia item) {
         historico.add(item);
-    } 
+    }
 
-    public List<Multimidia> gethistorico(){
+    public List<Multimidia> gethistorico() {
         return historico;
     }
 
     public void removeremprestimo(Emprestimo emprestimo) {
         emprestimos.remove(emprestimo);
     }
-
 
 }

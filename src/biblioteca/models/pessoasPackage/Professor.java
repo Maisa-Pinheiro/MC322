@@ -3,7 +3,6 @@ package biblioteca.models.pessoasPackage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 
 // Classe Professor que herda de Pessoa
