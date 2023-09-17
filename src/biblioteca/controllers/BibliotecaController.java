@@ -1,10 +1,11 @@
 package biblioteca.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
-//import biblioteca.models.multimidiaPackage.CD_Audio;
-//import biblioteca.models.multimidiaPackage.Capa;
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.renovacaoReservaPackage.Renovacao;
 //import biblioteca.models.multimidiaPackage.DVD_Video;
 //import biblioteca.models.multimidiaPackage.LivroEletronico;
 //import biblioteca.models.multimidiaPackage.LivroFisico;
@@ -20,7 +21,13 @@ import biblioteca.models.pessoasPackage.Pessoa;
 public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
 
-    boolean emprestarItem(Pessoa membro, Multimidia item);
+    void emprestarItem(Pessoa membro, Multimidia item);
 
-    boolean devolverItem(Pessoa membro, Multimidia item);
+    void devolverItem(Pessoa membro, Multimidia item);
+    
+    void liberacao(Pessoa pessoa);
+
+    Set<Multimidia.Categoria> getTodasAsCategorias();
+    
+    Set<String> getCategoriasUsadas();
 }

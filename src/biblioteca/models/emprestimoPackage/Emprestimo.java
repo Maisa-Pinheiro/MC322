@@ -8,7 +8,8 @@ import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.models.pessoasPackage.Pessoa.Perfil;
 
 public class Emprestimo {
-    private int registro;
+    private static int proximoregistro = 1; // Variável estática para rastrear o próximo id
+    private int registro;// Id
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private float multa;
@@ -16,25 +17,31 @@ public class Emprestimo {
     private Pessoa pessoa;
 
     /* construtor privado, pois só administradores podem criar */
-    private Emprestimo(int registro, LocalDate dataEmprestimo, LocalDate dataDevolucao, float multa,
-            Multimidia multimidia, Pessoa pessoa) {
+    private Emprestimo( LocalDate dataEmprestimo, Multimidia multimidia, Pessoa pessoa) {
+        this.registro = proximoregistro++;
+        this.dataEmprestimo = dataEmprestimo;
+        this.multa = 0 ;
+        this.multimidia = multimidia;
+        this.pessoa = pessoa;
         Perfil perfil = biblioteca.models.pessoasPackage.Pessoa.getperfil();
         // Verifique o perfil do usuário
         switch (perfil) {
             case ESTUDANTE_GRADUACAO:
                 // Lógica específica para estudantes de graduação
                 // Por exemplo:
+                this.dataDevolucao = dataEmprestimo.plusDays(15);
                 int limiteEmprestimoEstudanteGraduacao = 3;
                 if (biblioteca.models.pessoasPackage.AlunoGraduacao
                         .contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
                     throw new IllegalArgumentException("Limite de empréstimos para estudantes de graduação atingido.");
-
                 }
+            
                 break;
 
             case ESTUDANTE_POS_GRADUACAO:
                 // Lógica específica para estudantes de pós-graduação
                 // Por exemplo:
+                 this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoEstudantePosGraduacao = 5;
                 if (biblioteca.models.pessoasPackage.AlunoPosGraduacao
                         .contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
@@ -46,6 +53,7 @@ public class Emprestimo {
             case PROFESSOR:
                 // Lógica específica para professores
                 // Por exemplo:
+                 this.dataDevolucao = dataEmprestimo.plusDays(30);
                 int limiteEmprestimoProfessor = 7;
                 if (biblioteca.models.pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimoProfessor) {
                     throw new IllegalArgumentException("Limite de empréstimos para professores atingido.");
@@ -56,6 +64,7 @@ public class Emprestimo {
             case FUNCIONARIO:
                 // Lógica específica para funcionários
                 // Por exemplo:
+                 this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoFuncionario = 4;
                 if (biblioteca.models.pessoasPackage.FuncionarioBiblioteca
                         .contarEmprestimos() >= limiteEmprestimoFuncionario) {
@@ -68,12 +77,9 @@ public class Emprestimo {
 
                 break;
         }
-        this.registro = registro;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
-        this.multa = multa;
-        this.multimidia = multimidia;
-        this.pessoa = pessoa;
+        
+        
+        
     }
 
     public int getregistro() {
@@ -100,12 +106,29 @@ public class Emprestimo {
         return multa;
     }
 
-    public void setMulta(float multa) {
+    public void setMulta(int atraso) {
+        float multiplicador = 1.0f;
+        switch (pessoa.getPerfil()) {
+            case ALUNO_GRADUACAO:
+            case ALUNO_POS_GRADUACAO:
+                multiplicador = 1.0f;
+                break;
+            case PROFESSOR:
+                multiplicador = 0.5f;
+                break;
+            case FUNCIONARIO:
+                multiplicador = 0.75f;
+                break;
+            default:
+                // Trate qualquer outro caso aqui, se necessário
+                break;
+        }
+        multa = (multiplicador * atraso);
         this.multa = multa;
     }
 
-    public String getMultimidia() {
-        return multimidia.gettitulo();
+    public Multimidia getMultimidia() {
+        return multimidia;
     }
 
     public String getpessoa() {

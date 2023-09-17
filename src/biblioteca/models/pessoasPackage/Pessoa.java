@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LinkedList;
+
+import biblioteca.models.emprestimosPackage.Emprestimo; 
+import biblioteca.models.multimidiaPackage.Multimidia; 
 
 /* classe "mãe" */
-public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa pode não ser nem, aluno,
-                      // nem professor, nem funcionário, mas ainda estar na biblioteca(um visitante,
-                      // por exemplo)
+public abstract class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe, ela passa a ser abstrata
     private String nome;
     private LocalDate data;// Data de Registro
     private int id;// Número de Identificação interno da Universidade
@@ -17,6 +19,9 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
     private String endereco;
     private static Perfil perfil;
     private List<Pessoa> listaPessoas;
+     private static LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
+    private boolean podeemprestar; // true -pode, false- não pode, bloqueado por atraso
+    private List<Multimidia> historico; // histórico de itens emprestados
 
     /* construtor dedicado apenas aos usuarios */
     public Pessoa(String nome, LocalDate data, int id, String contato, int idade, String endereco,
@@ -29,6 +34,9 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
         this.endereco = endereco;
         Pessoa.perfil = perfil;
         this.listaPessoas = new ArrayList<>();
+        this.emprestimos  = new LinkedList<>();
+        this.historico = new ArrayList<>();
+        this.podeemprestar = true;
     }
 
     /* getters para os atributos privados */
@@ -54,6 +62,14 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
 
     public String getendereco() {
         return endereco;
+    }
+
+    public void setpodeemprestar(Boolean opcao){
+        this.podeemprestar = opcao;
+    }
+
+    public Boolean getpodeemprestar(){
+        return podeemprestar;
     }
 
     /* Estrutura de dados para perfil de pessoa */
@@ -121,5 +137,35 @@ public class Pessoa { // pessoa não será uma classe abstrata, pois uma pessoa 
         }
         System.out.println("Pessoa com ID " + id + " não encontrada na lista.");
     }
+   public void getemprestimosid() {
+        System.out.println("empréstimos do membro:");
+        for (Emprestimo emprestimo : emprestimos) {
+            System.out.println(emprestimo.getregistro());
+        }
+        System.out.println("\n");
+    }
+
+    /* quantidade de emprestimos */
+    public static int contarEmprestimos() {
+        return emprestimos.size();
+    }
+  // adicionar empréstimo
+    public void novoEmprestimo(Emprestimo emprestimo) {
+        emprestimos.add(emprestimo);
+    }
+
+   // retornar a lista de emprestimos
+   public LinkedList<Emprestimos> getemprestimos(){
+     return emprestimos;
+   }
+
+    public void addhistorico(Multimidia item){
+        historico.add(item);
+    } 
+
+    public List<Multimidia> gethistorico(){
+        return historico;
+    }
+
 
 }

@@ -1,10 +1,19 @@
 package biblioteca.models.multimidiaPackage;
+import java.util.LinkedList;
 
 import java.util.Map;
 import java.util.HashMap;
+import biblioteca.models.comentariosPackage.Comentarios;
+import biblioteca.models.renovacaoReservaPackage.Renovacao; 
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
+
+    public enum Categoria {
+        POESIA, ROMANCE, ACAO, FICCAO, FANTASIA, HISTORIA, ARTE, ACADEMICO, TECNOLOGIA, LINGUAGENS,
+        BIOGRAFIA, SUSPENSE, FISICA_AFINS, CALCULO_AFINS, SOCIOLOGIA, ECONOMIA, FILOSOFIA, BIOLOGIA,
+        JORNALISTICO, INFORMATIVO, REVISTA, TTERROR, INFANTIL, LEGISLACAO, DIVERSOS
+    }
     private String titulo; // título
     private int id; // número de registro do livro para biblioteca
     private String autor; // autor ou artista do item do acervo
@@ -18,9 +27,13 @@ abstract public class Multimidia {
     private int numCopias; // número de cópias que tem esse item
     public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
     private Map<Integer, Multimidia> mapMultimidia;
+    private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
+    private Categoria categoria;// ação, fantasia, romance, biografia, etc
+    private Set<Categoria> categoriasDisponiveis;
+    private LinkedList<Renovacao> reservas; //lista com a ordem de reservas do livro em questão
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
-            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis) {
+            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis, Categoria categoria) {
         this.titulo = titulo;
         this.id = id;
         this.autor = autor;
@@ -33,6 +46,16 @@ abstract public class Multimidia {
         this.numCopias = numCopias;
         Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
         this.mapMultimidia = new HashMap<>(); 
+        this.comentarios = new ArrayList<>();
+        this.reservas = new LinkedList<>();
+        this.categoria = categoria;
+        inicializarCategoriasDisponiveis(); 
+    }
+
+     private void inicializarCategoriasDisponiveis() {
+        for (Categoria categoria : Categoria.values()) {
+            categoriasDisponiveis.add(categoria);
+        }
     }
 
     public String gettitulo() {
@@ -47,6 +70,18 @@ abstract public class Multimidia {
         return autor;
     }
 
+      public String getcategoria() {
+        return categoria;
+    }
+
+    public LinkedList<Renovacao> getreservas(){
+        return reservas;
+    }
+
+    public void addreservas( Renovacao reserva){
+        reservas.add(reserva);
+    }
+    
     public String geteditora() {
         return editora;
     }
@@ -73,5 +108,13 @@ abstract public class Multimidia {
 
     public static int getnumCopiasDisponiveis() {
         return numCopiasDisponiveis;
+    }
+
+     public void addcomentario(Comentario comentario) {
+        listaPessoas.add(comentario);
+    }
+
+    public Categoria getcategoria() {
+        return categoria;
     }
 }
