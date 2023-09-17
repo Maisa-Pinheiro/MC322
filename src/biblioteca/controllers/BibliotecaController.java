@@ -2,11 +2,8 @@ package biblioteca.controllers;
 
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
-import biblioteca.models.emprestimoPackage.Emprestimo;
-import biblioteca.models.renovacaoReservaPackage.Renovacao;
 //import biblioteca.models.multimidiaPackage.DVD_Video;
 //import biblioteca.models.multimidiaPackage.LivroEletronico;
 //import biblioteca.models.multimidiaPackage.LivroFisico;

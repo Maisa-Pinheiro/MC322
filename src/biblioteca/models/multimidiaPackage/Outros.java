@@ -9,7 +9,7 @@ public class Outros extends Multimidia {
     public Outros(String titulo, int id, String autor, String editora, int anoPublicacao,
             String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String tipo, String formato, String local,
-            String estadoConservacao) {
+            String estadoConservacao, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
                 numCopias, numCopiasDisponiveis, categoria);
         this.tipo = tipo;

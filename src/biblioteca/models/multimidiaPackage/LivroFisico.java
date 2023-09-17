@@ -9,7 +9,7 @@ public class LivroFisico extends Multimidia {
 
     public LivroFisico(String titulo, int id, String autor, String editora, int anoPublicacao,
     String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
-    int numCopiasDisponiveis, long isbn, int edicao, String local, String estadoConsevacao) {
+    int numCopiasDisponiveis, long isbn, int edicao, String local, String estadoConsevacao, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
                 numCopias, numCopiasDisponiveis, categoria);
         this.isbn = isbn;
