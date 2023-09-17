@@ -1,9 +1,10 @@
 package biblioteca.models.emprestimoPackage;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
-//import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
 import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.models.pessoasPackage.Pessoa.Perfil;
 
@@ -15,15 +16,13 @@ public class Emprestimo {
     private float multa;
     private Multimidia multimidia;
     private Pessoa pessoa;
+    private Set<Emprestimo> emprestimosSemRepeticao; // set para garantir que um item não seja emprestado para dois
+                                                     // membros ao mesmo tempo.
 
-   
-    public Emprestimo( LocalDate dataEmprestimo, Multimidia multimidia, Pessoa pessoa) {
-        this.registro = proximoregistro++;
-        this.dataEmprestimo = dataEmprestimo;
-        this.multa = 0 ;
-        this.multimidia = multimidia;
-        this.pessoa = pessoa;
-        Perfil perfil = biblioteca.models.pessoasPackage.Pessoa.getperfil();
+    /* construtor privado, pois só administradores podem criar */
+    public Emprestimo(LocalDate dataEmprestimo, Multimidia multimidia, Pessoa pessoa) {
+        Perfil perfil = pessoa.getperfil();
+
         // Verifique o perfil do usuário
         switch (perfil) {
             case ESTUDANTE_GRADUACAO:
@@ -32,51 +31,79 @@ public class Emprestimo {
                 this.dataDevolucao = dataEmprestimo.plusDays(15);
                 int limiteEmprestimoEstudanteGraduacao = 3;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
-                    throw new IllegalArgumentException("Limite de empréstimos para estudantes de graduação atingido.");
+                    throw new IllegalArgumentException(
+                            "Limite de empréstimos para estudantes de graduação atingido.");
+                    // se o perfil de pessoa não atingiu o limite de emprestimo
+                } else {
+                    this.registro = proximoregistro++;
+                    this.dataEmprestimo = dataEmprestimo;
+                    this.multa = 0;
+                    this.multimidia = multimidia;
+                    this.pessoa = pessoa;
+                    emprestimosSemRepeticao = new HashSet<>();
                 }
-            
                 break;
 
             case ESTUDANTE_POS_GRADUACAO:
                 // Lógica específica para estudantes de pós-graduação
                 // Por exemplo:
-                 this.dataDevolucao = dataEmprestimo.plusDays(20);
+                this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoEstudantePosGraduacao = 5;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
                     throw new IllegalArgumentException(
                             "Limite de empréstimos para estudantes de pós-graduação atingido.");
+                } else {
+                    this.registro = proximoregistro++;
+                    this.dataEmprestimo = dataEmprestimo;
+                    this.multa = 0;
+                    this.multimidia = multimidia;
+                    this.pessoa = pessoa;
+                    emprestimosSemRepeticao = new HashSet<>();
                 }
                 break;
 
             case PROFESSOR:
                 // Lógica específica para professores
                 // Por exemplo:
-                 this.dataDevolucao = dataEmprestimo.plusDays(30);
+                this.dataDevolucao = dataEmprestimo.plusDays(30);
                 int limiteEmprestimoProfessor = 7;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoProfessor) {
                     throw new IllegalArgumentException("Limite de empréstimos para professores atingido.");
 
+                } else {
+                    this.registro = proximoregistro++;
+                    this.dataEmprestimo = dataEmprestimo;
+                    this.multa = 0;
+                    this.multimidia = multimidia;
+                    this.pessoa = pessoa;
+                    emprestimosSemRepeticao = new HashSet<>();
                 }
                 break;
 
             case FUNCIONARIO:
                 // Lógica específica para funcionários
                 // Por exemplo:
-                 this.dataDevolucao = dataEmprestimo.plusDays(20);
+                this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoFuncionario = 4;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoFuncionario) {
                     throw new IllegalArgumentException("Limite de empréstimos para funcionários atingido.");
 
+                } else {
+                    this.registro = proximoregistro++;
+                    this.dataEmprestimo = dataEmprestimo;
+                    this.multa = 0;
+                    this.multimidia = multimidia;
+                    this.pessoa = pessoa;
+                    emprestimosSemRepeticao = new HashSet<>();
                 }
+
                 break;
 
             default:
 
                 break;
         }
-        
-        
-        
+
     }
 
     public int getregistro() {
@@ -103,7 +130,7 @@ public class Emprestimo {
         return multa;
     }
 
-    public void setmulta(int atraso) {
+    public void setmulta(int atraso, Pessoa pessoa) {
         float multiplicador = 1.0f;
         Perfil perfil2 = pessoa.getperfil();
         switch (perfil2) {
@@ -123,7 +150,7 @@ public class Emprestimo {
                 // Trate qualquer outro caso aqui, se necessário
                 break;
         }
-        multa = (multiplicador * atraso);
+        float multa = (multiplicador * atraso);
         this.multa = multa;
     }
 
@@ -133,6 +160,10 @@ public class Emprestimo {
 
     public String getpessoa() {
         return pessoa.getnome();
+    }
+
+    public void SetemprestimosSemRepeticao(Emprestimo emprestimo){
+        emprestimosSemRepeticao.add(emprestimo);
     }
 
 }
