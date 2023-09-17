@@ -1,6 +1,6 @@
 package biblioteca.views;
 
-/*import java.util.List;
+import java.util.List;
 
 import biblioteca.controllers.BibliotecaController;
 import biblioteca.models.multimidiaPackage.Multimidia;
@@ -13,7 +13,7 @@ public class BibliotecaViewImpl implements BibliotecaView {
     }
 
     @Override
-    public void mostrarItensDisponiveis(List<ItemMultimidia> itens) {
+    public void mostrarItensDisponiveis(List<Multimidia> itens) {
         // Implementação da exibição de itens disponíveis
     }
 
@@ -34,4 +34,4 @@ public class BibliotecaViewImpl implements BibliotecaView {
             System.out.println("Falha ao realizar a devolução.");
         }
     }
-}*/
+}

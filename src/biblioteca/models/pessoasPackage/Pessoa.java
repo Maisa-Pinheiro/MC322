@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 
-import biblioteca.models.emprestimosPackage.Emprestimo; 
+import biblioteca.models.emprestimoPackage.Emprestimo; 
 import biblioteca.models.multimidiaPackage.Multimidia; 
 
 /* classe "mãe" */
@@ -19,7 +19,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     private String endereco;
     private static Perfil perfil;
     private List<Pessoa> listaPessoas;
-     private static LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
+     private  LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
     private boolean podeemprestar; // true -pode, false- não pode, bloqueado por atraso
     private List<Multimidia> historico; // histórico de itens emprestados
 
@@ -64,8 +64,8 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         return endereco;
     }
 
-    public void setpodeemprestar(Boolean opcao){
-        this.podeemprestar = opcao;
+    public void setpodeemprestar(boolean podeemprestar){
+        this.podeemprestar = podeemprestar;
     }
 
     public Boolean getpodeemprestar(){
@@ -146,7 +146,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     }
 
     /* quantidade de emprestimos */
-    public static int contarEmprestimos() {
+    public  int contarEmprestimos() {
         return emprestimos.size();
     }
   // adicionar empréstimo
@@ -155,7 +155,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     }
 
    // retornar a lista de emprestimos
-   public LinkedList<Emprestimos> getemprestimos(){
+   public LinkedList<Emprestimo> getemprestimos(){
      return emprestimos;
    }
 
@@ -165,6 +165,10 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
 
     public List<Multimidia> gethistorico(){
         return historico;
+    }
+
+    public void removeremprestimo(Emprestimo emprestimo) {
+        emprestimos.remove(emprestimo);
     }
 
 

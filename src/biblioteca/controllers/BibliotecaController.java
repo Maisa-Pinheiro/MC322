@@ -2,6 +2,7 @@ package biblioteca.controllers;
 
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.emprestimoPackage.Emprestimo;
@@ -26,8 +27,6 @@ public interface BibliotecaController {
     void devolverItem(Pessoa membro, Multimidia item);
     
     void liberacao(Pessoa pessoa);
-
-    Set<Multimidia.Categoria> getTodasAsCategorias();
     
-    Set<String> getCategoriasUsadas();
+    Set<Multimidia.Categoria> getCategoriasUsadas();
 }

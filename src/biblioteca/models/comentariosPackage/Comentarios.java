@@ -1,9 +1,9 @@
-package ComentariosPackage;
+package biblioteca.models.ComentariosPackage;
 
 import java.time.LocalDate;
 
-import multimidiaPackage.Multimidia;
-import pessoasPackage.Pessoa;
+import biblioteca.models.multimidiaPackage.Multimidia;
+import biblioteca.models.pessoasPackage.Pessoa;
 //import pessoasPackage.Pessoa.Perfil;
 
 public class Comentarios {
@@ -39,7 +39,7 @@ public class Comentarios {
     }
     
     public String getcomentario() {
-        return comentario();
+        return comentario;
     }
     
     public Pessoa getpessoa(){

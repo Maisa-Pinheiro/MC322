@@ -1,4 +1,4 @@
-/*package biblioteca.controllers;
+package biblioteca.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
 import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
 import biblioteca.views.MembroView;
 
-/*public class MembroControllerImpl implements MembroController {
+public class MembroControllerImpl implements MembroController {
     private List<Pessoa> membros;
 
     public MembroControllerImpl() {
@@ -25,10 +25,10 @@ import biblioteca.views.MembroView;
     //@Override
     public Pessoa buscarMembroPorIdentificacao(int  registro) {
         for (Pessoa membro : membros) {
-            if (membro.getregistro().equals(registro)) {
+            if (membro.getid()==registro) {
                 return membro; // Retorna a pessoa encontrada
             }
         }
         return null; // Retorna null se a pessoa não for encontrada
     }
-}*/
+}

@@ -1,9 +1,9 @@
 package biblioteca.views;
 
-/*import java.util.List;
+import java.util.List;
 
 import biblioteca.controllers.MembroController;
-import biblioteca.models.Membro;
+import biblioteca.models.pessoasPackage.Pessoa;
 
 public class MembroViewImpl implements MembroView {
     private MembroController membroController;
@@ -13,12 +13,12 @@ public class MembroViewImpl implements MembroView {
     }
 
     @Override
-    public void mostrarListaMembros(List<Membro> membros) {
+    public void mostrarListaMembros(List<Pessoa> membros) {
         // Implementação da exibição da lista de membros
     }
 
     @Override
-    public void mostrarDetalhesMembro(Membro membro) {
+    public void mostrarDetalhesMembro(Pessoa membro) {
         // Implementação da exibição dos detalhes de um membro
     }
-}*/
+}

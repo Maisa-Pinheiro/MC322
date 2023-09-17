@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.emprestimoPackage.Emprestimo;
@@ -36,14 +39,11 @@ public class BibliotecaControllerImpl implements BibliotecaController {
    
     private void inicializarCategorias() {
         for (Multimidia item : itens) {
-            categorias.add(multimidia.getCategoria());
+            categoriasusadas.add(item.getcategoria());
         }
     }
 
-    @Override
-    public Set<Multimidia.Categoria> getTodasAsCategorias() {
-        return todasAsCategorias;
-    }
+   
 
     @Override
     public List<Multimidia> consultarItensDisponiveis() {
@@ -62,12 +62,12 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             Emprestimo emprestimo = new Emprestimo(LocalDate.now(), item, membro);
             item.numCopiasDisponiveis--;
             membro.novoEmprestimo(emprestimo);
-        System.ou.println("o item foi emprestado com sucesso");
+        System.out.println("o item foi emprestado com sucesso");
         }else{
             Renovacao reserva = new Renovacao(false, membro);
             reserva.reservar(item);
             item.addreserva(reserva);
-            System.ou.println("o item foi reservado com sucesso");
+            System.out.println("o item foi reservado com sucesso");
             
         }
     }
@@ -81,26 +81,27 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     public void devolverItem(Pessoa membro, Multimidia item) {
         for (Emprestimo emprestimo : membro.getemprestimos()) {
                 if (emprestimo.getMultimidia().equals(item)) {
-                    int prazo= emprestimo.getdataDevolucao();
-                    LocalDate today = Localdate.now();
-                    if(prazo.isbefore(today)){
-                        int atraso= ChronoUnit.DAYS.between(today,prazo);
+                    LocalDate prazo= emprestimo.getdataDevolucao();
+                    LocalDate today = LocalDate.now();
+                    if(prazo.isBefore(today)){
+                        long atraso2= ChronoUnit.DAYS.between(today,prazo);
+                        int atraso = (int) atraso2;
                         
-                        membro.setpodemeprestar(false);
+                        membro.setpodeemprestar(false);
                         emprestimo.setmulta(atraso);
                         System.out.println("O membro devolveu o empréstimo com atraso, logo, não pode fazer empréstimos pelos próximos 20 dias, devendo pedir a liberação ao final desse prazo, junto ao pagamento da multa, de R$ " + emprestimo.getmulta());
                          membro.removeremprestimo(emprestimo); 
                         break;
                     } else{
                         membro.removeremprestimo(emprestimo);
-                        if(item.listareservas.size==0){
+                        if(item.getsize()==0){
                             item.numCopiasDisponiveis++;
-                            System.ou.println("O item foi devolvido com sucesso e emprestado ao membro ");
+                            System.out.println("O item foi devolvido com sucesso e emprestado ao membro ");
                     }else{
-                            emprestarItem(listareservas.get(0).getpessoa(), item);
-                            listareservas.remove(0);
+                            emprestarItem(item.getreservas().get(0).getpessoa(), item);
+                            item.remove(0);
                     }
-                    System.ou.println("O item foi devolvido com sucesso e emprestado ao membro " +  listareservas.get(0).getpessoa().getnome());  
+                    System.out.println("O item foi devolvido com sucesso e emprestado ao membro " +  item.getreservas().get(0).getpessoa().getnome());  
                     break;
                     }
         }
@@ -109,7 +110,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public Set<String> getcategoriasusadas(){
+    public Set<Multimidia.Categoria> getCategoriasUsadas(){
         return categoriasusadas;
     }
 }

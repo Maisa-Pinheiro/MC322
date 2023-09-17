@@ -3,6 +3,8 @@ package biblioteca.models.eventosPackage;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.List;
+import biblioteca.models.pessoasPackage.Pessoa;
+import java.util.ArrayList;
 
 public class EventosBiblioteca {
     private int id; // número de identificação da palestra
@@ -32,7 +34,7 @@ public class EventosBiblioteca {
     }
 
     public void addparticipantes(Pessoa participante){
-        membro.add(participante);
+        membros.add(participante);
     }
 
     /* definição das classes internas */
