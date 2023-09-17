@@ -105,7 +105,7 @@ public class Emprestimo {
 
     public void setmulta(int atraso) {
         float multiplicador = 1.0f;
-        Perfil perfil2 = biblioteca.models.pessoasPackage.Pessoa.getperfil();
+        Perfil perfil2 = pessoa.getperfil();
         switch (perfil2) {
             case ESTUDANTE_GRADUACAO:
                 multiplicador = 1.0f;
