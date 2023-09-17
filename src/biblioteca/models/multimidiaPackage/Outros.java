@@ -11,7 +11,7 @@ public class Outros extends Multimidia {
             int numCopiasDisponiveis, String tipo, String formato, String local,
             String estadoConservacao) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
-                numCopias, numCopiasDisponiveis);
+                numCopias, numCopiasDisponiveis, categoria);
         this.tipo = tipo;
         this.formato = formato;
         this.local = local;
