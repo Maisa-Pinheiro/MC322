@@ -1,9 +1,12 @@
 package biblioteca.models.multimidiaPackage;
 import java.util.LinkedList;
-
+import java.util.HashSet;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
-import biblioteca.models.comentariosPackage.Comentarios;
+import biblioteca.models.ComentariosPackage.Comentarios;
 import biblioteca.models.renovacaoReservaPackage.Renovacao; 
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
@@ -25,7 +28,7 @@ abstract public class Multimidia {
                                         // emprestimo objeto multimidia do acervo
     public boolean disponibilidade; // true se a cópia em questão está disponível, false se não está
     private int numCopias; // número de cópias que tem esse item
-    public static int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
+    public  int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
     private Map<Integer, Multimidia> mapMultimidia;
     private List<Comentarios> comentarios; // comentários de usuários a respeito da obra
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
@@ -44,7 +47,7 @@ abstract public class Multimidia {
         this.historicoEmprestimo = historicoEmprestimo;
         this.disponibilidade = disponibilidade;
         this.numCopias = numCopias;
-        Multimidia.numCopiasDisponiveis = numCopiasDisponiveis;
+        this.numCopiasDisponiveis = numCopiasDisponiveis;
         this.mapMultimidia = new HashMap<>(); 
         this.comentarios = new ArrayList<>();
         this.reservas = new LinkedList<>();
@@ -70,7 +73,7 @@ abstract public class Multimidia {
         return autor;
     }
 
-      public String getcategoria() {
+      public Categoria getcategoria() {
         return categoria;
     }
 
@@ -78,7 +81,15 @@ abstract public class Multimidia {
         return reservas;
     }
 
-    public void addreservas( Renovacao reserva){
+    public int getsize(){
+        return reservas.size();
+    }
+
+    public void remove(int x){
+        reservas.remove(x);
+    }
+
+    public void addreserva( Renovacao reserva){
         reservas.add(reserva);
     }
     
@@ -106,15 +117,13 @@ abstract public class Multimidia {
         return numCopias;
     }
 
-    public static int getnumCopiasDisponiveis() {
+    public int getnumCopiasDisponiveis() {
         return numCopiasDisponiveis;
     }
 
      public void addcomentario(Comentario comentario) {
-        listaPessoas.add(comentario);
+        comentarios.add(comentario);
     }
 
-    public Categoria getcategoria() {
-        return categoria;
-    }
+   
 }
