@@ -16,8 +16,8 @@ public class Emprestimo {
     private Multimidia multimidia;
     private Pessoa pessoa;
 
-    /* construtor privado, pois só administradores podem criar */
-    private Emprestimo( LocalDate dataEmprestimo, Multimidia multimidia, Pessoa pessoa) {
+   
+    public Emprestimo( LocalDate dataEmprestimo, Multimidia multimidia, Pessoa pessoa) {
         this.registro = proximoregistro++;
         this.dataEmprestimo = dataEmprestimo;
         this.multa = 0 ;
@@ -31,8 +31,7 @@ public class Emprestimo {
                 // Por exemplo:
                 this.dataDevolucao = dataEmprestimo.plusDays(15);
                 int limiteEmprestimoEstudanteGraduacao = 3;
-                if (biblioteca.models.pessoasPackage.AlunoGraduacao
-                        .contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
+                if (pessoa.contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
                     throw new IllegalArgumentException("Limite de empréstimos para estudantes de graduação atingido.");
                 }
             
@@ -43,8 +42,7 @@ public class Emprestimo {
                 // Por exemplo:
                  this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoEstudantePosGraduacao = 5;
-                if (biblioteca.models.pessoasPackage.AlunoPosGraduacao
-                        .contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
+                if (pessoa.contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
                     throw new IllegalArgumentException(
                             "Limite de empréstimos para estudantes de pós-graduação atingido.");
                 }
@@ -55,7 +53,7 @@ public class Emprestimo {
                 // Por exemplo:
                  this.dataDevolucao = dataEmprestimo.plusDays(30);
                 int limiteEmprestimoProfessor = 7;
-                if (biblioteca.models.pessoasPackage.Professor.contarEmprestimos() >= limiteEmprestimoProfessor) {
+                if (pessoa.contarEmprestimos() >= limiteEmprestimoProfessor) {
                     throw new IllegalArgumentException("Limite de empréstimos para professores atingido.");
 
                 }
@@ -66,8 +64,7 @@ public class Emprestimo {
                 // Por exemplo:
                  this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoFuncionario = 4;
-                if (biblioteca.models.pessoasPackage.FuncionarioBiblioteca
-                        .contarEmprestimos() >= limiteEmprestimoFuncionario) {
+                if (pessoa.contarEmprestimos() >= limiteEmprestimoFuncionario) {
                     throw new IllegalArgumentException("Limite de empréstimos para funcionários atingido.");
 
                 }
@@ -106,11 +103,14 @@ public class Emprestimo {
         return multa;
     }
 
-    public void setMulta(int atraso) {
+    public void setmulta(int atraso) {
         float multiplicador = 1.0f;
-        switch (pessoa.getPerfil()) {
-            case ALUNO_GRADUACAO:
-            case ALUNO_POS_GRADUACAO:
+        Perfil perfil2 = biblioteca.models.pessoasPackage.Pessoa.getperfil();
+        switch (perfil2) {
+            case ESTUDANTE_GRADUACAO:
+                multiplicador = 1.0f;
+                break;
+            case ESTUDANTE_POS_GRADUACAO:
                 multiplicador = 1.0f;
                 break;
             case PROFESSOR:
