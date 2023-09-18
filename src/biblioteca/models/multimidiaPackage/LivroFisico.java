@@ -8,7 +8,7 @@ public class LivroFisico extends Multimidia {
     private String estadoConsevacao; // estado de conservação do livro físico
 
     public LivroFisico(String titulo, int id, String autor, String editora, int anoPublicacao,
-    String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
+    String sinopse, String capa,  boolean disponibilidade, int numCopias,
     int numCopiasDisponiveis, long isbn, int edicao, String local, String estadoConsevacao, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
                 numCopias, numCopiasDisponiveis, categoria);
