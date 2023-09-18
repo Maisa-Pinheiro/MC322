@@ -51,15 +51,16 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     @Override
     public void emprestarItem(Pessoa membro, Multimidia item) {
-        int qtddisponivel = item.getnumCopiasDisponiveis();
+       
         Boolean liberado = membro.getpodeemprestar();
         if (liberado == false) {
             System.out.println("O membro está bloqueado e não pode fazer empréstimos, favor requisitar liberação");
             return;
         }
-        if (qtddisponivel > 0) {
+        if (item.disponilibidade == true) {
             Emprestimo emprestimo = new Emprestimo(LocalDate.now(), item, membro);
             item.numCopiasDisponiveis--;
+            item.disponibilidade = false;
             membro.novoEmprestimo(emprestimo);
             emprestimo.SetemprestimosSemRepeticao(emprestimo); // set para garantir que um item não seja emprestado para dois membros ao mesmo tempo.
 
@@ -99,7 +100,8 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                     membro.removeremprestimo(emprestimo);
                     if (item.getsize() == 0) {
                         item.numCopiasDisponiveis++;
-                        System.out.println("O item foi devolvido com sucesso e emprestado ao membro ");
+                        item.disponilibidade = true;
+                        System.out.println("O item foi devolvido com sucesso ");
                     } else {
                         emprestarItem(item.getreservas().get(0).getpessoa(), item);
                         item.remove(0);
