@@ -10,7 +10,7 @@ public class LivroEletronico extends Multimidia {
     private LocalDate dataDisponibilidade; // Atributo para armazenar a data de disponibilidade
 
     public LivroEletronico(String titulo, int id, String autor, String editora, int anoPublicacao,
-            String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
+            String sinopse, String capa, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String formato, URL url, String requisitosLeitura,
             LocalDate dataDisponibilidade, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
