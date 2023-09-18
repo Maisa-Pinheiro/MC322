@@ -25,7 +25,7 @@ abstract public class Multimidia {
     private int anoPublicacao; // o ano referente a publicação da obra
     private String sinopse; // resumo conciso e breve do objeto em questão
     private String capa; // no futuro uma classe será implementada no lugar desse atibuto
-    private String historicoEmprestimo; // a ideia desse atributo é implementar algo para conter o historico de
+    private List<Emprestimo> historicoEmprestimo; // a ideia desse atributo é implementar algo para conter o historico de
                                         // emprestimo objeto multimidia do acervo
     public boolean disponibilidade; // true se a cópia em questão está disponível, false se não está
     private int numCopias; // número de cópias que tem esse item
@@ -38,7 +38,7 @@ abstract public class Multimidia {
     // membros ao mesmo tempo.
 
     public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
-            String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
+            String capa, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
             Categoria categoria) {
         this.titulo = titulo;
         this.id = id;
@@ -47,7 +47,7 @@ abstract public class Multimidia {
         this.anoPublicacao = anoPublicacao;
         this.sinopse = sinopse;
         this.capa = capa;
-        this.historicoEmprestimo = historicoEmprestimo;
+        this.historicoEmprestimo = new ArrayList<>();
         this.disponibilidade = disponibilidade;
         this.numCopias = numCopias;
         this.numCopiasDisponiveis = numCopiasDisponiveis;
@@ -112,7 +112,7 @@ abstract public class Multimidia {
         return capa;
     }
 
-    public String gethistoricoEmprestimo() {
+    public List<Emprestimo> gethistoricoEmprestimo() {
         return historicoEmprestimo;
     }
 
@@ -130,6 +130,10 @@ abstract public class Multimidia {
 
     public void addcomentario(Comentario comentario) {
         comentarios.add(comentario);
+    }
+
+    public void addhistorico(Emprestimo emprestimo){
+        historicoEmprestimo.add(emprestimo);
     }
 
     public void addNovaMultimidia(int id, Multimidia multimidia) {
