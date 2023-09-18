@@ -8,7 +8,7 @@ public class CD_Audio extends Multimidia {
     private String estadoConservacao;
 
     public CD_Audio(String titulo, int id, String autor, String editora, int anoPublicacao,
-            String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
+            String sinopse, String capa,  boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
             String listaFaixas, Duration duracao, String estadoConservacao, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade, numCopias, numCopiasDisponiveis, categoria);
         this.listaFaixas = listaFaixas;
