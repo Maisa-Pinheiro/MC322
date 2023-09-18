@@ -13,9 +13,7 @@ import biblioteca.models.comentariosPackage.Comentario;
 abstract public class Multimidia {
 
     public enum Categoria {
-        POESIA, ROMANCE, ACAO, FICCAO, FANTASIA, HISTORIA, ARTE, ACADEMICO, TECNOLOGIA, LINGUAGENS,
-        BIOGRAFIA, SUSPENSE, FISICA_AFINS, CALCULO_AFINS, SOCIOLOGIA, ECONOMIA, FILOSOFIA, BIOLOGIA,
-        JORNALISTICO, INFORMATIVO, REVISTA, TTERROR, INFANTIL, LEGISLACAO, DIVERSOS
+        POESIA, ROMANCE, ACAO, FICCAO, FANTASIA // mais categorias serão adicionadas posteriormente
     }
 
     private String titulo; // título
