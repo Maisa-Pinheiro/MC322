@@ -7,7 +7,7 @@ public class Outros extends Multimidia {
     private String estadoConservacao;
 
     public Outros(String titulo, int id, String autor, String editora, int anoPublicacao,
-            String sinopse, String capa, String historicoEmprestimo, boolean disponibilidade, int numCopias,
+            String sinopse, String capa, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String tipo, String formato, String local,
             String estadoConservacao, Categoria categoria) {
         super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
