@@ -1,6 +1,6 @@
 package main;
 
-/*import biblioteca.controllers.*;
+import biblioteca.controllers.*;
 import biblioteca.models.*;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.pessoasPackage.Pessoa;
@@ -155,7 +155,7 @@ public class BibliotecaMain {
         }
     }
 
-    /*private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
+    private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
         while (true) {
             System.out.println("---- Menu Relatórios e Estatísticas ----");
             System.out.println();
@@ -296,7 +296,7 @@ public class BibliotecaMain {
     }
 
     // Métodos para gerar relatórios e estatísticas
-    /*private static void gerarRelatorioAtividadesMembros() {
+    private static void gerarRelatorioAtividadesMembros() {
         // Lógica para gerar o Relatório de Atividades de Membros
         System.out.println("Gerando Relatório de Atividades de Membros");
     }
@@ -325,4 +325,5 @@ public class BibliotecaMain {
         // Lógica para gerar o Relatório de Itens Mais Populares
         System.out.println("Gerando Relatório de Itens Mais Populares");
     }
-}*/
+}
+
