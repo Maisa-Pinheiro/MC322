@@ -28,8 +28,8 @@ public class BibliotecaMain {
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
-            System.out.println("1. Gerenciamento de Itens");
-            System.out.println("2. Gerenciamento de Membros");
+            System.out.println("1. Gerenciamento de Itens"); // MA
+            System.out.println("2. Gerenciamento de Membros"); // FER
             System.out.println("3. Geração de Relatórios e Estatísticas");
             System.out.println("4. Administração de Funcionários");
             System.out.println("5. Sair");
