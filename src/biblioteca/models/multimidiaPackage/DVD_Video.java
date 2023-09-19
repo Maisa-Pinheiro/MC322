@@ -12,7 +12,7 @@ public class DVD_Video extends Multimidia {
             String sinopse, String capa,  boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis,
             String elenco, Duration duracao, String legendasAudio, String estadoConservacao, Categoria categoria) {
-        super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, historicoEmprestimo, disponibilidade,
+        super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, disponibilidade,
                 numCopias, numCopiasDisponiveis, categoria);
         this.elenco = elenco;
         this.duracao = duracao;

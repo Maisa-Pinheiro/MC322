@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.comentariosPackage.Comentario;
+import biblioteca.models.emprestimoPackage.Emprestimo;
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {

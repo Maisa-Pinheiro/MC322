@@ -89,7 +89,7 @@ public class BibliotecaMain {
             switch (opcaoItens) {
                 case 1:
                     List<Multimidia> itens = bibliotecaController.consultarItensDisponiveis();
-                    //bibliotecaView.mostrarItensDisponiveis(itens);
+                    bibliotecaView.mostrarItensDisponiveis(itens);
                     break;
                 case 2:
                     adicionarItem(scanner);
@@ -136,7 +136,7 @@ public class BibliotecaMain {
             switch (opcaoMembros) {
                 case 1:
                     List<Pessoa> membros = membroController.listarMembros();
-                    //membroView.mostrarListaMembros(membros);
+                    membroView.mostrarListaMembros(membros);
                     break;
                 case 2:
                     adicionarMembro(scanner);

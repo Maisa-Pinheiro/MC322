@@ -57,7 +57,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             System.out.println("O membro está bloqueado e não pode fazer empréstimos, favor requisitar liberação");
             return;
         }
-        if (item.disponilibidade == true) {
+        if (item.disponibilidade == true) {
             Emprestimo emprestimo = new Emprestimo(LocalDate.now(), item, membro);
             item.numCopiasDisponiveis--;
             item.disponibilidade = false;
@@ -100,7 +100,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                     membro.removeremprestimo(emprestimo);
                     if (item.getsize() == 0) {
                         item.numCopiasDisponiveis++;
-                        item.disponilibidade = true;
+                        item.disponibilidade = true;
                         System.out.println("O item foi devolvido com sucesso ");
                     } else {
                         emprestarItem(item.getreservas().get(0).getpessoa(), item);
