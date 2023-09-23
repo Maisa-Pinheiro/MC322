@@ -17,7 +17,7 @@ public class Emprestimo {
     private Multimidia multimidia;
     private Pessoa pessoa;
     private Set<Emprestimo> emprestimosSemRepeticao; // set para garantir que um item não seja emprestado para dois
-                                                     // membros ao mesmo tempo.
+     // membros ao mesmo tempo.
 
     /* construtor privado, pois só administradores podem criar */
     public Emprestimo(LocalDate dataEmprestimo, Multimidia multimidia, Pessoa pessoa) {
