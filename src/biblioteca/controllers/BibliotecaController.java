@@ -8,7 +8,7 @@ import biblioteca.models.multimidiaPackage.Multimidia;
 //import biblioteca.models.multimidiaPackage.LivroEletronico;
 //import biblioteca.models.multimidiaPackage.LivroFisico;
 //import biblioteca.models.multimidiaPackage.Outros;
-
+import biblioteca.models.emprestimoPackage.*;
 import biblioteca.models.pessoasPackage.Pessoa;
 //import biblioteca.models.pessoasPackage.Professor;
 //import biblioteca.models.pessoasPackage.AlunoGraduacao;
@@ -21,9 +21,26 @@ public interface BibliotecaController {
 
     void emprestarItem(Pessoa membro, Multimidia item);
 
+    void reservaritem(Pessoa membro, Multimidia item);
+
+    void renovaremprestimo(Pessoa membro,Emprestimo emprestimo);
+
     void devolverItem(Pessoa membro, Multimidia item);
-    
+
+    void addItemDisponivel(Multimidia item);
+
+    void addemprestimo(Emprestimo emprestimo);
+
+
     void liberacao(Pessoa pessoa);
+
+    void removerItemDispoinvel(int id);
+
+    void removeremprestimo(int id);
+
+    Multimidia retornaritem(int id);
+
+    Emprestimo retornaremprestimo(int id);
     
     Set<Multimidia.Categoria> getCategoriasUsadas();
 }

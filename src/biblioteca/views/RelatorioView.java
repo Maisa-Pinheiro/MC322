@@ -1,5 +1,10 @@
 package biblioteca.views;
 
-public class RelatorioView {
+
+import biblioteca.controllers.*;
+import biblioteca.models.relatorioPackage.*;
+
+
+public interface RelatorioView {
     
 }

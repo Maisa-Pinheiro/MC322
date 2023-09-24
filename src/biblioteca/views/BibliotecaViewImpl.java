@@ -14,7 +14,9 @@ public class BibliotecaViewImpl implements BibliotecaView {
 
     @Override
     public void mostrarItensDisponiveis(List<Multimidia> itens) {
-        // Implementação da exibição de itens disponíveis
+        for (Multimidia item : itens) {
+            System.out.println("Título: " + item.gettitulo() + ", ID: " + item.getid()); 
+        }
     }
 
     @Override

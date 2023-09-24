@@ -9,11 +9,11 @@ public class LivroEletronico extends Multimidia {
     private String requisitosLeitura; // quais são os requisitos para leitura desse livro (SW e compatibilidade)
     private LocalDate dataDisponibilidade; // Atributo para armazenar a data de disponibilidade
 
-    public LivroEletronico(String titulo, int id, String autor, String editora, int anoPublicacao,
+    public LivroEletronico(String titulo,  String autor, String editora, int anoPublicacao,
             String sinopse, String capa, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String formato, URL url, String requisitosLeitura,
             LocalDate dataDisponibilidade, Categoria categoria) {
-        super(titulo, id, autor, editora, anoPublicacao, sinopse, capa, disponibilidade,
+        super(titulo,  autor, editora, anoPublicacao, sinopse, capa, disponibilidade,
                 numCopias, numCopiasDisponiveis, categoria);
         this.formato = formato;
         this.url = url;
@@ -21,7 +21,7 @@ public class LivroEletronico extends Multimidia {
         this.dataDisponibilidade = dataDisponibilidade;
     }
 
-    // Métodos getters e setters para a URL e data de disponibilidade
+    // Métodos getters e setters 
     public URL getUrl() {
         return url;
     }
@@ -34,8 +34,16 @@ public class LivroEletronico extends Multimidia {
         return formato;
     }
 
+    public void setformato(String formato){
+        this.formato = formato;
+    }
+
     public String getrequisitosLeitura() {
         return requisitosLeitura;
+    }
+
+    public void setrequisitosLeitura(String requisitosLeitura){
+        this.requisitosLeitura = requisitosLeitura;
     }
 
     public LocalDate getDataDisponibilidade() {

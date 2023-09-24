@@ -7,6 +7,7 @@ import java.util.Set;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
@@ -24,6 +25,7 @@ import biblioteca.models.pessoasPackage.Pessoa;
 public class BibliotecaControllerImpl implements BibliotecaController {
 
     private List<Multimidia> itens;
+    private List<Emprestimo> emprestimos;
     private Set<Multimidia.Categoria> categoriasusadas; /*
                                                          * categorias de itens presentes na biblioteca, o enum categoria
                                                          * possui todas as categorias possíveis, mas este atributo reúne
@@ -34,6 +36,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     public BibliotecaControllerImpl() {
         itens = new ArrayList<>();
+        emprestimos = new ArrayList<>();
         this.categoriasusadas = new HashSet<>();
         inicializarCategorias();
     }
@@ -50,6 +53,58 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
+    public void addemprestimo(Emprestimo emprestimo){
+        emprestimos.add(emprestimo);
+    }
+
+    @Override
+    public void addItemDisponivel(Multimidia item){
+        itens.add(item);
+    }
+
+    @Override
+    public void removerItemDispoinvel(int id){
+        for (Multimidia item : itens) {
+            if(id == item.getid()){
+                item=null;
+                itens.remove(item);
+            }
+        }
+    }
+
+     @Override
+    public void removeremprestimo(int id){
+        for (Emprestimo emprestimo : emprestimos) {
+            if(id == emprestimo.getregistro()){
+                emprestimo=null;
+                emprestimos.remove(emprestimo);
+            }
+        }
+    }
+
+    @Override
+    public Multimidia retornaritem(int id){
+        for (Multimidia item : itens) {
+            if(id == item.getid()){
+               return item;
+               
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Emprestimo retornaremprestimo(int id){
+        for (Emprestimo emprestimo : emprestimos) {
+            if(id == emprestimo.getregistro()){
+               return emprestimo;
+               
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void emprestarItem(Pessoa membro, Multimidia item) {
        
         Boolean liberado = membro.getpodeemprestar();
@@ -63,7 +118,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             item.disponibilidade = false;
             membro.novoEmprestimo(emprestimo);
             emprestimo.SetemprestimosSemRepeticao(emprestimo); // set para garantir que um item não seja emprestado para dois membros ao mesmo tempo.
-
+            addemprestimo(emprestimo);
             System.out.println("O item foi emprestado com sucesso.");
         } else {
             Renovacao reserva = new Renovacao(false, membro);
@@ -80,6 +135,27 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
+    public void reservaritem(Pessoa membro, Multimidia item){
+        if (item.disponibilidade == true) {
+            System.out.println("o item está disponível para empréstimo");
+        }else{
+            Renovacao reserva = new Renovacao(false, membro);
+            reserva.reservar(item);
+            item.addreserva(reserva);
+            System.out.println("o item foi reservado com sucesso");
+
+        }
+            
+    }
+
+    public void renovaremprestimo(Pessoa membro,Emprestimo emprestimo){
+        
+            Renovacao renovacao = new Renovacao(true, membro);
+            renovacao.renovar(emprestimo);
+
+    }
+
+    @Override
     public void devolverItem(Pessoa membro, Multimidia item) {
         for (Emprestimo emprestimo : membro.getemprestimos()) {
             if (emprestimo.getMultimidia().equals(item)) {
@@ -88,7 +164,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                 if (prazo.isBefore(today)) {
                     long atraso2 = ChronoUnit.DAYS.between(today, prazo);
                     int atraso = (int) atraso2;
-
+                    emprestimos.remove(emprestimo);
                     membro.setpodeemprestar(false);
                     emprestimo.setmulta(atraso, membro);
                     System.out.println(
@@ -97,10 +173,12 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                     membro.removeremprestimo(emprestimo);
                     break;
                 } else {
+                    emprestimos.remove(emprestimo);
                     membro.removeremprestimo(emprestimo);
                     if (item.getsize() == 0) {
                         item.numCopiasDisponiveis++;
                         item.disponibilidade = true;
+                        
                         System.out.println("O item foi devolvido com sucesso ");
                     } else {
                         emprestarItem(item.getreservas().get(0).getpessoa(), item);
