@@ -775,18 +775,6 @@ public class BibliotecaMain {
                 System.out.print("Nome do aluno: ");
                 String nome = scanner.nextLine();
 
-                /* data de adição do aluno */
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Formato da data
-                System.out.print("Data (no formato YYYY-MM-DD): ");
-                String dataInput = scanner.nextLine();
-
-                try {
-                    LocalDate data = LocalDate.parse(dataInput, dateFormatter);
-                    System.out.println("Data lida: " + data);
-                } catch (Exception e) {
-                    System.out.println("Formato de data inválido. Certifique-se de usar o formato YYYY-MM-DD.");
-                }
-
                 /* contato do aluno */
                 System.out.print("Contato do aluno (e-mail): ");
                 String contato = scanner.nextLine();
@@ -807,11 +795,127 @@ public class BibliotecaMain {
                 System.out.print("RA do aluno: ");
                 int ra = scanner.nextInt();
                 scanner.nextLine();
-                
+
                 /* curso do aluno */
                 System.out.print("Curso do aluno: ");
                 String curso = scanner.nextLine();
 
+                AlunoGraduacao novoMembro = new AlunoGraduacao(nome, LocalDate.now(), contato, idade, endereco, perfil,
+                        ra, curso);
+                membroController.addMembro(novoMembro);
+                break;
+
+            case 2:
+
+                /* nome do aluno */
+                System.out.print("Nome do aluno: ");
+                String nomeAlunoPos = scanner.nextLine();
+
+                /* contato do aluno */
+                System.out.print("Contato do aluno (e-mail): ");
+                String contatoAlunoPos = scanner.nextLine();
+
+                /* idade do aluno */
+                System.out.print("Idade do aluno: ");
+                int idadeAlunoPos = scanner.nextInt();
+                scanner.nextLine();
+
+                /* endereço do aluno */
+                System.out.print("Endereço do aluno: ");
+                String enderecoAlunoPos = scanner.nextLine();
+
+                /* adicionando o perfil */
+                Perfil perfilAlunoPos = Perfil.ESTUDANTE_POS_GRADUACAO;
+
+                /* RA do aluno */
+                System.out.print("RA do aluno: ");
+                int raAlunoPos = scanner.nextInt();
+                scanner.nextLine();
+
+                /* curso do aluno */
+                System.out.print("Curso do aluno: ");
+                String cursoAlunoPos = scanner.nextLine();
+
+                AlunoPosGraduacao novoMembroAlunoPos = new AlunoPosGraduacao(nomeAlunoPos, LocalDate.now(),
+                        contatoAlunoPos, idadeAlunoPos, enderecoAlunoPos, perfilAlunoPos,
+                        raAlunoPos, cursoAlunoPos);
+                membroController.addMembro(novoMembroAlunoPos);
+                break;
+
+            case 3:
+                /* nome do funcionario */
+                System.out.print("Nome do funcionario: ");
+                String nomeFuncionario = scanner.nextLine();
+
+                /* contato do funcionario */
+                System.out.print("Contato do funcionario (e-mail): ");
+                String contatoFuncionario = scanner.nextLine();
+
+                /* idade do funcionario */
+                System.out.print("Idade do funcionario: ");
+                int idadeFuncionario = scanner.nextInt();
+                scanner.nextLine();
+
+                /* endereço do funcionario */
+                System.out.print("Endereço do funcionario: ");
+                String enderecoFuncionario = scanner.nextLine();
+
+                /* adicionando o perfil */
+                Perfil perfilFuncionario = Perfil.FUNCIONARIO;
+
+                /* cargo do funcionario */
+                System.out.print("Cargo do funcionario: ");
+                String cargoFuncionario = scanner.nextLine();
+
+                /* salario do funcionario */
+                System.out.print("Salario do funcionario: ");
+                float salarioFuncionario = scanner.nextFloat();
+                scanner.nextLine();
+
+                /* horario do funcionario */
+                System.out.print("Horário do funcionario: ");
+                String horarioFuncionario = scanner.nextLine();
+
+                /* acesso do funcionario */
+                System.out.print("Acesso do funcionario: ");
+                String acessoFuncionario = scanner.nextLine();
+
+                FuncionarioBiblioteca novoFuncionario = new FuncionarioBiblioteca(nomeFuncionario, LocalDate.now(),
+                        contatoFuncionario, idadeFuncionario, enderecoFuncionario, perfilFuncionario,
+                        cargoFuncionario, salarioFuncionario, horarioFuncionario, acessoFuncionario);
+                membroController.addMembro(novoFuncionario);
+                break;
+
+            case 4:
+                /* nome do professor */
+                System.out.print("Nome do professor: ");
+                String nomeProfessor = scanner.nextLine();
+
+                /* contato do funcionario */
+                System.out.print("Contato do professor (e-mail): ");
+                String contatoProfessor = scanner.nextLine();
+
+                /* idade do funcionario */
+                System.out.print("Idade do professor: ");
+                int idadeProfessor = scanner.nextInt();
+                scanner.nextLine();
+
+                /* endereço do funcionario */
+                System.out.print("Endereço do professor: ");
+                String enderecoProfessor = scanner.nextLine();
+
+                /* adicionando o perfil */
+                Perfil perfilProfessor = Perfil.PROFESSOR;
+
+                /* endereço do funcionario */
+                System.out.print("Instituto do professor: ");
+                String institutoProfessor = scanner.nextLine();
+
+                Professor novoProfessor = new Professor(nomeProfessor, LocalDate.now(),
+                        contatoProfessor, idadeProfessor, enderecoProfessor, perfilProfessor,
+                        institutoProfessor);
+                membroController.addMembro(novoProfessor);
+                break;
         }
 
     }

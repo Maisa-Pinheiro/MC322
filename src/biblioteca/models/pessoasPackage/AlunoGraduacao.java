@@ -11,7 +11,7 @@ public class AlunoGraduacao extends Pessoa {
     private List<Renovacao> renovacoes; // A lista de renovações
 
     // Construtor da classe Aluno de Graduação
-    public AlunoGraduacao(String nome, LocalDate data, int id, String contato, int idade, String endereco,
+    public AlunoGraduacao(String nome, LocalDate data, String contato, int idade, String endereco,
             Perfil perfil,
             int ra, String curso) {
         super(nome, data, contato, idade, endereco, perfil);

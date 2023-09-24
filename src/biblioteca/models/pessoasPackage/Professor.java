@@ -11,7 +11,7 @@ public class Professor extends Pessoa {
     private List<Renovacao> renovacoes; // A lista de renovações
 
     // Construtor da classe Professor
-    public Professor(String nome, LocalDate data, int id, String contato, int idade, String endereco,
+    public Professor(String nome, LocalDate data, String contato, int idade, String endereco,
             Perfil perfil, String instituto) {
         super(nome, data, contato, idade, endereco, perfil);
         this.instituto = instituto;

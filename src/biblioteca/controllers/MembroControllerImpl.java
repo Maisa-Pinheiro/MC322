@@ -18,9 +18,9 @@ public class MembroControllerImpl implements MembroController {
     }
 
     @Override
-    public Pessoa buscarMembroPorIdentificacao(int  registro) {
+    public Pessoa buscarMembroPorIdentificacao(int registro) {
         for (Pessoa membro : membros) {
-            if (membro.getid()==registro) {
+            if (membro.getid() == registro) {
                 return membro; // Retorna a pessoa encontrada
             }
         }
@@ -29,7 +29,7 @@ public class MembroControllerImpl implements MembroController {
 
     @Override
     /* metodo para adicionar novo membro a lista */
-    public void addMembro(Pessoa pessoa){
+    public void addMembro(Pessoa pessoa) {
         Pessoa novPessoa = pessoa;
         pessoa.addPessoa(novPessoa);
     }

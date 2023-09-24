@@ -15,7 +15,7 @@ public class FuncionarioBiblioteca extends Pessoa {
                           // nível de acesso
 
     // Construtor da classe Funcionário da Biblioteca
-    public FuncionarioBiblioteca(String nome, LocalDate data, int id, String contato, int idade, String endereco,
+    public FuncionarioBiblioteca(String nome, LocalDate data, String contato, int idade, String endereco,
             Perfil perfil,
             String cargo, float salario, String horario, String acesso) {
         super(nome, data, contato, idade, endereco, perfil);

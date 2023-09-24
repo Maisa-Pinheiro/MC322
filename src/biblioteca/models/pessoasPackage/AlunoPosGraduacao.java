@@ -12,7 +12,7 @@ public class AlunoPosGraduacao extends Pessoa {
     private List<Renovacao> renovacoes; // A lista de renovações
 
     // Construtor da classe Aluno de Pós-Graduação 
-    public AlunoPosGraduacao(String nome, LocalDate data, int id, String contato, int idade, String endereco,
+    public AlunoPosGraduacao(String nome, LocalDate data, String contato, int idade, String endereco,
             Perfil perfil, int ra, String curso) {
         super(nome, data, contato, idade, endereco, perfil);
         this.curso = curso;
