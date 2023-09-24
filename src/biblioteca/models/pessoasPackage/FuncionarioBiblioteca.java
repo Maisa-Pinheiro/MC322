@@ -18,7 +18,7 @@ public class FuncionarioBiblioteca extends Pessoa {
     public FuncionarioBiblioteca(String nome, LocalDate data, int id, String contato, int idade, String endereco,
             Perfil perfil,
             String cargo, float salario, String horario, String acesso) {
-        super(nome, data, id, contato, idade, endereco, perfil);
+        super(nome, data, contato, idade, endereco, perfil);
         this.cargo = cargo;
         this.salario = salario;
         this.horario = horario;

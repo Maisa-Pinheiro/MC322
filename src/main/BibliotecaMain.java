@@ -5,6 +5,7 @@ import biblioteca.controllers.*;
 //import biblioteca.models.*;
 import biblioteca.models.multimidiaPackage.*;
 import biblioteca.models.pessoasPackage.*;
+import biblioteca.models.pessoasPackage.Pessoa.Perfil;
 import biblioteca.models.comentariosPackage.*;
 import biblioteca.models.equipamentosPackage.*;
 import biblioteca.models.equipamentosPackage.Equipamentos.AudioVisual;
@@ -20,6 +21,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.time.Duration;
 import java.net.MalformedURLException;
+import java.time.format.DateTimeFormatter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -746,7 +748,7 @@ public class BibliotecaMain {
 
     private static void removerItem(Scanner scanner) {
         // Lógica para remover um item
-        System.out.println("Operação de Remoção de Item, por favor,  insira o ID do item.");
+        System.out.println("Operação de remoção de Item, por favor,  insira o ID do item.");
         int id = scanner.nextInt();
 
         bibliotecaController.removerItemDispoinvel(id);
@@ -756,7 +758,62 @@ public class BibliotecaMain {
 
     private static void adicionarMembro(Scanner scanner) {
         // Lógica para adicionar um novo membro
-        System.out.println("Operação de Adição de Membro");
+        System.out.println("\n");
+        System.out.println("Selecione o tipo de membro: ");
+        System.out.println("1 - Aluno de Graduação");
+        System.out.println("2 - Aluno de Pós Graduação");
+        System.out.println("3 - Funcionario da Biblioteca");
+        System.out.println("4 - Professor");
+
+        System.out.print("\nEscolha uma opção: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (id) {
+            case 1:
+                /* nome do aluno */
+                System.out.print("Nome do aluno: ");
+                String nome = scanner.nextLine();
+
+                /* data de adição do aluno */
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Formato da data
+                System.out.print("Data (no formato YYYY-MM-DD): ");
+                String dataInput = scanner.nextLine();
+
+                try {
+                    LocalDate data = LocalDate.parse(dataInput, dateFormatter);
+                    System.out.println("Data lida: " + data);
+                } catch (Exception e) {
+                    System.out.println("Formato de data inválido. Certifique-se de usar o formato YYYY-MM-DD.");
+                }
+
+                /* contato do aluno */
+                System.out.print("Contato do aluno (e-mail): ");
+                String contato = scanner.nextLine();
+
+                /* idade do aluno */
+                System.out.print("Idade do aluno: ");
+                int idade = scanner.nextInt();
+                scanner.nextLine();
+
+                /* endereço do aluno */
+                System.out.print("Endereço do aluno: ");
+                String endereco = scanner.nextLine();
+
+                /* adicionando o perfil */
+                Perfil perfil = Perfil.ESTUDANTE_GRADUACAO;
+
+                /* RA do aluno */
+                System.out.print("RA do aluno: ");
+                int ra = scanner.nextInt();
+                scanner.nextLine();
+                
+                /* curso do aluno */
+                System.out.print("Curso do aluno: ");
+                String curso = scanner.nextLine();
+
+        }
+
     }
 
     private static void editarMembro(Scanner scanner) {

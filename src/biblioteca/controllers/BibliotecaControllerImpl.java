@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.emprestimoPackage.ListaEmprestimos;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.reservaSalaPackage.ReservaSala;
@@ -113,6 +114,10 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             emprestimo.SetemprestimosSemRepeticao(emprestimo); // set para garantir que um item não seja emprestado para
                                                                // dois membros ao mesmo tempo.
             addemprestimo(emprestimo);
+            /* adicionando o emprestimo a classe generica */
+            ListaEmprestimos<Multimidia> listaDeEmprestimos = new ListaEmprestimos<>();
+            listaDeEmprestimos.addemprestimo(item);
+
             System.out.println("O item foi emprestado com sucesso.");
         } else {
             Renovacao reserva = new Renovacao(false, membro);
@@ -137,13 +142,16 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             Renovacao reserva = new Renovacao(false, membro);
             reserva.reservar(item);
             item.addreserva(reserva);
+            /* classe generica */
+            ListaReserva<Multimidia> listaDeItens = new ListaReserva<>();
+            listaDeItens.addreserva(item);
             System.out.println("o item foi reservado com sucesso");
 
         }
     }
 
     @Override
-    /* Reservar um Equipamento */
+    /* Reservar um Equipamento - Classe generica */
     public void reservarEquipamento(Equipamentos equipamento) {
         /* precisa se implementada a logica que analisa a necessidade de emprestimo */
         ListaReserva<Equipamentos> listaDeItens = new ListaReserva<>();
@@ -151,7 +159,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    /* Reservar uma Sala */
+    /* Reservar uma Sala - Classe generica */
     public void reservarSala(ReservaSala sala) {
         /* precisa se implementada a logica que analisa a necessidade de emprestimo */
         ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();

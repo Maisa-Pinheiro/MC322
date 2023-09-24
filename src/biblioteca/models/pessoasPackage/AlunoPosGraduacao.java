@@ -14,7 +14,7 @@ public class AlunoPosGraduacao extends Pessoa {
     // Construtor da classe Aluno de Pós-Graduação 
     public AlunoPosGraduacao(String nome, LocalDate data, int id, String contato, int idade, String endereco,
             Perfil perfil, int ra, String curso) {
-        super(nome, data, id, contato, idade, endereco, perfil);
+        super(nome, data, contato, idade, endereco, perfil);
         this.curso = curso;
         this.ra = ra;
         this.renovacoes = new ArrayList<>();

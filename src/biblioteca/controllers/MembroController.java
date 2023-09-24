@@ -12,4 +12,5 @@ import biblioteca.models.pessoasPackage.Pessoa;
 public interface MembroController {
     List<Pessoa> listarMembros();
     Pessoa buscarMembroPorIdentificacao(int registro);
+    void addMembro(Pessoa pessoa);
 }

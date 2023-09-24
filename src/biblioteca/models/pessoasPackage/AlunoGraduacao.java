@@ -14,7 +14,7 @@ public class AlunoGraduacao extends Pessoa {
     public AlunoGraduacao(String nome, LocalDate data, int id, String contato, int idade, String endereco,
             Perfil perfil,
             int ra, String curso) {
-        super(nome, data, id, contato, idade, endereco, perfil);
+        super(nome, data, contato, idade, endereco, perfil);
         this.ra = ra;
         this.renovacoes = new ArrayList<>();
     }

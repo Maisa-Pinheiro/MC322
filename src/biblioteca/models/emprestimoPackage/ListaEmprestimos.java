@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // classe genérica com a lista de emprestimos, declarar objeto do tipo emprestimo na main
-public class ListaEmprestimos<T>
-{
+public class ListaEmprestimos<T> {
 
     private static int proximoId = 1; // Variável estática para rastrear o próximo ID
     private int id; // identificação das reservas
@@ -19,17 +18,19 @@ public class ListaEmprestimos<T>
         return id;
     }
 
-    public void addreserva(T emprestimo){
+    /* metodo para adicionar um emprestimo a lista generica de emprestimos */
+    public void addemprestimo(T emprestimo) {
         listaEmprestimos.add(emprestimo);
     }
 
-    public void removereserva(T emprestimo){
+    /* metodo para remover um emprestimo a lista generica de emprestimos */
+    public void removereserva(T emprestimo) {
         listaEmprestimos.remove(emprestimo);
     }
-    
 
-    public List<T> getlistaemprestimo(){
+    /* metodo para retornar a lista generica de emprestimos */
+    public List<T> getlistaemprestimo() {
         return listaEmprestimos;
     }
-    
+
 }
