@@ -18,6 +18,7 @@ abstract public class Multimidia {
     }
 
     private String titulo; // título
+    private static int proximoid = 1;
     private int id; // número de registro do livro para biblioteca
     private String autor; // autor ou artista do item do acervo
     private String editora; // editora ou gravadora do item
@@ -36,11 +37,11 @@ abstract public class Multimidia {
     private LinkedList<Renovacao> reservas; // lista com a ordem de reservas do livro em questão
     // membros ao mesmo tempo.
 
-    public Multimidia(String titulo, int id, String autor, String editora, int anoPublicacao, String sinopse,
+    public Multimidia(String titulo, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
             Categoria categoria) {
         this.titulo = titulo;
-        this.id = id;
+        this.id = proximoid++;
         this.autor = autor;
         this.editora = editora;
         this.anoPublicacao = anoPublicacao;
@@ -56,6 +57,39 @@ abstract public class Multimidia {
         this.categoria = categoria;
         inicializarCategoriasDisponiveis();
     }
+
+    public void settitulo(String titulo){
+        this.titulo = titulo;
+    }
+    public void setautor(String autor){
+        this.autor = autor;
+    }
+    public void seteditora(String editora){
+        this.editora = editora;
+    }
+    public void setanoPublicacao(int anoPublicacao){
+        this.anoPublicacao = anoPublicacao;
+    }
+    public void setsinopse(String sinopse){
+        this.sinopse = sinopse;
+    }
+    public void setcapa(String capa){
+        this.capa = capa;
+    }
+    public void setdisponibilidade(boolean disponibilidade){
+        this.disponibilidade = disponibilidade;
+    }
+    public void setnumCopias(int numCopias){
+        this.numCopias = numCopias;
+    }
+    public void setnumCopiasDisponiveis(int numCopiasDisponiveis){
+        this.numCopiasDisponiveis = numCopiasDisponiveis;
+    }
+    public void setcategoria(Categoria categoria){
+        this.categoria = categoria;
+    }
+    
+    
 
     private void inicializarCategoriasDisponiveis() {
         for (Categoria categoria : Categoria.values()) {
