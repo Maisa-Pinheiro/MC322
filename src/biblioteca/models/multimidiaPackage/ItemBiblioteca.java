@@ -22,6 +22,7 @@ public class ItemBiblioteca<T extends Multimidia>{
         numeroDeItensReservados = 0;
     }
 
+    /* Metodo para reservar um item */
     public void reservarItem(T item) {
         if (!itensReservados.contains(item)) {
 
@@ -30,6 +31,7 @@ public class ItemBiblioteca<T extends Multimidia>{
         }
     }
 
+    /* Metodo para emprestar um item */
     public void emprestarItem(T item, Pessoa membro) {
         if ( !itensEmprestados.contains(item)) {
              if (!membro.getpodeemprestar()) {
@@ -62,6 +64,7 @@ public class ItemBiblioteca<T extends Multimidia>{
 
     }  
 
+    /* Metodo para devolver um item (somente se estiver emprestado) */
     public void devolverItem(Pessoa membro, T item) {
         for (Emprestimo emprestimo : membro.getemprestimos()) {
             if (emprestimo.getMultimidia().equals(item) && itensEmprestados.contains(item)) {

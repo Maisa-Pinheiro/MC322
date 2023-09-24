@@ -48,6 +48,6 @@ public class LivroFisico extends Multimidia {
     }
 
     public void setestadoConservacao(String estadoConservacao){
-        this.estadoConsevacao = estadoConsevacao;
+        this.estadoConsevacao = estadoConservacao;
     }
 }

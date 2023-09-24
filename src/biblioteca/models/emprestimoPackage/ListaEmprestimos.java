@@ -1,10 +1,7 @@
 package biblioteca.models.emprestimoPackage;
 
-import biblioteca.models.multimidiaPackage.*;
-import biblioteca.models.reservaSalaPackage.*;
 import java.util.ArrayList;
 import java.util.List;
-import biblioteca.models.pessoasPackage.*;
 
 // classe genérica com a lista de emprestimos, declarar objeto do tipo emprestimo na main
 public class ListaEmprestimos<T>
