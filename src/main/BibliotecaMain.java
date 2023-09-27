@@ -45,10 +45,10 @@ public class BibliotecaMain {
         while (true) {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
-            System.out.println("1. Gerenciamento de Itens"); // MA
-            System.out.println("2. Gerenciamento de Membros"); // FER
-            System.out.println("3. Geração de Relatórios e Estatísticas");
-            System.out.println("4. Administração de Funcionários");
+            System.out.println("1. Gerenciamento de Itens"); // MA -ok
+            System.out.println("2. Gerenciamento de Membros"); // FER -ok
+            System.out.println("3. Geração de Relatórios e Estatísticas"); // MA
+            System.out.println("4. Administração de Funcionários");//FER
             System.out.println("5. Sair");
             System.out.println();
             System.out.println();
