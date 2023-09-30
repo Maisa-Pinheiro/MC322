@@ -1,13 +1,10 @@
 package biblioteca.models.renovacaoReservaPackage;
 
-import biblioteca.models.reservaSalaPackage.*;
 import java.util.ArrayList;
 import java.util.List;
-import biblioteca.models.pessoasPackage.*;
 
 // classe genérica com a lista de reservas, quando for declacar o objeto na main, a pessoa pode escolher se será uma lista de reserva de itens ou de salas
-public class ListaReserva<T>
-{
+public class ListaReserva<T> {
 
     private static int proximoId = 1; // Variável estática para rastrear o próximo ID
     private int idReserva; // identificação das reservas
@@ -21,17 +18,19 @@ public class ListaReserva<T>
         return idReserva;
     }
 
-    public void addreserva(T reserva){
+    /* Metodo para adicionar reserva */
+    public void addreserva(T reserva) {
         listaReserva.add(reserva);
     }
 
-    public void removereserva(T reserva){
+    /* Metodo para remover reserva */
+    public void removereserva(T reserva) {
         listaReserva.remove(reserva);
     }
-    
 
-    public List<T> getlistareserva(){
+    /* Metodo para listar reservas */
+    public List<T> getlistareserva() {
         return listaReserva;
     }
-    
+
 }

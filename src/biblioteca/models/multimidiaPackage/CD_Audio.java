@@ -21,10 +21,9 @@ public class CD_Audio extends Multimidia {
     }
 
     public void setlistaFaixas(String listafaixas){
-        this.listaFaixas = listaFaixas;
+        this.listaFaixas = listafaixas;
     }
 
-  
     public Duration getDuracao() {
         return duracao;
     }

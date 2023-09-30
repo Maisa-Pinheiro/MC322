@@ -14,6 +14,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
                                // ela passa a ser abstrata
     private String nome;
     private LocalDate data;// Data de Registro
+    private static int proximoId = 1; // Variável estática para rastrear o próximo ID
     private int id;// Número de Identificação interno da Universidade
     private String contato; // e-mail ou telefone
     private int idade;
@@ -25,11 +26,11 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     private List<Multimidia> historico; // histórico de itens emprestados
 
     /* construtor dedicado apenas aos usuarios */
-    public Pessoa(String nome, LocalDate data, int id, String contato, int idade, String endereco,
+    public Pessoa(String nome, LocalDate data, String contato, int idade, String endereco,
             Perfil perfil) {
         this.nome = nome;
         this.data = data;
-        this.id = id;
+        this.id = proximoId++;
         this.contato = contato;
         this.idade = idade;
         this.endereco = endereco;

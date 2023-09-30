@@ -9,6 +9,7 @@ import biblioteca.models.multimidiaPackage.Multimidia;
 //import biblioteca.models.multimidiaPackage.LivroFisico;
 //import biblioteca.models.multimidiaPackage.Outros;
 import biblioteca.models.emprestimoPackage.*;
+import biblioteca.models.equipamentosPackage.Equipamentos;
 import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.models.manutencaoPackage.Manutencao;
 //import biblioteca.models.pessoasPackage.Professor;
@@ -16,6 +17,7 @@ import biblioteca.models.manutencaoPackage.Manutencao;
 //import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
 //import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
 //import biblioteca.views.BibliotecaView;
+import biblioteca.models.reservaSalaPackage.ReservaSala;
 
 public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
@@ -24,6 +26,10 @@ public interface BibliotecaController {
     //void emprestarItem(Pessoa membro, Multimidia item);
 
     void reservaritem(Pessoa membro, Multimidia item);
+
+    void reservarEquipamento(Equipamentos equipamento);
+
+    void reservarSala(ReservaSala sala);
 
     void renovaremprestimo(Pessoa membro,Emprestimo emprestimo);
 
