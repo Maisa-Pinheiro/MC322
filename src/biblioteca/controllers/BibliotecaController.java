@@ -11,6 +11,7 @@ import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.emprestimoPackage.*;
 import biblioteca.models.equipamentosPackage.Equipamentos;
 import biblioteca.models.pessoasPackage.Pessoa;
+import biblioteca.models.manutencaoPackage.Manutencao;
 //import biblioteca.models.pessoasPackage.Professor;
 //import biblioteca.models.pessoasPackage.AlunoGraduacao;
 //import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
@@ -21,7 +22,8 @@ import biblioteca.models.reservaSalaPackage.ReservaSala;
 public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
 
-    void emprestarItem(Pessoa membro, Multimidia item);
+    void emprestarItem(Pessoa membro, Multimidia item)throws BloqueioMembroException;
+    //void emprestarItem(Pessoa membro, Multimidia item);
 
     void reservaritem(Pessoa membro, Multimidia item);
 
@@ -31,12 +33,13 @@ public interface BibliotecaController {
 
     void renovaremprestimo(Pessoa membro,Emprestimo emprestimo);
 
-    void devolverItem(Pessoa membro, Multimidia item);
+    void devolverItem(Pessoa membro, Multimidia item, boolean dano) throws ItemDanificadoException;
 
     void addItemDisponivel(Multimidia item);
 
     void addemprestimo(Emprestimo emprestimo);
 
+     void addmanutencao(Manutencao manutencao);
 
     void liberacao(Pessoa pessoa);
 

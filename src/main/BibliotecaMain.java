@@ -46,9 +46,9 @@ public class BibliotecaMain {
             System.out.println("---- Menu Biblioteca ----");
             System.out.println();
             System.out.println("1. Gerenciamento de Itens"); // MA -ok
-            System.out.println("2. Gerenciamento de Membros"); // FER -ok
+            System.out.println("2. Gerenciamento de Membros"); // FER - ok
             System.out.println("3. Geração de Relatórios e Estatísticas"); // MA
-            System.out.println("4. Administração de Funcionários");//FER
+            System.out.println("4. Administração de Funcionários"); //FER
             System.out.println("5. Sair");
             System.out.println();
             System.out.println();
@@ -173,7 +173,7 @@ public class BibliotecaMain {
             }
         }
     }
-
+    // MA
     private static void menuRelatoriosEstatisticas(Scanner scanner, RelatorioView relatorioView) {
         while (true) {
             System.out.println("---- Menu Relatórios e Estatísticas ----");
@@ -268,8 +268,8 @@ public class BibliotecaMain {
     }
 
     // Métodos para realizar empréstimo, renovação e reserva
-
-    private static void realizarEmprestimo(Scanner scanner) {
+    private static void realizarEmprestimo(Scanner scanner)  {
+    
         // Lógica para realizar um empréstimo
         System.out.println("Operação de Empréstimo de Itens, insira o ID do usuário:");
         int iduser = scanner.nextInt();
@@ -277,8 +277,18 @@ public class BibliotecaMain {
         System.out.println("Insira o ID do item:");
         int iditem = scanner.nextInt();
 
-        bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser),
-                bibliotecaController.retornaritem(iditem));
+        
+      try {
+        bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser), bibliotecaController.retornaritem(iditem));
+    } catch (BloqueioMembroException e) {
+        System.out.println("Erro ao emprestar o item: " + e.getMessage());
+        // Aqui você pode tomar medidas apropriadas, como exibir uma mensagem de erro ao usuário.
+    }
+
+        //bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser), bibliotecaController.retornaritem(iditem));
+
+        bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser),bibliotecaController.retornaritem(iditem));
+
 
     }
 
@@ -394,9 +404,17 @@ public class BibliotecaMain {
 
         switch (tipo) {
             case 1:
+            
 
                 System.out.print("ISBN: ");
                 long isbn = scanner.nextLong();
+
+                for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
+                if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
+                    System.out.println("Já existe um livro com o mesmo ISBN. Nenhum item adicionado.");
+                    return;
+                }
+            }
 
                 System.out.print("Edição: ");
                 int edicao = scanner.nextInt();
@@ -934,6 +952,25 @@ public class BibliotecaMain {
     private static void gerarRelatorioAtividadesMembros() {
         // Lógica para gerar o Relatório de Atividades de Membros
         System.out.println("Gerando Relatório de Atividades de Membros");
+        System.out.println("Numero de Membros");
+        //listar membros
+        System.out.println("Numero de Alunos de graduação");
+        //listar
+        System.out.println("Numero de Alunos de Pós Graduação");
+        // listar
+        System.out.println("Numero de Professores");
+        //listar
+        System.out.println("Numero de Funcionários");
+        //listar
+        System.out.println("Numero de empréstimos vigentes");
+        // listar itens emprestados
+        System.out.println("Numero de empréstimos em atraso");
+        //listar
+        System.out.println("Salas reservadas no período");
+        // listar salas
+        
+
+
     }
 
     private static void gerarRelatorioUsoItens() {
