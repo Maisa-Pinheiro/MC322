@@ -35,11 +35,15 @@ abstract public class Multimidia {
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
     private LinkedList<Renovacao> reservas; // lista com a ordem de reservas do livro em questão
+    private boolean dano;// false- não foram encontrados danos após o emprestimo, true-  o item foi devolvido comn danos que não possuía antes
     // membros ao mesmo tempo.
 
     public Multimidia(String titulo, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
             Categoria categoria) {
+        if (anoPublicacao < 0 || numCopias < 0 || numCopiasDisponiveis < 0 || numCopiasDisponiveis > numCopias) {
+            throw new DadosInvalidosException("Dados de multimídia inválidos.");
+        }
         this.titulo = titulo;
         this.id = proximoid++;
         this.autor = autor;
@@ -55,17 +59,27 @@ abstract public class Multimidia {
         this.comentarios = new ArrayList<>();
         this.reservas = new LinkedList<>();
         this.categoria = categoria;
+        this.dano = false;
         inicializarCategoriasDisponiveis();
     }
 
     public void settitulo(String titulo){
         this.titulo = titulo;
     }
+
+     public void setdano(boolean dano){
+        this.dano = dano;
+    }
+
     public void setautor(String autor){
         this.autor = autor;
     }
     public void seteditora(String editora){
         this.editora = editora;
+    }
+
+    public boolean isDanificado(){
+        return dano;
     }
     public void setanoPublicacao(int anoPublicacao){
         this.anoPublicacao = anoPublicacao;
