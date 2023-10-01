@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 import biblioteca.models.emprestimoPackage.Emprestimo;
-import biblioteca.models.emprestimoPackage.ListaEmprestimos;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.reservaSalaPackage.ReservaSala;
@@ -44,7 +44,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public void addmanutencao(Manutencao manutencao){
+    public void addmanutencao(Manutencao manutencao) {
         itensmanutencao.add(manutencao);
     }
 
@@ -106,29 +106,25 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public void emprestarItem(Pessoa membro, Multimidia item)throws BloqueioMembroException {
-       
+    public void emprestarItem(Pessoa membro, Multimidia item) throws BloqueioMembroException {
+
         Boolean liberado = membro.getpodeemprestar();
-        
-    
+
         if (!liberado) {
-            throw new BloqueioMembroException("O membro está bloqueado e não pode fazer empréstimos, favor requisitar liberação");
+            throw new BloqueioMembroException(
+                    "O membro está bloqueado e não pode fazer empréstimos, favor requisitar liberação");
         }
         if (item.disponibilidade == true) {
             Emprestimo emprestimo = new Emprestimo(LocalDate.now(), item, membro);
             item.numCopiasDisponiveis--;
             item.disponibilidade = false;
             membro.novoEmprestimo(emprestimo);
-            emprestimo.SetemprestimosSemRepeticao(emprestimo); // set para garantir que um item não seja emprestado para dois membros ao mesmo tempo.
+            emprestimo.SetemprestimosSemRepeticao(emprestimo); // set para garantir que um item não seja emprestado para
+                                                               // dois membros ao mesmo tempo.
             addemprestimo(emprestimo);
             System.out.println("O item foi emprestado com sucesso.");
         } else {
-             throw new IllegalArgumentException("o item não está disponível no momento");
-            /*Renovacao reserva = new Renovacao(false, membro);
-            reserva.reservar(item);
-            item.addreserva(reserva);
-            System.out.println("o item foi reservado com sucesso");
-            */
+            throw new IllegalArgumentException("o item não está disponível no momento");
         }
     }
 
@@ -162,12 +158,24 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         listaDeItens.addreserva(equipamento);
     }
 
+    /*
+     * Logica para verificar se a sala está disponivel ou não na data e hprário da
+     * solicitação de reserva
+     */
+    private boolean salaReservada(int id, LocalDate data, LocalTime hora, int duracao) {
+
+        /* percorrendo todas as reservas existentes na lista */
+        for (ReservaSala reserva : ReservaSala.getlistaDReservaSalas()) {
+
+        }
+    }
+
     @Override
     /* Reservar uma Sala - Classe generica */
-    public void reservarSala(ReservaSala sala) {
-        /* precisa se implementada a logica que analisa a necessidade de emprestimo */
+    public void reservarSala(int id, LocalDate data, LocalTime hora, int duracao) {
+
         ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();
-        listaDeItens.addreserva(sala);
+        // listaDeItens.addreserva(sala);
     }
 
     public void renovaremprestimo(Pessoa membro, Emprestimo emprestimo) {
@@ -179,73 +187,75 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     @Override
     public void devolverItem(Pessoa membro, Multimidia item, boolean dano) throws BloqueioMembroException {
-    boolean emprestado = false;
+        boolean emprestado = false;
 
-    // Verifique se o item está na lista de empréstimos da pessoa
-    for (Emprestimo emprestimo : membro.getemprestimos()) {
-        if (emprestimo.getMultimidia().equals(item)) {
-            emprestado = true;
+        // Verifique se o item está na lista de empréstimos da pessoa
+        for (Emprestimo emprestimo : membro.getemprestimos()) {
+            if (emprestimo.getMultimidia().equals(item)) {
+                emprestado = true;
 
-            LocalDate prazo = emprestimo.getdataDevolucao();
-            LocalDate today = LocalDate.now();
+                LocalDate prazo = emprestimo.getdataDevolucao();
+                LocalDate today = LocalDate.now();
 
-            // Verifique se o item está danificado
-            if (item.isDanificado()) {
-                // Lança a exceção ItemDanificadoException
-                LocalDate prazo2= today.plusDays(7);
-                Manutencao manutencao= new Manutencao(item, today, prazo2,  "leve", "cola");
-                addmanutencao(manutencao);
-                throw new ItemDanificadoException("O item está danificado e deve ir para manutenção.");
-            }
+                // Verifique se o item está danificado
+                if (item.isDanificado()) {
+                    // Lança a exceção ItemDanificadoException
+                    LocalDate prazo2 = today.plusDays(7);
+                    Manutencao manutencao = new Manutencao(item, today, prazo2, "leve", "cola");
+                    addmanutencao(manutencao);
+                    throw new ItemDanificadoException("O item está danificado e deve ir para manutenção.");
+                }
 
-            if (prazo.isBefore(today)) {
-                long atraso2 = ChronoUnit.DAYS.between(today, prazo);
-                int atraso = (int) atraso2;
-                emprestimos.remove(emprestimo);
-                membro.setpodeemprestar(false);
-                emprestimo.setmulta(atraso, membro);
-                System.out.println(
-                        "O membro devolveu o empréstimo com atraso, logo, não pode fazer empréstimos pelos próximos 20 dias, devendo pedir a liberação ao final desse prazo, junto ao pagamento da multa, de R$ "
-                                + emprestimo.getmulta());
-                membro.removeremprestimo(emprestimo);
-            } else {
-                emprestimos.remove(emprestimo);
-                membro.removeremprestimo(emprestimo);
-
-                if (item.getsize() == 0) {
-                    item.numCopiasDisponiveis++;
-                    item.disponibilidade = true;
-                    System.out.println("O item foi devolvido com sucesso ");
+                if (prazo.isBefore(today)) {
+                    long atraso2 = ChronoUnit.DAYS.between(today, prazo);
+                    int atraso = (int) atraso2;
+                    emprestimos.remove(emprestimo);
+                    membro.setpodeemprestar(false);
+                    emprestimo.setmulta(atraso, membro);
+                    System.out.println(
+                            "O membro devolveu o empréstimo com atraso, logo, não pode fazer empréstimos pelos próximos 20 dias, devendo pedir a liberação ao final desse prazo, junto ao pagamento da multa, de R$ "
+                                    + emprestimo.getmulta());
+                    membro.removeremprestimo(emprestimo);
                 } else {
-                    try {
-                        if (dano) {
-                            // Verifique se o item está danificado
-                            if (item.isDanificado()) {
-                                // Lança a exceção ItemDanificadoException
-                                throw new ItemDanificadoException("O item está danificado e não pode ser emprestado.");
+                    emprestimos.remove(emprestimo);
+                    membro.removeremprestimo(emprestimo);
+
+                    if (item.getsize() == 0) {
+                        item.numCopiasDisponiveis++;
+                        item.disponibilidade = true;
+                        System.out.println("O item foi devolvido com sucesso ");
+                    } else {
+                        try {
+                            if (dano) {
+                                // Verifique se o item está danificado
+                                if (item.isDanificado()) {
+                                    // Lança a exceção ItemDanificadoException
+                                    throw new ItemDanificadoException(
+                                            "O item está danificado e não pode ser emprestado.");
+                                } else {
+                                    emprestarItem(item.getreservas().get(0).getpessoa(), item);
+                                }
                             } else {
                                 emprestarItem(item.getreservas().get(0).getpessoa(), item);
                             }
-                        } else {
-                            emprestarItem(item.getreservas().get(0).getpessoa(), item);
+                        } catch (BloqueioMembroException e) {
+                            System.out.println("Erro ao emprestar o item: " + e.getMessage());
                         }
-                    } catch (BloqueioMembroException e) {
-                        System.out.println("Erro ao emprestar o item: " + e.getMessage());
+                        item.remove(0);
+                        System.out.println("O item foi devolvido com sucesso e emprestado ao membro "
+                                + item.getreservas().get(0).getpessoa().getnome());
                     }
-                    item.remove(0);
-                    System.out.println("O item foi devolvido com sucesso e emprestado ao membro "
-                            + item.getreservas().get(0).getpessoa().getnome());
                 }
+                break;
             }
-            break;
+        }
+
+        // Se o item não estiver na lista de empréstimos, lance uma exceção
+        // personalizada
+        if (!emprestado) {
+            throw new ItemNaoEmprestadoException("O item não foi emprestado por este membro.");
         }
     }
-
-    // Se o item não estiver na lista de empréstimos, lance uma exceção personalizada
-    if (!emprestado) {
-        throw new ItemNaoEmprestadoException("O item não foi emprestado por este membro.");
-    }
-}
 
     @Override
     public Set<Multimidia.Categoria> getCategoriasUsadas() {

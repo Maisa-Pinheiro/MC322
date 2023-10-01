@@ -268,23 +268,26 @@ public class BibliotecaMain {
     }
 
     // Métodos para realizar empréstimo, renovação e reserva
-  private static void realizarEmprestimo(Scanner scanner)  {
-    
+    private static void realizarEmprestimo(Scanner scanner) {
+
         // Lógica para realizar um empréstimo
         System.out.println("Operação de Empréstimo de Itens, insira o ID do usuário:");
         int iduser = scanner.nextInt();
 
         System.out.println("Insira o ID do item:");
         int iditem = scanner.nextInt();
-        
-      try {
-        bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser), bibliotecaController.retornaritem(iditem));
-    } catch (BloqueioMembroException e) {
-        System.out.println("Erro ao emprestar o item: " + e.getMessage());
-        // Aqui você pode tomar medidas apropriadas, como exibir uma mensagem de erro ao usuário.
-    }
 
-        //bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser), bibliotecaController.retornaritem(iditem));
+        try {
+            bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser),
+                    bibliotecaController.retornaritem(iditem));
+        } catch (BloqueioMembroException e) {
+            System.out.println("Erro ao emprestar o item: " + e.getMessage());
+            // Aqui você pode tomar medidas apropriadas, como exibir uma mensagem de erro ao
+            // usuário.
+        }
+
+        // bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser),
+        // bibliotecaController.retornaritem(iditem));
 
     }
 
@@ -296,15 +299,22 @@ public class BibliotecaMain {
         System.out.println("Insira o ID da reserva:");
         int idreserva = scanner.nextInt();
 
-        bibliotecaController.renovaremprestimo(membroController.buscarMembroPorIdentificacao(iduser), bibliotecaController.retornaremprestimo(idreserva));
+        bibliotecaController.renovaremprestimo(membroController.buscarMembroPorIdentificacao(iduser),
+                bibliotecaController.retornaremprestimo(idreserva));
     }
 
     // Lógica para fazer uma reserva de item
     private static void fazerReserva(Scanner scanner) {
-        // Definição de qual item será reservado
-        System.out.println(
-                "Selecione o tipo de item: (1 - Item acervo Biblioteca, 2 - Equipamento, 3 - Reserva de Sala)");
+        /* Definição de qual item será reservado */
+        System.out.println("\n");
+        System.out.println("Selecione o tipo de item que deseja reservar: ");
+        System.out.println("1 - Item acervo Biblioteca");
+        System.out.println("2 - Reserva de Equipamento");
+        System.out.println("3 - Reserva de Sala");
+
+        System.out.print("\nEscolha uma opção: ");
         int opcao = scanner.nextInt();
+        scanner.nextLine();
 
         switch (opcao) {
             case 1:
@@ -332,16 +342,43 @@ public class BibliotecaMain {
                 bibliotecaController.reservarEquipamento(novEquipamento);
                 break;
             case 3:
-                /*
-                 * logica para reservar uma sala ainda precisa ser implementada, mas após as
-                 * condicionais de reserva ele deve ser adicionado a lista de reserva generica
-                 */
-                /*
-                 * Instanciando um objeto referencia de equipamento APENAS para demonstrar a
-                 * utilização da classe generica, no futuro será mudado
-                 */
-                ReservaSala sala = new ReservaSala(1, LocalDate.now(), LocalTime.now(), 5);
-                bibliotecaController.reservarSala(sala);
+                /* Recebendo informações do usuário */
+                /* ID da sala */
+                System.out.print("ID da sala que deseja reservar: ");
+                int idSala = scanner.nextInt();
+                scanner.nextLine();
+
+                /* Data para a reserva da sala */
+                System.out.print("Data no formato dd/MM/yyyy em que deseja resevar a sala: ");
+                String dataString = scanner.nextLine();
+                LocalDate data = null;
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                try {
+                    data = LocalDate.parse(dataString, formatter);
+                } catch (Exception e) {
+                    System.out.println("Data inserida no formato inválido.");
+                }
+
+                /* Horario para reserva da sala */
+                System.out.print("Horário no formato HH:mm:ss: em que deseja resevar a sala: ");
+                String horarioString = scanner.nextLine();
+                LocalTime horario = null;
+
+                DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+                try {
+                    horario = LocalTime.parse(horarioString, formatterHora);
+                } catch (Exception e) {
+                    System.out.println("Horário inserido no formato inválido.");
+                }
+
+                /* Duração pretendida para utilização da sala */
+                System.out.print("Quanto tempo pretende utilizar a sala? Digite apenas um número");
+                int duracao = scanner.nextInt();
+                scanner.nextLine();
+
+                /* Chamar função de criação da reserva */
+                bibliotecaController.reservarSala(idSala, data, horario, duracao);
                 break;
         }
     }
@@ -350,7 +387,7 @@ public class BibliotecaMain {
 
     private static void adicionarItem(Scanner scanner) {
         // Lógica para adicionar um novo item
-         System.out.println("Operação de Adição de Item");
+        System.out.println("Operação de Adição de Item");
         System.out.println("Por favor, insira as informações do novo item:");
 
         System.out.print("Título: ");
@@ -382,7 +419,8 @@ public class BibliotecaMain {
 
         System.out.print("Categoria(somente letras maiúsculas): ");
         String categoriauser = scanner.nextLine();
-         Multimidia.Categoria categoriaselecionada= null;;
+        Multimidia.Categoria categoriaselecionada = null;
+        ;
 
         for (Multimidia.Categoria categoria : Multimidia.Categoria.values()) {
             if (categoria.name().equals(categoriauser)) {
@@ -398,18 +436,17 @@ public class BibliotecaMain {
 
         switch (tipo) {
             case 1:
-            
 
                 System.out.print("ISBN: ");
                 long isbn = scanner.nextLong();
 
                 for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
-                if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
-                    System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
-                    isbn = scanner.nextLong();
-                    return;
+                    if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
+                        System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
+                        isbn = scanner.nextLong();
+                        return;
+                    }
                 }
-            }
 
                 System.out.print("Edição: ");
                 int edicao = scanner.nextInt();
@@ -420,9 +457,9 @@ public class BibliotecaMain {
                 System.out.print("Estado de Conservação: ");
                 String estado = scanner.nextLine();
 
-               
-                novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,isbn,edicao, local, estado, categoriaselecionada);
-                
+                novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
+                        copiasdisp, isbn, edicao, local, estado, categoriaselecionada);
+
                 break;
             case 2:
                 System.out.print("Data de disponibilidade:(formato: ano-mês-dia) ");
@@ -431,22 +468,20 @@ public class BibliotecaMain {
 
                 System.out.print("URL: ");
                 String stringurl = scanner.nextLine();
-               
-                
-                    System.out.print("Formato: ");
-                    String formato = scanner.nextLine();
 
-                    System.out.print("Requisitos de Leitura: ");
-                    String requisitos = scanner.nextLine();
-                
-                    novoItem = new LivroEletronico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,formato,stringurl,requisitos, data, categoriaselecionada);
-            
-                
+                System.out.print("Formato: ");
+                String formato = scanner.nextLine();
 
-                
+                System.out.print("Requisitos de Leitura: ");
+                String requisitos = scanner.nextLine();
+
+                novoItem = new LivroEletronico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
+                        copiasdisp, formato, stringurl, requisitos, data, categoriaselecionada);
+
                 break;
             case 3:
-                System.out.print("Duração:(formato: PT10H30M ='10h e 30 min', inserindo a quantidade de tempo correta) ");
+                System.out
+                        .print("Duração:(formato: PT10H30M ='10h e 30 min', inserindo a quantidade de tempo correta) ");
                 String input = scanner.nextLine();
                 Duration duration = Duration.parse(input);
 
@@ -455,24 +490,27 @@ public class BibliotecaMain {
 
                 System.out.print("Estado de Conservação: ");
                 String estadocon = scanner.nextLine();
-                
-                novoItem = new CD_Audio(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,faixas,duration, estadocon, categoriaselecionada);
-                 break;
+
+                novoItem = new CD_Audio(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,
+                        faixas, duration, estadocon, categoriaselecionada);
+                break;
             case 4:
-                System.out.print("Duração:(formato: PT10H30M ='10h e 30 min', inserindo a quantidade de tempo correta) ");
+                System.out
+                        .print("Duração:(formato: PT10H30M ='10h e 30 min', inserindo a quantidade de tempo correta) ");
                 String durationinput = scanner.nextLine();
                 Duration durationdvd = Duration.parse(durationinput);
 
-               System.out.print("Estado de Conservação: ");
+                System.out.print("Estado de Conservação: ");
                 String estadocons = scanner.nextLine();
-                
+
                 System.out.print("Elenco: ");
                 String elenco = scanner.nextLine();
 
                 System.out.print("Legendas: ");
                 String legenda = scanner.nextLine();
 
-                novoItem = new DVD_Video(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,elenco,durationdvd, legenda,estadocons, categoriaselecionada);
+                novoItem = new DVD_Video(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
+                        copiasdisp, elenco, durationdvd, legenda, estadocons, categoriaselecionada);
                 break;
             case 5:
                 System.out.print("Local: ");
@@ -487,9 +525,8 @@ public class BibliotecaMain {
                 System.out.print("Estado de Conservação: ");
                 String estadoc = scanner.nextLine();
 
-                 
-
-                novoItem = new Outros(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,tipoitem,formatooutro, localoutro, estadoc, categoriaselecionada);
+                novoItem = new Outros(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,
+                        tipoitem, formatooutro, localoutro, estadoc, categoriaselecionada);
                 break;
             default:
                 System.out.println("Tipo de item inválido. Nenhum item adicionado.");

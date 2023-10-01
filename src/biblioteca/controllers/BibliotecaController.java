@@ -1,5 +1,7 @@
 package biblioteca.controllers;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +19,6 @@ import biblioteca.models.pessoasPackage.Pessoa;
 //import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
 //import biblioteca.models.pessoasPackage.FuncionarioBiblioteca;
 //import biblioteca.views.BibliotecaView;
-import biblioteca.models.reservaSalaPackage.ReservaSala;
 
 public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
@@ -30,7 +31,7 @@ public interface BibliotecaController {
 
     void reservarEquipamento(Equipamentos equipamento);
 
-    void reservarSala(ReservaSala sala);
+    void reservarSala(int id, LocalDate data, LocalTime hora, int duracao);
 
     void renovaremprestimo(Pessoa membro,Emprestimo emprestimo);
 
