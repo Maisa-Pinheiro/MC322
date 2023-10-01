@@ -34,8 +34,8 @@ abstract public class Multimidia {
     private List<Comentario> comentarios; // comentários de usuários a respeito da obra
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
+    private boolean dano;
     private LinkedList<Renovacao> reservas; // lista com a ordem de reservas do livro em questão
-    private boolean dano;// false- não foram encontrados danos após o emprestimo, true-  o item foi devolvido comn danos que não possuía antes
     // membros ao mesmo tempo.
 
     public Multimidia(String titulo, String autor, String editora, int anoPublicacao, String sinopse,
@@ -59,27 +59,26 @@ abstract public class Multimidia {
         this.comentarios = new ArrayList<>();
         this.reservas = new LinkedList<>();
         this.categoria = categoria;
-        this.dano = false;
         inicializarCategoriasDisponiveis();
+        this.dano = false;
     }
 
     public void settitulo(String titulo){
         this.titulo = titulo;
     }
 
-     public void setdano(boolean dano){
+    public void setdano(boolean dano){
         this.dano = dano;
     }
 
+    public boolean isDanificado(){
+        return dano;
+    }
     public void setautor(String autor){
         this.autor = autor;
     }
     public void seteditora(String editora){
         this.editora = editora;
-    }
-
-    public boolean isDanificado(){
-        return dano;
     }
     public void setanoPublicacao(int anoPublicacao){
         this.anoPublicacao = anoPublicacao;
