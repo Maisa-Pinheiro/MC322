@@ -8,12 +8,14 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.emprestimoPackage.ListaEmprestimos;
 import biblioteca.models.multimidiaPackage.Multimidia;
-import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
+import biblioteca.models.reservaSalaPackage.ReservaSala;
 import biblioteca.models.manutencaoPackage.Manutencao;
 import biblioteca.models.pessoasPackage.Pessoa;
-
+import biblioteca.models.renovacaoReservaPackage.ListaReserva;
+import biblioteca.models.equipamentosPackage.Equipamentos;
 
 public class BibliotecaControllerImpl implements BibliotecaController {
 
@@ -32,7 +34,6 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         itens = new ArrayList<>();
         emprestimos = new ArrayList<>();
         this.categoriasusadas = new HashSet<>();
-        itensmanutencao = new ArrayList<>();
         inicializarCategorias();
     }
 
@@ -40,11 +41,6 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         for (Multimidia item : itens) {
             categoriasusadas.add(item.getcategoria());
         }
-    }
-
-    @Override
-    public List<Multimidia> getitensDisponiveis(){
-        return itens;
     }
 
     @Override
@@ -58,52 +54,52 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public void addemprestimo(Emprestimo emprestimo){
+    public void addemprestimo(Emprestimo emprestimo) {
         emprestimos.add(emprestimo);
     }
 
     @Override
-    public void addItemDisponivel(Multimidia item){
+    public void addItemDisponivel(Multimidia item) {
         itens.add(item);
     }
 
     @Override
-    public void removerItemDispoinvel(int id){
+    public void removerItemDispoinvel(int id) {
         for (Multimidia item : itens) {
-            if(id == item.getid()){
-                item=null;
+            if (id == item.getid()) {
+                item = null;
                 itens.remove(item);
             }
         }
     }
 
-     @Override
-    public void removeremprestimo(int id){
+    @Override
+    public void removeremprestimo(int id) {
         for (Emprestimo emprestimo : emprestimos) {
-            if(id == emprestimo.getregistro()){
-                emprestimo=null;
+            if (id == emprestimo.getregistro()) {
+                emprestimo = null;
                 emprestimos.remove(emprestimo);
             }
         }
     }
 
     @Override
-    public Multimidia retornaritem(int id){
+    public Multimidia retornaritem(int id) {
         for (Multimidia item : itens) {
-            if(id == item.getid()){
-               return item;
-               
+            if (id == item.getid()) {
+                return item;
+
             }
         }
         return null;
     }
 
     @Override
-    public Emprestimo retornaremprestimo(int id){
+    public Emprestimo retornaremprestimo(int id) {
         for (Emprestimo emprestimo : emprestimos) {
-            if(id == emprestimo.getregistro()){
-               return emprestimo;
-               
+            if (id == emprestimo.getregistro()) {
+                return emprestimo;
+
             }
         }
         return null;
@@ -142,23 +138,42 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public void reservaritem(Pessoa membro, Multimidia item){
+    /* Reservar um item de multimidia */
+    public void reservaritem(Pessoa membro, Multimidia item) {
         if (item.disponibilidade == true) {
             System.out.println("o item está disponível para empréstimo");
-        }else{
+        } else {
             Renovacao reserva = new Renovacao(false, membro);
             reserva.reservar(item);
             item.addreserva(reserva);
+            /* classe generica */
+            ListaReserva<Multimidia> listaDeItens = new ListaReserva<>();
+            listaDeItens.addreserva(item);
             System.out.println("o item foi reservado com sucesso");
 
         }
-            
     }
 
-    public void renovaremprestimo(Pessoa membro,Emprestimo emprestimo){
-        
-            Renovacao renovacao = new Renovacao(true, membro);
-            renovacao.renovar(emprestimo);
+    @Override
+    /* Reservar um Equipamento - Classe generica */
+    public void reservarEquipamento(Equipamentos equipamento) {
+        /* precisa se implementada a logica que analisa a necessidade de emprestimo */
+        ListaReserva<Equipamentos> listaDeItens = new ListaReserva<>();
+        listaDeItens.addreserva(equipamento);
+    }
+
+    @Override
+    /* Reservar uma Sala - Classe generica */
+    public void reservarSala(ReservaSala sala) {
+        /* precisa se implementada a logica que analisa a necessidade de emprestimo */
+        ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();
+        listaDeItens.addreserva(sala);
+    }
+
+    public void renovaremprestimo(Pessoa membro, Emprestimo emprestimo) {
+
+        Renovacao renovacao = new Renovacao(true, membro);
+        renovacao.renovar(emprestimo);
 
     }
 
@@ -231,7 +246,6 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         throw new ItemNaoEmprestadoException("O item não foi emprestado por este membro.");
     }
 }
-
 
     @Override
     public Set<Multimidia.Categoria> getCategoriasUsadas() {
