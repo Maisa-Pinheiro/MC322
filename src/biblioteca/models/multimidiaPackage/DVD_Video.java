@@ -8,7 +8,7 @@ public class DVD_Video extends Multimidia {
     private String legendasAudio; // Legendas e Áudio Disponíveis
     private String estadoConservacao;
 
-    public DVD_Video(String titulo,  String autor, String editora, int anoPublicacao,
+     public DVD_Video(String titulo,  String autor, String editora, int anoPublicacao,
             String sinopse, String capa,  boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis,
             String elenco, Duration duracao, String legendasAudio, String estadoConservacao, Categoria categoria) {

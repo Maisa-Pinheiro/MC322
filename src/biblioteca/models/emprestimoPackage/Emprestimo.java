@@ -32,7 +32,7 @@ public class Emprestimo {
                 int limiteEmprestimoEstudanteGraduacao = 3;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoEstudanteGraduacao) {
                     throw new IllegalArgumentException(
-                            "Limite de empréstimos para estudantes de graduação atingido. O Usuário não pode emprestar mais itens do que o limite permitido");
+                            "Limite de empréstimos para estudantes de graduação atingido.");
                     // se o perfil de pessoa não atingiu o limite de emprestimo
                 } else {
                     this.registro = proximoregistro++;
@@ -51,7 +51,7 @@ public class Emprestimo {
                 int limiteEmprestimoEstudantePosGraduacao = 5;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoEstudantePosGraduacao) {
                     throw new IllegalArgumentException(
-                            "Limite de empréstimos para estudantes de pós-graduação atingido.O Usuário não pode emprestar mais itens do que o limite permitido");
+                            "Limite de empréstimos para estudantes de pós-graduação atingido.");
                 } else {
                     this.registro = proximoregistro++;
                     this.dataEmprestimo = dataEmprestimo;
@@ -68,7 +68,7 @@ public class Emprestimo {
                 this.dataDevolucao = dataEmprestimo.plusDays(30);
                 int limiteEmprestimoProfessor = 7;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoProfessor) {
-                    throw new IllegalArgumentException("Limite de empréstimos para professores atingido. O Usuário não pode emprestar mais itens do que o limite permitido");
+                    throw new IllegalArgumentException("Limite de empréstimos para professores atingido.");
 
                 } else {
                     this.registro = proximoregistro++;
@@ -86,7 +86,7 @@ public class Emprestimo {
                 this.dataDevolucao = dataEmprestimo.plusDays(20);
                 int limiteEmprestimoFuncionario = 4;
                 if (pessoa.contarEmprestimos() >= limiteEmprestimoFuncionario) {
-                    throw new IllegalArgumentException("Limite de empréstimos para funcionários atingido.O Usuário não pode emprestar mais itens do que o limite permitido");
+                    throw new IllegalArgumentException("Limite de empréstimos para funcionários atingido.");
 
                 } else {
                     this.registro = proximoregistro++;
