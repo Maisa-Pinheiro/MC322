@@ -43,7 +43,7 @@ public class ReservaSala {
     }
 
     /* Metodo para adicionar reserva de sala na lista */
-    public void addReservaDeSala(ReservaSala reserva) {
+    public static void addReservaDeSala(ReservaSala reserva) {
         listaDReservaSalas.add(reserva);
     }
 

@@ -308,9 +308,9 @@ public class BibliotecaMain {
         /* Definição de qual item será reservado */
         System.out.println("\n");
         System.out.println("Selecione o tipo de item que deseja reservar: ");
-        System.out.println("1 - Item acervo Biblioteca");
-        System.out.println("2 - Reserva de Equipamento");
-        System.out.println("3 - Reserva de Sala");
+        System.out.println("1. Item acervo Biblioteca");
+        System.out.println("2. Reserva de Equipamento");
+        System.out.println("3. Reserva de Sala");
 
         System.out.print("\nEscolha uma opção: ");
         int opcao = scanner.nextInt();
@@ -373,7 +373,7 @@ public class BibliotecaMain {
                 }
 
                 /* Duração pretendida para utilização da sala */
-                System.out.print("Quanto tempo pretende utilizar a sala? Digite apenas um número");
+                System.out.print("Quanto tempo pretende utilizar a sala? Digite apenas um número: ");
                 int duracao = scanner.nextInt();
                 scanner.nextLine();
 
