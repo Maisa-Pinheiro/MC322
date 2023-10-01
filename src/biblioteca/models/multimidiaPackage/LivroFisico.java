@@ -1,8 +1,10 @@
 package biblioteca.models.multimidiaPackage;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
+/*subclasse de Multimidia "LivroFisico"*/
 public class LivroFisico extends Multimidia {
     private long isbn; // International Standard Book Number
     private int edicao;
@@ -22,11 +24,11 @@ public class LivroFisico extends Multimidia {
         if (isbnsUtilizados.contains(isbn)) {
             throw new IllegalArgumentException("ISBN já existente.");
         }
-
         // Adicione o ISBN ao conjunto de ISBNs utilizados
         isbnsUtilizados.add(isbn);
 
         this.isbn = isbn;
+        this.edicao = edicao;
         this.edicao = edicao;
         this.local = local;
         this.estadoConsevacao = estadoConsevacao;
