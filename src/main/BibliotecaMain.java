@@ -882,9 +882,7 @@ public class BibliotecaMain {
                 if (emailLogin.equals("gerente@dac.unicamp.br") || emailLogin.equals("adm@dac.unicamp.br")) {
                     if (senhaLogin == 1234) {
                         varAux = 1;
-                    }
-                    else
-                    {
+                    } else {
                         throw new NovaPessoaException("Senha inválida, tente novamente.\n");
                     }
                 }
