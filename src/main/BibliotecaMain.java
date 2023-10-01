@@ -15,6 +15,10 @@ import biblioteca.models.recursosMultimidiaPackage.*;
 import biblioteca.models.relatorioPackage.*;
 import biblioteca.models.renovacaoReservaPackage.*;
 import biblioteca.models.reservaSalaPackage.*;
+import biblioteca.models.reservaSalaPackage.ReservaSala.SalaGrupo;
+import biblioteca.models.reservaSalaPackage.ReservaSala.SalaIndividual;
+import biblioteca.models.reservaSalaPackage.ReservaSala.SalaMultimidia;
+import biblioteca.models.reservaSalaPackage.ReservaSala.SalaSilenciosa;
 import biblioteca.views.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -342,6 +346,39 @@ public class BibliotecaMain {
                 bibliotecaController.reservarEquipamento(novEquipamento);
                 break;
             case 3:
+
+                /* Definição de qual o tipo de sala será reservada */
+                System.out.println("\n");
+                System.out.println("Selecione o tipo de sala que deseja reservar: ");
+                System.out.println("1. Sala Individual");
+                System.out.println("2. Sala em Grupo");
+                System.out.println("3. Sala Silenciosa");
+                System.out.println("4. Sala com Multimidia");
+
+                System.out.print("\nEscolha uma opção: ");
+                int sala = scanner.nextInt();
+                scanner.nextLine();
+
+                /* estabelecendo a capacidade máxima da sala de acordo com o tipo de sala */
+                int capacidadeMax = 0;
+                switch (sala) {
+                    case 1:
+                        capacidadeMax = SalaIndividual.getcapacidade();
+                        break;
+
+                    case 2:
+                        capacidadeMax = SalaGrupo.getcapacidade();
+                        break;
+
+                    case 3:
+                        capacidadeMax = SalaSilenciosa.getcapacidade();
+                        break;
+
+                    case 4:
+                        capacidadeMax = SalaMultimidia.getcapacidade();
+                        break;
+                }
+
                 /* Recebendo informações do usuário */
                 /* ID da sala */
                 System.out.print("ID da sala que deseja reservar: ");
@@ -377,8 +414,13 @@ public class BibliotecaMain {
                 int duracao = scanner.nextInt();
                 scanner.nextLine();
 
+                /* Duração pretendida para utilização da sala */
+                System.out.print("Quantas pessoas vão utilizar a sala? Digite apenas um número: ");
+                int pessoas = scanner.nextInt();
+                scanner.nextLine();
+
                 /* Chamar função de criação da reserva */
-                bibliotecaController.reservarSala(idSala, data, horario, duracao);
+                bibliotecaController.reservarSala(idSala, data, horario, duracao, pessoas, capacidadeMax);
                 break;
         }
     }

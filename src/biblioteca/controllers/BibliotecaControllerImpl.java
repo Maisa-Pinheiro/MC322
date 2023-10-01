@@ -167,43 +167,53 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     public boolean salaReservada(int id, LocalDate data, LocalTime hora, int duracao) {
 
         /* percorrendo todas as reservas existentes na lista */
-        if (ReservaSala.getlistaDReservaSalas() != null){
-        for (ReservaSala reserva : ReservaSala.getlistaDReservaSalas()) {
-            if (reserva.getid() == id && reserva.getdata().equals(data)) {
-                LocalTime horaReservada = reserva.gethoraInicio();
-                int duracaoReservada = reserva.getduracao();
-                /* verificando conflito de horario */
-                if ((hora.isAfter(horaReservada) || hora.equals(horaReservada)) && hora.isBefore(horaReservada.plusHours(duracaoReservada))) {
-                    return true; // A sala está reservada neste horário
+        if (ReservaSala.getlistaDReservaSalas() != null) {
+            for (ReservaSala reserva : ReservaSala.getlistaDReservaSalas()) {
+                if (reserva.getid() == id && reserva.getdata().equals(data)) {
+                    LocalTime horaReservada = reserva.gethoraInicio();
+                    int duracaoReservada = reserva.getduracao();
+                    /* verificando conflito de horario */
+                    if ((hora.isAfter(horaReservada) || hora.equals(horaReservada))
+                            && hora.isBefore(horaReservada.plusHours(duracaoReservada))) {
+                        return true; // A sala está reservada neste horário
+                    }
                 }
             }
         }
-    }
         return false;
     }
 
     @Override
-    /* Reservar uma Sala - Classe generica */
-    public void reservarSala(int id, LocalDate data, LocalTime hora, int duracao) {
-        try
-        {
-            /* chamando a função que verifica se a sala está reservada no horário especifico */
-            if(salaReservada(id, data, hora, duracao) ==  true){
+    /* Reservar uma Sala */
+    public void reservarSala(int id, LocalDate data, LocalTime hora, int duracao, int pessoas, int capaciadade) {
+        try {
+            /*
+             * chamando a função que verifica se a sala está reservada no horário especifico
+             */
+            if (salaReservada(id, data, hora, duracao) == true) {
                 System.out.println("\n");
                 throw new ReservaSalaException("A sala já está reservada neste horário, tente outra data/horário.\n");
             }
             /* se a sala não estiver reservada no horário solicitado é criado uma reserva */
-            else
-            {
-                ReservaSala reserva = new ReservaSala(id, data, hora, duracao);
+            else {
+                /* se a capacidade maxima de pessoas para a sala for atingida */
+                if (pessoas >= capaciadade) {
+                    System.out.println("\n");
+                    throw new ReservaSalaException("O número de pessoas está acima da capacidade máxima da sala, tente outra sala.\n");
+                } else {
+                    ReservaSala reserva = new ReservaSala(id, data, hora, duracao);
 
-                /* adicionando a classe generica de todas as reservas e a lista de reserva de salas respectivamente */
-                ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();
-                listaDeItens.addreserva(reserva);
-                ReservaSala.addReservaDeSala(reserva);
-                System.out.println("\nSala reservada com sucesso!\n");
+                    /*
+                     * adicionando a classe generica de todas as reservas e a lista de reserva de
+                     * salas respectivamente
+                     */
+                    ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();
+                    listaDeItens.addreserva(reserva);
+                    ReservaSala.addReservaDeSala(reserva);
+                    System.out.println("\nSala reservada com sucesso!\n");
+                }
             }
-        /* tratando o catch */
+            /* tratando o catch */
         } catch (ReservaSalaException e) {
             System.out.println("Erro ao reservar a sala: " + e.getMessage());
         }
