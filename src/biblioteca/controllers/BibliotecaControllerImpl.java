@@ -12,6 +12,7 @@ import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.reservaSalaPackage.ReservaSala;
+import biblioteca.models.reservaSalaPackage.ReservaSalaException;
 import biblioteca.models.manutencaoPackage.Manutencao;
 import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.models.renovacaoReservaPackage.ListaReserva;
@@ -159,23 +160,63 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     /*
-     * Logica para verificar se a sala está disponivel ou não na data e hprário da
+     * Logica para verificar se a sala está disponivel ou não na data e horário da
      * solicitação de reserva
      */
-    private boolean salaReservada(int id, LocalDate data, LocalTime hora, int duracao) {
+    @Override
+    public boolean salaReservada(int id, LocalDate data, LocalTime hora, int duracao) {
 
         /* percorrendo todas as reservas existentes na lista */
-        for (ReservaSala reserva : ReservaSala.getlistaDReservaSalas()) {
-
+        if (ReservaSala.getlistaDReservaSalas() != null) {
+            for (ReservaSala reserva : ReservaSala.getlistaDReservaSalas()) {
+                if (reserva.getid() == id && reserva.getdata().equals(data)) {
+                    LocalTime horaReservada = reserva.gethoraInicio();
+                    int duracaoReservada = reserva.getduracao();
+                    /* verificando conflito de horario */
+                    if ((hora.isAfter(horaReservada) || hora.equals(horaReservada))
+                            && hora.isBefore(horaReservada.plusHours(duracaoReservada))) {
+                        return true; // A sala está reservada neste horário
+                    }
+                }
+            }
         }
+        return false;
     }
 
     @Override
-    /* Reservar uma Sala - Classe generica */
-    public void reservarSala(int id, LocalDate data, LocalTime hora, int duracao) {
+    /* Reservar uma Sala */
+    public void reservarSala(int id, LocalDate data, LocalTime hora, int duracao, int pessoas, int capaciadade) {
+        try {
+            /*
+             * chamando a função que verifica se a sala está reservada no horário especifico
+             */
+            if (salaReservada(id, data, hora, duracao) == true) {
+                System.out.println("\n");
+                throw new ReservaSalaException("A sala já está reservada neste horário, tente outra data/horário.\n");
+            }
+            /* se a sala não estiver reservada no horário solicitado é criado uma reserva */
+            else {
+                /* se a capacidade maxima de pessoas para a sala for atingida */
+                if (pessoas >= capaciadade) {
+                    System.out.println("\n");
+                    throw new ReservaSalaException("O número de pessoas está acima da capacidade máxima da sala, tente outra sala.\n");
+                } else {
+                    ReservaSala reserva = new ReservaSala(id, data, hora, duracao);
 
-        ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();
-        // listaDeItens.addreserva(sala);
+                    /*
+                     * adicionando a classe generica de todas as reservas e a lista de reserva de
+                     * salas respectivamente
+                     */
+                    ListaReserva<ReservaSala> listaDeItens = new ListaReserva<>();
+                    listaDeItens.addreserva(reserva);
+                    ReservaSala.addReservaDeSala(reserva);
+                    System.out.println("\nSala reservada com sucesso!\n");
+                }
+            }
+            /* tratando o catch */
+        } catch (ReservaSalaException e) {
+            System.out.println("Erro ao reservar a sala: " + e.getMessage());
+        }
     }
 
     public void renovaremprestimo(Pessoa membro, Emprestimo emprestimo) {

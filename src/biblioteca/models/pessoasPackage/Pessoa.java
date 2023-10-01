@@ -66,6 +66,10 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         return endereco;
     }
 
+    public List<Pessoa> getListaPessoas() {
+        return listaPessoas;
+    }
+
     public void setpodeemprestar(boolean podeemprestar) {
         this.podeemprestar = podeemprestar;
     }

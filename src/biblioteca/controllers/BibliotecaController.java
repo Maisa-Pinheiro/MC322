@@ -31,7 +31,9 @@ public interface BibliotecaController {
 
     void reservarEquipamento(Equipamentos equipamento);
 
-    void reservarSala(int id, LocalDate data, LocalTime hora, int duracao);
+    boolean salaReservada(int id, LocalDate data, LocalTime hora, int duracao);
+
+    void reservarSala(int id, LocalDate data, LocalTime hora, int duracao, int pessoas, int capaciadade);
 
     void renovaremprestimo(Pessoa membro,Emprestimo emprestimo);
 
