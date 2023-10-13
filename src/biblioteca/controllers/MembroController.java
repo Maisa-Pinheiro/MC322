@@ -13,4 +13,5 @@ public interface MembroController {
     List<Pessoa> listarMembros();
     Pessoa buscarMembroPorIdentificacao(int registro);
     void addMembro(Pessoa pessoa);
+    void removerMembro(int id);
 }

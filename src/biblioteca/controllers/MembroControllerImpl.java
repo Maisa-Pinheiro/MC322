@@ -27,6 +27,14 @@ public class MembroControllerImpl implements MembroController {
         return null; // Retorna null se a pessoa não for encontrada
     }
 
+
+    /* função para remover membro da lista de membros */
+    @Override
+    public void removerMembro(int id)
+    {
+        Pessoa.removerPessoaLista(id);
+    }
+
     @Override
     /* metodo para adicionar novo membro a lista */
     public void addMembro(Pessoa pessoa) {

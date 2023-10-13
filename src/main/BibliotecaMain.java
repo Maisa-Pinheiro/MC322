@@ -1078,7 +1078,10 @@ public class BibliotecaMain {
 
     private static void removerMembro(Scanner scanner) {
         // Lógica para remover um membro
-        System.out.println("Operação de Remoção de Membro");
+        System.out.print("Digite o ID do membro que deseja remover da lista: ");
+        int idMembro = scanner.nextInt();
+        scanner.nextLine();
+        membroController.removerMembro(idMembro);
     }
 
     // Métodos para gerar relatórios e estatísticas

@@ -137,7 +137,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     }
 
     /* Metodo para remover uma pessoa com id especifico da lista */
-    public void removerPessoaLista(int id) {
+    public static void removerPessoaLista(int id) {
         /* cirando um iterador para percorrer a lista */
         Iterator<Pessoa> iterator = listaPessoas.iterator();
         /* enquanto o interador tiver um próximo (não chegou ao fim da lista) */
@@ -145,7 +145,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
             Pessoa pessoa = iterator.next();
             if (pessoa.getid() == id) {
                 iterator.remove();
-                System.out.println("Pessoa com ID" + id + "foi removida com sucesso.");
+                System.out.println("Pessoa com ID: " + id + " foi removida com sucesso.\n");
                 return;
             }
         }
