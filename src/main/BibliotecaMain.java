@@ -943,6 +943,7 @@ public class BibliotecaMain {
                                 perfil,
                                 ra, curso);
                         membroController.addMembro(novoMembro);
+                        System.out.println("\nAluno de graduação adicionado com sucesso! \n");
                         break;
 
                     case 2:
@@ -980,6 +981,7 @@ public class BibliotecaMain {
                                 contatoAlunoPos, idadeAlunoPos, enderecoAlunoPos, perfilAlunoPos,
                                 raAlunoPos, cursoAlunoPos);
                         membroController.addMembro(novoMembroAlunoPos);
+                        System.out.println("\nAluno de pós graduação adicionado com sucesso! \n");
                         break;
 
                     case 3:
@@ -1025,6 +1027,7 @@ public class BibliotecaMain {
                                 contatoFuncionario, idadeFuncionario, enderecoFuncionario, perfilFuncionario,
                                 cargoFuncionario, salarioFuncionario, horarioFuncionario, acessoFuncionario);
                         membroController.addMembro(novoFuncionario);
+                        System.out.println("\nFuncionario adicionado com sucesso! \n");
                         break;
 
                     case 4:
@@ -1056,6 +1059,7 @@ public class BibliotecaMain {
                                 contatoProfessor, idadeProfessor, enderecoProfessor, perfilProfessor,
                                 institutoProfessor);
                         membroController.addMembro(novoProfessor);
+                        System.out.println("\nProfessor adicionado com sucesso! \n");
 
                         break;
                 }

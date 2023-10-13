@@ -35,7 +35,9 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         this.idade = idade;
         this.endereco = endereco;
         this.perfil = perfil;
+        if (listaPessoas == null){
         Pessoa.listaPessoas = new ArrayList<>();
+        }
         this.emprestimos = new LinkedList<>();
         this.historico = new ArrayList<>();
         this.podeemprestar = true;
@@ -104,7 +106,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
 
     /* Criação de metodos */
     /* Metodo para adicionar pessoa a lista */
-    public void addPessoa(Pessoa pessoa) {
+    public static void addPessoa(Pessoa pessoa) {
         int idpessoa = pessoa.getid();
         for (Pessoa membro : listaPessoas) {
             if (membro.getid() == idpessoa) {

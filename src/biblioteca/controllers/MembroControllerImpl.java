@@ -14,8 +14,7 @@ public class MembroControllerImpl implements MembroController {
 
     @Override
     public List<Pessoa> listarMembros() {
-        List<Pessoa> listaDePessoas = Pessoa.listarPessoas();
-        return listaDePessoas;
+        return Pessoa.listarPessoas();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class MembroControllerImpl implements MembroController {
     @Override
     /* metodo para adicionar novo membro a lista */
     public void addMembro(Pessoa pessoa) {
-        Pessoa novPessoa = pessoa;
-        pessoa.addPessoa(novPessoa);
+        Pessoa.addPessoa(pessoa);
+        membros = Pessoa.listarPessoas();
     }
 }
