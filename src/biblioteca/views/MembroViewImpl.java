@@ -14,9 +14,9 @@ public class MembroViewImpl implements MembroView {
 
     @Override
     public void mostrarListaMembros(List<Pessoa> membros) {
+        System.out.println("Lista de membros da biblioteca: \n");
         for (Pessoa pessoa : membros) {
-            System.out.println(pessoa.getnome() + " " + pessoa.getid() + " " + pessoa.getperfil());
-            System.out.println("\n");
+            System.out.println("Nome: " + pessoa.getnome() + "Identificação: " + pessoa.getid() + "Perfil do membro: " + pessoa.getperfil() + "\n");
         }
     }
 

@@ -20,7 +20,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
     private int idade;
     private String endereco;
     private Perfil perfil;
-    private List<Pessoa> listaPessoas;
+    private static List<Pessoa> listaPessoas;
     private LinkedList<Emprestimo> emprestimos;// lista com os empréstimos feitos pelo membro
     private boolean podeemprestar; // true -pode, false- não pode, bloqueado por atraso
     private List<Multimidia> historico; // histórico de itens emprestados
@@ -35,7 +35,7 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         this.idade = idade;
         this.endereco = endereco;
         this.perfil = perfil;
-        this.listaPessoas = new ArrayList<>();
+        Pessoa.listaPessoas = new ArrayList<>();
         this.emprestimos = new LinkedList<>();
         this.historico = new ArrayList<>();
         this.podeemprestar = true;
@@ -114,6 +114,11 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
             }
         }
         listaPessoas.add(pessoa);
+    }
+
+    /* Metodo para retornar a lista de pessoas */
+    public static List<Pessoa> listarPessoas() {
+        return listaPessoas;
     }
 
     /*

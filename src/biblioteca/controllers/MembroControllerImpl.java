@@ -14,7 +14,8 @@ public class MembroControllerImpl implements MembroController {
 
     @Override
     public List<Pessoa> listarMembros() {
-        return membros;
+        List<Pessoa> listaDePessoas = Pessoa.listarPessoas();
+        return listaDePessoas;
     }
 
     @Override

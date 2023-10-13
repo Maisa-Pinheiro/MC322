@@ -97,9 +97,9 @@ public class BibliotecaMain {
             System.out.println("2. Adicionar Item"); // adicionar uma mulimidia ao acervo
             System.out.println("3. Editar Item");// editar objeto do tipo multimidia
             System.out.println("4. Remover Item"); // remover multimidia do acervo
-            System.out.println("5. Empréstimo de Itens"); // ok
-            System.out.println("6. Renovação de Empréstimos");// ok
-            System.out.println("7. Reservas de Itens"); // ok
+            System.out.println("5. Empréstimo de Itens"); // realizar o emprestimo dos itens
+            System.out.println("6. Renovação de Empréstimos"); // renovar o emprestimo de itens
+            System.out.println("7. Reservas de Itens"); // reversar itens
             System.out.println("8. Voltar");
             System.out.println();
             System.out.println();
