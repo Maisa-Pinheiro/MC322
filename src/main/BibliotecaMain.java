@@ -35,6 +35,8 @@ public class BibliotecaMain {
     private static MembroController membroController;
     private static RelatorioController relatorioController;
 
+    public static int idPerfil;
+
     public static void main(String[] args) {
         bibliotecaController = new BibliotecaControllerImpl();
         membroController = new MembroControllerImpl();
@@ -61,29 +63,112 @@ public class BibliotecaMain {
             int opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {
-                case 1:
-                    // Menu de Gerenciamento de Itens
-                    menuGerenciamentoItens(scanner, bibliotecaView);
-                    break;
-                case 2:
-                    // Menu de Gerenciamento de Membros
-                    menuGerenciamentoMembros(scanner, membroView);
-                    break;
-                case 3:
-                    // Menu de Geração de Relatórios e Estatísticas
-                    // menuRelatoriosEstatisticas(scanner, relatorioView);
-                    break;
-                case 4:
-                    // Menu de Administração de Funcionários
-                    menuAdministracaoFuncionarios(scanner);
-                    break;
-                case 5:
-                    System.out.println("Saindo do menu. Até logo!");
-                    scanner.close();
-                    return;
-                default:
-                    System.out.println("Opção inválida. Por favor, escolha novamente.");
+            /* Solicitando o perfil para solicitar e verificar as credenciais */
+            System.out.println("\n");
+            System.out.println("1 - Atendente");
+            System.out.println("2 - Gerente");
+            System.out.println("3 - Administração");
+            System.out.println("4 - Usuário Externo");
+            System.out.println();
+            System.out.println();
+            System.out.print("Selecione o seu perfil: ");
+            idPerfil = scanner.nextInt();
+            scanner.nextLine();
+
+            int varLiberarAcesso = 0;
+
+            /* solicitando e verificando as credenciais */
+            try {
+                /* login do membro */
+                /* e-mail do membro */
+                System.out.print("E-mail: ");
+                String emailLogin = scanner.nextLine();
+
+                /* senha do membro */
+                System.out.print("Senha: ");
+                int senhaLogin = scanner.nextInt();
+                scanner.nextLine();
+
+                /* Checando as credenciais do membro */
+                /*
+                 * Apenas um exemplo de login, pois deveria haver um banco de dados dinâmico
+                 * para essa aplicação
+                 */
+
+                switch (idPerfil) {
+                    /* perfil de atendente */
+                    case 1:
+                        if (emailLogin.equals("atendente@dac.unicamp.br") && senhaLogin == 1234) {
+                            System.out.println("\nLogado com sucesso!\n");
+                        } else {
+                            varLiberarAcesso = 1;
+                            throw new NovaPessoaException("Credenciais inválidas, tente novamente.\n");
+                        }
+                        break;
+
+                    /* perfil de gerente */
+                    case 2:
+                        if (emailLogin.equals("gerente@dac.unicamp.br") && senhaLogin == 1234) {
+                            System.out.println("\nLogado com sucesso!\n");
+                        } else {
+                            varLiberarAcesso = 1;
+                            throw new NovaPessoaException("Credenciais inválidas, tente novamente.\n");
+                        }
+                        break;
+
+                    /* perfil de administrador */
+                    case 3:
+                        if (emailLogin.equals("adm@dac.unicamp.br") && senhaLogin == 1234) {
+                            System.out.println("\nLogado com sucesso!\n");
+                        } else {
+                            varLiberarAcesso = 1;
+                            throw new NovaPessoaException("Credenciais inválidas, tente novamente.\n");
+                        }
+                        break;
+
+                    /* perfil de usuario externo */
+                    case 4:
+                        if (emailLogin.equals("user@dac.unicamp.br") && senhaLogin == 1234) {
+                            System.out.println("\nLogado com sucesso!\n");
+                        } else {
+                            varLiberarAcesso = 1;
+                            throw new NovaPessoaException("Credenciais inválidas, tente novamente.\n");
+                        }
+                        break;
+
+                }
+            }
+            /* Tratando o catch */
+            catch (NovaPessoaException e) {
+                System.out.println("\nErro ao adicionar o novo membro: " + e.getMessage());
+            }
+
+            /* se o acesso for liberado */
+            if (varLiberarAcesso == 0) {
+                switch (opcao) {
+                    case 1:
+                        // Menu de Gerenciamento de Itens
+                        menuGerenciamentoItens(scanner, bibliotecaView);
+                        break;
+                    case 2:
+                        // Menu de Gerenciamento de Membros
+                        menuGerenciamentoMembros(scanner, membroView);
+                        break;
+                    case 3:
+                        // Menu de Geração de Relatórios e Estatísticas
+                        // menuRelatoriosEstatisticas(scanner, relatorioView);
+                        break;
+                    case 4:
+                        // Menu de Administração de Funcionários
+                        menuAdministracaoFuncionarios(scanner);
+                        break;
+                    case 5:
+                        System.out.println("Saindo do menu. Até logo!");
+                        scanner.close();
+                        return;
+                    default:
+                        System.out.println("Opção inválida. Por favor, escolha novamente.");
+                }
             }
         }
     }
@@ -830,8 +915,8 @@ public class BibliotecaMain {
 
     }
 
+    /* Lógica para remover um item */
     private static void removerItem(Scanner scanner) {
-        // Lógica para remover um item
         System.out.println("Operação de remoção de Item, por favor,  insira o ID do item.");
         int id = scanner.nextInt();
 
@@ -842,238 +927,241 @@ public class BibliotecaMain {
 
     /* Lógica para adicionar um novo membro */
     private static void adicionarMembro(Scanner scanner) {
-        /* Indicando o perfil da pessoa que quer adicionar o membro */
-        System.out.println("\n");
-        System.out.println("Selecione o seu perfil: ");
-        System.out.println("1 - Atendente");
-        System.out.println("2 - Gerente");
-        System.out.println("3 - Administração");
-        System.out.println("4 - Usuário Externo");
-
-        System.out.print("\nEscolha uma opção: ");
-        int idPerfil = scanner.nextInt();
-        scanner.nextLine();
 
         /*
-         * Verificando se o perfil da pessoa tem acesso para cadastrar um novo membro
-         * (apenas Gerentes e Administradores podem)
+         * verificando se é um gerente ou um adm, pois só eles podem adicionar novas
+         * pessoas ao sistema
          */
 
-        try {
+        if (idPerfil == 2 || idPerfil == 3) {
+            System.out.println("\n");
+            System.out.println("Selecione o tipo de membro: ");
+            System.out.println("1 - Aluno de Graduação");
+            System.out.println("2 - Aluno de Pós Graduação");
+            System.out.println("3 - Funcionario da Biblioteca");
+            System.out.println("4 - Professor");
 
-            int varAux = 0;
+            System.out.print("\nEscolha uma opção: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
 
-            if (idPerfil == 2 || idPerfil == 3) {
-                /* login do membro */
-                /* e-mail do membro */
-                System.out.print("E-mail: ");
-                String emailLogin = scanner.nextLine();
+            switch (id) {
+                case 1:
+                    /* nome do aluno */
+                    System.out.print("Nome do aluno: ");
+                    String nome = scanner.nextLine();
 
-                /* senha do membro */
-                System.out.print("Senha: ");
-                int senhaLogin = scanner.nextInt();
-                scanner.nextLine();
+                    /* contato do aluno */
+                    System.out.print("Contato do aluno (e-mail): ");
+                    String contato = scanner.nextLine();
 
-                /* Checando as credenciais do membro */
-                /*
-                 * Apenas um exemplo de login, pois deveria haver um banco de dados dinâmico
-                 * para essa aplicação
-                 */
-                if (emailLogin.equals("gerente@dac.unicamp.br") || emailLogin.equals("adm@dac.unicamp.br")) {
-                    if (senhaLogin == 1234) {
-                        varAux = 1;
-                    } else {
-                        throw new NovaPessoaException("Senha inválida, tente novamente.\n");
-                    }
-                }
-                /* credenciais invalidas */
-                else {
-                    throw new NovaPessoaException("Credenciais inválidas, tente novamente.\n");
-                }
+                    /* idade do aluno */
+                    System.out.print("Idade do aluno: ");
+                    int idade = scanner.nextInt();
+                    scanner.nextLine();
+
+                    /* endereço do aluno */
+                    System.out.print("Endereço do aluno: ");
+                    String endereco = scanner.nextLine();
+
+                    /* adicionando o perfil */
+                    Perfil perfil = Perfil.ESTUDANTE_GRADUACAO;
+
+                    /* RA do aluno */
+                    System.out.print("RA do aluno: ");
+                    int ra = scanner.nextInt();
+                    scanner.nextLine();
+
+                    /* curso do aluno */
+                    System.out.print("Curso do aluno: ");
+                    String curso = scanner.nextLine();
+
+                    AlunoGraduacao novoMembro = new AlunoGraduacao(nome, LocalDate.now(), contato, idade, endereco,
+                            perfil,
+                            ra, curso);
+                    membroController.addMembro(novoMembro);
+                    System.out.println("\nAluno de graduação adicionado com sucesso! \n");
+                    break;
+
+                case 2:
+
+                    /* nome do aluno */
+                    System.out.print("Nome do aluno: ");
+                    String nomeAlunoPos = scanner.nextLine();
+
+                    /* contato do aluno */
+                    System.out.print("Contato do aluno (e-mail): ");
+                    String contatoAlunoPos = scanner.nextLine();
+
+                    /* idade do aluno */
+                    System.out.print("Idade do aluno: ");
+                    int idadeAlunoPos = scanner.nextInt();
+                    scanner.nextLine();
+
+                    /* endereço do aluno */
+                    System.out.print("Endereço do aluno: ");
+                    String enderecoAlunoPos = scanner.nextLine();
+
+                    /* adicionando o perfil */
+                    Perfil perfilAlunoPos = Perfil.ESTUDANTE_POS_GRADUACAO;
+
+                    /* RA do aluno */
+                    System.out.print("RA do aluno: ");
+                    int raAlunoPos = scanner.nextInt();
+                    scanner.nextLine();
+
+                    /* curso do aluno */
+                    System.out.print("Curso do aluno: ");
+                    String cursoAlunoPos = scanner.nextLine();
+
+                    AlunoPosGraduacao novoMembroAlunoPos = new AlunoPosGraduacao(nomeAlunoPos, LocalDate.now(),
+                            contatoAlunoPos, idadeAlunoPos, enderecoAlunoPos, perfilAlunoPos,
+                            raAlunoPos, cursoAlunoPos);
+                    membroController.addMembro(novoMembroAlunoPos);
+                    System.out.println("\nAluno de pós graduação adicionado com sucesso! \n");
+                    break;
+
+                case 3:
+                    /* nome do funcionario */
+                    System.out.print("Nome do funcionario: ");
+                    String nomeFuncionario = scanner.nextLine();
+
+                    /* contato do funcionario */
+                    System.out.print("Contato do funcionario (e-mail): ");
+                    String contatoFuncionario = scanner.nextLine();
+
+                    /* idade do funcionario */
+                    System.out.print("Idade do funcionario: ");
+                    int idadeFuncionario = scanner.nextInt();
+                    scanner.nextLine();
+
+                    /* endereço do funcionario */
+                    System.out.print("Endereço do funcionario: ");
+                    String enderecoFuncionario = scanner.nextLine();
+
+                    /* adicionando o perfil */
+                    Perfil perfilFuncionario = Perfil.FUNCIONARIO;
+
+                    /* cargo do funcionario */
+                    System.out.print("Cargo do funcionario: ");
+                    String cargoFuncionario = scanner.nextLine();
+
+                    /* salario do funcionario */
+                    System.out.print("Salario do funcionario: ");
+                    float salarioFuncionario = scanner.nextFloat();
+                    scanner.nextLine();
+
+                    /* horario do funcionario */
+                    System.out.print("Horário do funcionario: ");
+                    String horarioFuncionario = scanner.nextLine();
+
+                    /* acesso do funcionario */
+                    System.out.print("Acesso do funcionario: ");
+                    String acessoFuncionario = scanner.nextLine();
+
+                    FuncionarioBiblioteca novoFuncionario = new FuncionarioBiblioteca(nomeFuncionario,
+                            LocalDate.now(),
+                            contatoFuncionario, idadeFuncionario, enderecoFuncionario, perfilFuncionario,
+                            cargoFuncionario, salarioFuncionario, horarioFuncionario, acessoFuncionario);
+                    membroController.addMembro(novoFuncionario);
+                    System.out.println("\nFuncionario adicionado com sucesso! \n");
+                    break;
+
+                case 4:
+                    /* nome do professor */
+                    System.out.print("Nome do professor: ");
+                    String nomeProfessor = scanner.nextLine();
+
+                    /* contato do funcionario */
+                    System.out.print("Contato do professor (e-mail): ");
+                    String contatoProfessor = scanner.nextLine();
+
+                    /* idade do funcionario */
+                    System.out.print("Idade do professor: ");
+                    int idadeProfessor = scanner.nextInt();
+                    scanner.nextLine();
+
+                    /* endereço do funcionario */
+                    System.out.print("Endereço do professor: ");
+                    String enderecoProfessor = scanner.nextLine();
+
+                    /* adicionando o perfil */
+                    Perfil perfilProfessor = Perfil.PROFESSOR;
+
+                    /* endereço do funcionario */
+                    System.out.print("Instituto do professor: ");
+                    String institutoProfessor = scanner.nextLine();
+
+                    Professor novoProfessor = new Professor(nomeProfessor, LocalDate.now(),
+                            contatoProfessor, idadeProfessor, enderecoProfessor, perfilProfessor,
+                            institutoProfessor);
+                    membroController.addMembro(novoProfessor);
+                    System.out.println("\nProfessor adicionado com sucesso! \n");
+
+                    break;
             }
-            /* usuário não tem permissão para adicionar uma nova pessoa */
-            else {
-                throw new NovaPessoaException("Você não tem acesso para adicionar uma nova pessoa ao sistema.\n");
-            }
-
-            if (varAux == 1) {
-                System.out.println("\n");
-                System.out.println("Selecione o tipo de membro: ");
-                System.out.println("1 - Aluno de Graduação");
-                System.out.println("2 - Aluno de Pós Graduação");
-                System.out.println("3 - Funcionario da Biblioteca");
-                System.out.println("4 - Professor");
-
-                System.out.print("\nEscolha uma opção: ");
-                int id = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (id) {
-                    case 1:
-                        /* nome do aluno */
-                        System.out.print("Nome do aluno: ");
-                        String nome = scanner.nextLine();
-
-                        /* contato do aluno */
-                        System.out.print("Contato do aluno (e-mail): ");
-                        String contato = scanner.nextLine();
-
-                        /* idade do aluno */
-                        System.out.print("Idade do aluno: ");
-                        int idade = scanner.nextInt();
-                        scanner.nextLine();
-
-                        /* endereço do aluno */
-                        System.out.print("Endereço do aluno: ");
-                        String endereco = scanner.nextLine();
-
-                        /* adicionando o perfil */
-                        Perfil perfil = Perfil.ESTUDANTE_GRADUACAO;
-
-                        /* RA do aluno */
-                        System.out.print("RA do aluno: ");
-                        int ra = scanner.nextInt();
-                        scanner.nextLine();
-
-                        /* curso do aluno */
-                        System.out.print("Curso do aluno: ");
-                        String curso = scanner.nextLine();
-
-                        AlunoGraduacao novoMembro = new AlunoGraduacao(nome, LocalDate.now(), contato, idade, endereco,
-                                perfil,
-                                ra, curso);
-                        membroController.addMembro(novoMembro);
-                        System.out.println("\nAluno de graduação adicionado com sucesso! \n");
-                        break;
-
-                    case 2:
-
-                        /* nome do aluno */
-                        System.out.print("Nome do aluno: ");
-                        String nomeAlunoPos = scanner.nextLine();
-
-                        /* contato do aluno */
-                        System.out.print("Contato do aluno (e-mail): ");
-                        String contatoAlunoPos = scanner.nextLine();
-
-                        /* idade do aluno */
-                        System.out.print("Idade do aluno: ");
-                        int idadeAlunoPos = scanner.nextInt();
-                        scanner.nextLine();
-
-                        /* endereço do aluno */
-                        System.out.print("Endereço do aluno: ");
-                        String enderecoAlunoPos = scanner.nextLine();
-
-                        /* adicionando o perfil */
-                        Perfil perfilAlunoPos = Perfil.ESTUDANTE_POS_GRADUACAO;
-
-                        /* RA do aluno */
-                        System.out.print("RA do aluno: ");
-                        int raAlunoPos = scanner.nextInt();
-                        scanner.nextLine();
-
-                        /* curso do aluno */
-                        System.out.print("Curso do aluno: ");
-                        String cursoAlunoPos = scanner.nextLine();
-
-                        AlunoPosGraduacao novoMembroAlunoPos = new AlunoPosGraduacao(nomeAlunoPos, LocalDate.now(),
-                                contatoAlunoPos, idadeAlunoPos, enderecoAlunoPos, perfilAlunoPos,
-                                raAlunoPos, cursoAlunoPos);
-                        membroController.addMembro(novoMembroAlunoPos);
-                        System.out.println("\nAluno de pós graduação adicionado com sucesso! \n");
-                        break;
-
-                    case 3:
-                        /* nome do funcionario */
-                        System.out.print("Nome do funcionario: ");
-                        String nomeFuncionario = scanner.nextLine();
-
-                        /* contato do funcionario */
-                        System.out.print("Contato do funcionario (e-mail): ");
-                        String contatoFuncionario = scanner.nextLine();
-
-                        /* idade do funcionario */
-                        System.out.print("Idade do funcionario: ");
-                        int idadeFuncionario = scanner.nextInt();
-                        scanner.nextLine();
-
-                        /* endereço do funcionario */
-                        System.out.print("Endereço do funcionario: ");
-                        String enderecoFuncionario = scanner.nextLine();
-
-                        /* adicionando o perfil */
-                        Perfil perfilFuncionario = Perfil.FUNCIONARIO;
-
-                        /* cargo do funcionario */
-                        System.out.print("Cargo do funcionario: ");
-                        String cargoFuncionario = scanner.nextLine();
-
-                        /* salario do funcionario */
-                        System.out.print("Salario do funcionario: ");
-                        float salarioFuncionario = scanner.nextFloat();
-                        scanner.nextLine();
-
-                        /* horario do funcionario */
-                        System.out.print("Horário do funcionario: ");
-                        String horarioFuncionario = scanner.nextLine();
-
-                        /* acesso do funcionario */
-                        System.out.print("Acesso do funcionario: ");
-                        String acessoFuncionario = scanner.nextLine();
-
-                        FuncionarioBiblioteca novoFuncionario = new FuncionarioBiblioteca(nomeFuncionario,
-                                LocalDate.now(),
-                                contatoFuncionario, idadeFuncionario, enderecoFuncionario, perfilFuncionario,
-                                cargoFuncionario, salarioFuncionario, horarioFuncionario, acessoFuncionario);
-                        membroController.addMembro(novoFuncionario);
-                        System.out.println("\nFuncionario adicionado com sucesso! \n");
-                        break;
-
-                    case 4:
-                        /* nome do professor */
-                        System.out.print("Nome do professor: ");
-                        String nomeProfessor = scanner.nextLine();
-
-                        /* contato do funcionario */
-                        System.out.print("Contato do professor (e-mail): ");
-                        String contatoProfessor = scanner.nextLine();
-
-                        /* idade do funcionario */
-                        System.out.print("Idade do professor: ");
-                        int idadeProfessor = scanner.nextInt();
-                        scanner.nextLine();
-
-                        /* endereço do funcionario */
-                        System.out.print("Endereço do professor: ");
-                        String enderecoProfessor = scanner.nextLine();
-
-                        /* adicionando o perfil */
-                        Perfil perfilProfessor = Perfil.PROFESSOR;
-
-                        /* endereço do funcionario */
-                        System.out.print("Instituto do professor: ");
-                        String institutoProfessor = scanner.nextLine();
-
-                        Professor novoProfessor = new Professor(nomeProfessor, LocalDate.now(),
-                                contatoProfessor, idadeProfessor, enderecoProfessor, perfilProfessor,
-                                institutoProfessor);
-                        membroController.addMembro(novoProfessor);
-                        System.out.println("\nProfessor adicionado com sucesso! \n");
-
-                        break;
-                }
-            }
-        }
-        /* Tratando o catch */
-        catch (NovaPessoaException e) {
-            System.out.println("Erro ao adicionar o novo membro: " + e.getMessage());
         }
     }
 
+    /* Lógica para editar um membro existente */
     private static void editarMembro(Scanner scanner) {
-        // Lógica para editar um membro existente
-        System.out.println("Operação de Edição de Membro");
+
+        /*
+         * verificando se é um gerente ou um adm, pois só eles podem adicionar novas
+         * pessoas ao sistema
+         */
+
+        if (idPerfil == 2 || idPerfil == 3) {
+
+            System.out.println("\n");
+            System.out.println("Perfis de membros: ");
+            System.out.println("1 - Aluno de Graduação");
+            System.out.println("2 - Aluno de Pós Graduação");
+            System.out.println("3 - Funcionario da Biblioteca");
+            System.out.println("4 - Professor");
+            System.out.println();
+            System.out.println();
+
+            System.out.print("Escolha uma opção: ");
+            int perfil = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("ID do membro que deseja editar: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (perfil) {
+                case 1:
+                    System.out.println("\n");
+                    System.out.println("Informações que permitem edição: ");
+                    System.out.println("1 - Nome");
+                    System.out.println("2 - Endereço");
+                    System.out.println("3 - Contato (e-mail)");
+                    System.out.println("4 - Curso");
+                    System.out.println();
+                    System.out.println();
+
+                    System.out.print("Escolha uma opção: ");
+                    int info = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (info) {
+                        case 1:
+                            System.out.print("Insira o novo nome: ");
+                            String nome = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setnome(nome);
+                            break;
+
+                        case 2:
+                            System.out.print("Insira o novo endereço: ");
+                            String endereco = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setendereco(endereco);
+                            break;
+
+                    }
+
+            }
+        }
     }
 
     private static void removerMembro(Scanner scanner) {
