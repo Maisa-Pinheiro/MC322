@@ -522,6 +522,7 @@ public class BibliotecaMain {
 
         System.out.print("Ano de Publicação: ");
         int ano = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Sinopse: ");
         String sinopse = scanner.nextLine();
@@ -534,9 +535,11 @@ public class BibliotecaMain {
 
         System.out.print("Número de cópias: ");
         int copias = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Número de cópias dispiníveis: ");
         int copiasdisp = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Categoria(somente letras maiúsculas): ");
         String categoriauser = scanner.nextLine();
@@ -552,6 +555,7 @@ public class BibliotecaMain {
 
         System.out.print("Tipo de item (1 - Livro Fisico, 2 - Livro Eletrônico, 3 - CD, 4 - DVD, 5 - Outro): ");
         int tipo = scanner.nextInt();
+        scanner.nextLine();
 
         Multimidia novoItem = null;
 
@@ -571,6 +575,7 @@ public class BibliotecaMain {
 
                 System.out.print("Edição: ");
                 int edicao = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.print("Local: ");
                 String local = scanner.nextLine();
@@ -662,6 +667,7 @@ public class BibliotecaMain {
         // Lógica para editar um item existente
         System.out.println("Operação de Edição de Item, por favor,  insira o ID do item.");
         int id = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Selecione o que deseja editar:");
         System.out.println(
@@ -688,6 +694,7 @@ public class BibliotecaMain {
             case 4:
                 System.out.println("Insira o novo ano de publicação.");
                 int ano = scanner.nextInt();
+                scanner.nextLine();
                 bibliotecaController.retornaritem(id).setanoPublicacao(ano);
                 break;
             case 5:
@@ -714,11 +721,13 @@ public class BibliotecaMain {
             case 8:
                 System.out.println("Insira o novo número de cópias.");
                 int numcopias = scanner.nextInt();
+                scanner.nextLine();
                 bibliotecaController.retornaritem(id).setnumCopias(numcopias);
                 break;
             case 9:
                 System.out.println("Insira o novo número de cópias disponíveis.");
                 int numcopiasdisp = scanner.nextInt();
+                scanner.nextLine();
                 bibliotecaController.retornaritem(id).setnumCopiasDisponiveis(numcopiasdisp);
                 break;
             case 10:
@@ -745,15 +754,18 @@ public class BibliotecaMain {
                     System.out.println("Este item é um Livro Físico. Selecione o que deseja editar:");
                     System.out.println("1- ISBN, 2- Edição, 3- Local, 4- Estado de conservação");
                     int opcao1 = scanner.nextInt();
+                    scanner.nextLine();
                     switch (opcao1) {
                         case 1:
                             System.out.println("Insira o novo ISBN.");
                             int isbn = scanner.nextInt();
+                            scanner.nextLine();
                             ((LivroFisico) bibliotecaController.retornaritem(id)).setisbn(isbn);
                             break;
                         case 2:
                             System.out.println("Insira a nova Edição.");
                             int edicao = scanner.nextInt();
+                            scanner.nextLine();
                             ((LivroFisico) bibliotecaController.retornaritem(id)).setedicao(edicao);
                             break;
                         case 3:
@@ -775,6 +787,7 @@ public class BibliotecaMain {
                     System.out.println("Este item é um Livro Eletrônico. Selecione o que deseja editar:");
                     System.out.println("1- URL, 2- Formato, 3- Requisitos de leituta, 4 - Data de disponibilidade:");
                     int opcao2 = scanner.nextInt();
+                    scanner.nextLine();
                     switch (opcao2) {
                         case 1:
                             System.out.println("Insira a nova URL.");
@@ -813,6 +826,7 @@ public class BibliotecaMain {
                     System.out.println("Este item é um CD. Selecione o que deseja editar");
                     System.out.println("1- Lista de faixas, 2- Duração, 3- Estado de conservação");
                     int opcao1 = scanner.nextInt();
+                    scanner.nextLine();
                     switch (opcao1) {
                         case 1:
                             System.out.println("Insira a nova lista de faixas.");
@@ -839,6 +853,7 @@ public class BibliotecaMain {
                     System.out.println("Este item é um DVD. Selecione o que deseja editar");
                     System.out.println("1- Elenco, 2- Duração, 3- Legendas, 4- Estado de conservação");
                     int opcao1 = scanner.nextInt();
+                    scanner.nextLine();
                     switch (opcao1) {
                         case 1:
                             System.out.println("Insira o novo elenco.");
@@ -872,6 +887,7 @@ public class BibliotecaMain {
                             .println("Este item não se encaixa nas opções anteriores. Selecione o que deseja editar: ");
                     System.out.println("1- Tipo, 2- Formato, 3- Local, 4- Estado de Conservação");
                     int opcao1 = scanner.nextInt();
+                    scanner.nextLine();
                     switch (opcao1) {
                         case 1:
                             System.out.println("Insira o novo tipo.");
@@ -913,6 +929,7 @@ public class BibliotecaMain {
     private static void removerItem(Scanner scanner) {
         System.out.println("Operação de remoção de Item, por favor,  insira o ID do item.");
         int id = scanner.nextInt();
+        scanner.nextLine();
 
         bibliotecaController.removerItemDispoinvel(id);
         System.out.println("Novo item removido com sucesso!");
