@@ -371,13 +371,7 @@ public class BibliotecaMain {
                     bibliotecaController.retornaritem(iditem));
         } catch (BloqueioMembroException e) {
             System.out.println("Erro ao emprestar o item: " + e.getMessage());
-            // Aqui você pode tomar medidas apropriadas, como exibir uma mensagem de erro ao
-            // usuário.
         }
-
-        // bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser),
-        // bibliotecaController.retornaritem(iditem));
-
     }
 
     private static void realizarRenovacao(Scanner scanner) {
@@ -1131,6 +1125,7 @@ public class BibliotecaMain {
             scanner.nextLine();
 
             switch (perfil) {
+                /* Aluno de graduação */
                 case 1:
                     System.out.println("\n");
                     System.out.println("Informações que permitem edição: ");
@@ -1150,16 +1145,199 @@ public class BibliotecaMain {
                             System.out.print("Insira o novo nome: ");
                             String nome = scanner.nextLine();
                             membroController.buscarMembroPorIdentificacao(id).setnome(nome);
+                            System.out.print("\nAteração feita com sucesso!\n");
                             break;
 
                         case 2:
                             System.out.print("Insira o novo endereço: ");
                             String endereco = scanner.nextLine();
                             membroController.buscarMembroPorIdentificacao(id).setendereco(endereco);
+                            System.out.print("\nAteração feita com sucesso!\n");
                             break;
 
-                    }
+                        case 3:
+                            System.out.print("Insira o novo contato (e-mail): ");
+                            String contato = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setcontato(contato);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
 
+                        case 4:
+                            System.out.print("Insira o novo curso do membro: ");
+                            String curso = scanner.nextLine();
+                            ((AlunoGraduacao) membroController.buscarMembroPorIdentificacao(id)).setCurso(curso);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        default:
+                            System.out.println("Opção inválida. Por favor, escolha novamente.");
+                    }
+                    break;
+
+                /* aluno de pós graduação */
+                case 2:
+                    System.out.println("\n");
+                    System.out.println("Informações que permitem edição: ");
+                    System.out.println("1 - Nome");
+                    System.out.println("2 - Endereço");
+                    System.out.println("3 - Contato (e-mail)");
+                    System.out.println("4 - Curso");
+                    System.out.println();
+                    System.out.println();
+
+                    System.out.print("Escolha uma opção: ");
+                    int infoPos = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (infoPos) {
+                        case 1:
+                            System.out.print("Insira o novo nome: ");
+                            String nome = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setnome(nome);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 2:
+                            System.out.print("Insira o novo endereço: ");
+                            String endereco = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setendereco(endereco);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 3:
+                            System.out.print("Insira o novo contato (e-mail): ");
+                            String contato = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setcontato(contato);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 4:
+                            System.out.print("Insira o novo curso do membro: ");
+                            String curso = scanner.nextLine();
+                            ((AlunoPosGraduacao) membroController.buscarMembroPorIdentificacao(id)).setCurso(curso);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        default:
+                            System.out.println("Opção inválida. Por favor, escolha novamente.");
+                    }
+                    break;
+                /* funcionario */
+                case 3:
+                    System.out.println("\n");
+                    System.out.println("Informações que permitem edição: ");
+                    System.out.println("1 - Nome");
+                    System.out.println("2 - Endereço");
+                    System.out.println("3 - Contato (e-mail)");
+                    System.out.println("4 - Cargo");
+                    System.out.println("5 - Salário");
+                    System.out.println("6 - Horário");
+                    System.out.println();
+                    System.out.println();
+
+                    System.out.print("Escolha uma opção: ");
+                    int infoFuncionario = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (infoFuncionario) {
+                        case 1:
+                            System.out.print("Insira o novo nome: ");
+                            String nome = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setnome(nome);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 2:
+                            System.out.print("Insira o novo endereço: ");
+                            String endereco = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setendereco(endereco);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 3:
+                            System.out.print("Insira o novo contato (e-mail): ");
+                            String contato = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setcontato(contato);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 4:
+                            System.out.print("Insira o novo cargo do funcionario: ");
+                            String cargo = scanner.nextLine();
+                            ((FuncionarioBiblioteca) membroController.buscarMembroPorIdentificacao(id)).setCargo(cargo);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 5:
+                            System.out.print("Insira o novo salário do funcionario: ");
+                            int salario = scanner.nextInt();
+                            scanner.nextLine();
+                            ((FuncionarioBiblioteca) membroController.buscarMembroPorIdentificacao(id))
+                                    .setsalario(salario);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 6:
+                            System.out.print("Insira o novo horário do funcionario: ");
+                            String horario = scanner.nextLine();
+                            ((FuncionarioBiblioteca) membroController.buscarMembroPorIdentificacao(id))
+                                    .setendereco(horario);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        default:
+                            System.out.println("Opção inválida. Por favor, escolha novamente.");
+                    }
+                    break;
+
+                /* funcionario */
+                case 4:
+                    System.out.println("\n");
+                    System.out.println("Informações que permitem edição: ");
+                    System.out.println("1 - Nome");
+                    System.out.println("2 - Endereço");
+                    System.out.println("3 - Contato (e-mail)");
+                    System.out.println("4 - Instituto");
+                    System.out.println();
+                    System.out.println();
+
+                    System.out.print("Escolha uma opção: ");
+                    int infoInstituto = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (infoInstituto) {
+                        case 1:
+                            System.out.print("Insira o novo nome: ");
+                            String nome = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setnome(nome);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 2:
+                            System.out.print("Insira o novo endereço: ");
+                            String endereco = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setendereco(endereco);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 3:
+                            System.out.print("Insira o novo contato (e-mail): ");
+                            String contato = scanner.nextLine();
+                            membroController.buscarMembroPorIdentificacao(id).setcontato(contato);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        case 4:
+                            System.out.print("Insira o novo cargo do funcionario: ");
+                            String instituto = scanner.nextLine();
+                            ((Professor) membroController.buscarMembroPorIdentificacao(id)).setInstituto(instituto);
+                            System.out.print("\nAteração feita com sucesso!\n");
+                            break;
+
+                        default:
+                            System.out.println("Opção inválida. Por favor, escolha novamente.");
+                    }
+                    break;
             }
         }
     }

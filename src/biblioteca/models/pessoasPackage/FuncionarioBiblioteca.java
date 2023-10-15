@@ -49,6 +49,10 @@ public class FuncionarioBiblioteca extends Pessoa {
         return horario;
     }
 
+    public void sethorario(String horario) {
+        this.horario = horario;
+    }
+
     public void setsalario(float salario) {
         this.salario = salario;
 
@@ -57,7 +61,6 @@ public class FuncionarioBiblioteca extends Pessoa {
     public float getsalario() {
         return salario;
     }
-
 
     public void getrenovacoes() {
         System.out.println("renovações do aluno:");

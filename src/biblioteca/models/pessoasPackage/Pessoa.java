@@ -35,8 +35,8 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
         this.idade = idade;
         this.endereco = endereco;
         this.perfil = perfil;
-        if (listaPessoas == null){
-        Pessoa.listaPessoas = new ArrayList<>();
+        if (listaPessoas == null) {
+            Pessoa.listaPessoas = new ArrayList<>();
         }
         this.emprestimos = new LinkedList<>();
         this.historico = new ArrayList<>();
@@ -98,6 +98,10 @@ public abstract class Pessoa { // como agora os empréstimnos foram transferidos
      */
     public void setnome(String nome) {
         this.nome = nome;
+    }
+
+    public void setcontato(String contato) {
+        this.contato = contato;
     }
 
     public void setendereco(String endereco) {
