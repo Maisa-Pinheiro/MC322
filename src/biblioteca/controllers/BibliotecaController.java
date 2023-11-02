@@ -27,6 +27,8 @@ public interface BibliotecaController {
 
     void reflectionatributos(Scanner scanner);
 
+    void reflectionmetodos(Scanner Scanner);
+
     void reservaritem(Pessoa membro, Multimidia item);
 
      void addmanutencao(Manutencao manutencao);
