@@ -25,6 +25,8 @@ public interface BibliotecaController {
 
     void emprestarItem(Pessoa membro, Multimidia item)throws BloqueioMembroException;
 
+    void reflectionatributos(Scanner scanner);
+
     void reservaritem(Pessoa membro, Multimidia item);
 
      void addmanutencao(Manutencao manutencao);
