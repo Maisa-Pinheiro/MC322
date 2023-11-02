@@ -14,6 +14,7 @@ import biblioteca.models.manutencaoPackage.Manutencao;
 import biblioteca.models.emprestimoPackage.*;
 import biblioteca.models.equipamentosPackage.Equipamentos;
 import biblioteca.models.pessoasPackage.Pessoa;
+import java.util.Scanner;
 //import biblioteca.models.pessoasPackage.Professor;
 //import biblioteca.models.pessoasPackage.AlunoGraduacao;
 //import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
