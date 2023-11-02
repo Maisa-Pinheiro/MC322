@@ -156,7 +156,7 @@ public class BibliotecaMain {
                         break;
                     case 3:
                         // Menu de Geração de Relatórios e Estatísticas
-                        // menuRelatoriosEstatisticas(scanner, relatorioView);
+                        menuRelatoriosEstatisticas(scanner, relatorioView);
                         break;
                     case 4:
                         // Menu de Administração de Funcionários
@@ -184,7 +184,7 @@ public class BibliotecaMain {
             System.out.println("4. Remover Item"); // remover multimidia do acervo
             System.out.println("5. Empréstimo de Itens"); // realizar o emprestimo dos itens
             System.out.println("6. Renovação de Empréstimos"); // renovar o emprestimo de itens
-            System.out.println("7. Reservas de Itens"); // reversar itens
+            System.out.println("7. Reservas"); // reversar itens
             System.out.println("8. Voltar");
             System.out.println();
             System.out.println();
@@ -273,7 +273,8 @@ public class BibliotecaMain {
             System.out.println("4. Gerar Relatório de Disponibilidade de Itens");
             System.out.println("5. Gerar Estatísticas de Uso por Perfil de Membro");
             System.out.println("6. Gerar Relatório de Itens Mais Populares");
-            System.out.println("7. Voltar");
+            System.out.println("7. Listar Atributos e métodos");
+            System.out.println("8.Voltar");
             System.out.println();
             System.out.println();
             System.out.print("Escolha uma opção: ");
@@ -301,6 +302,9 @@ public class BibliotecaMain {
                     gerarRelatorioItensPopulares();
                     break;
                 case 7:
+                    listaratributosemetodos(scanner);
+                    break;
+                case 8:
                     return;
                 default:
                     System.out.println("Opção inválida. Por favor, escolha novamente.");
@@ -442,19 +446,19 @@ public class BibliotecaMain {
                 int capacidadeMax = 0;
                 switch (sala) {
                     case 1:
-                        capacidadeMax = SalaIndividual.getcapacidade();
+                        capacidadeMax = 2;
                         break;
 
                     case 2:
-                        capacidadeMax = SalaGrupo.getcapacidade();
+                        capacidadeMax = 11;
                         break;
 
                     case 3:
-                        capacidadeMax = SalaSilenciosa.getcapacidade();
+                        capacidadeMax = 4;
                         break;
 
                     case 4:
-                        capacidadeMax = SalaMultimidia.getcapacidade();
+                        capacidadeMax = 16;
                         break;
                 }
 
@@ -1359,6 +1363,21 @@ public class BibliotecaMain {
         }
     }
 
+    private static void listaratributosemetodos(Scanner scanner) {
+        
+        System.out.println("1. Listar atributos");
+        System.out.println("2. Listar métodos");
+        System.out.println("Escolha uma opção: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        
+        if(id==1){
+            bibliotecaController.reflectionatributos(scanner);
+        }else if(id==2){
+            bibliotecaController.reflectionmetodos(scanner);
+        }
+        
+    }
     private static void removerMembro(Scanner scanner) {
         // Lógica para remover um membro
         System.out.print("Digite o ID do membro que deseja remover da lista: ");
@@ -1397,4 +1416,6 @@ public class BibliotecaMain {
         // Lógica para gerar o Relatório de Itens Mais Populares
         System.out.println("Gerando Relatório de Itens Mais Populares");
     }
+
+    
 }

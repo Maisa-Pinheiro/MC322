@@ -49,14 +49,14 @@ public class ReservaSala {
 
     /* definição das classes internas */
     public class SalaIndividual {
-        private static int capacidade; // capaciadade maxima da sala
+        private int capacidade; // capaciadade maxima da sala
         private int numsala; // numero da sala
         private boolean computadorDisponivel; // a sala tem ou não um computador disponível
 
         /* construtor da classe interna */
 
         public SalaIndividual(int numsala, boolean computadorDisponivel) {
-            SalaIndividual.capacidade = 1;
+            this.capacidade = 1;
             this.numsala = numsala;
             this.computadorDisponivel = computadorDisponivel;
 
@@ -67,7 +67,7 @@ public class ReservaSala {
          * se mudasses, seria outra palestra
          */
 
-        public static int getcapacidade() {
+        public  int getcapacidade() {
             return capacidade;
         }
 
@@ -82,14 +82,14 @@ public class ReservaSala {
     }
 
     public class SalaGrupo {// atributos públicos estão sujeitos à possíveis mudanças
-        private static int capacidade; // capacidade maxima de pessoas
+        private  int capacidade; // capacidade maxima de pessoas
         private int numsala; // numero da sala
         private boolean apresentacao; // a sala tem ou não equipamento de apresentação disponível
 
         /* construtor da classe interna */
 
         public SalaGrupo(int numsala, boolean apresentacao) {
-            SalaGrupo.capacidade = 10;
+            this.capacidade = 10;
             this.numsala = numsala;
             this.apresentacao = apresentacao;
 
@@ -101,7 +101,7 @@ public class ReservaSala {
             return numsala;
         }
 
-        public static int getcapacidade() {
+        public int getcapacidade() {
             return capacidade;
         }
 
@@ -113,14 +113,14 @@ public class ReservaSala {
 
     public class SalaSilenciosa {// atributos públicos estão sujeitos à possíveis mudanças
 
-        private static int capacidade; // capacidade maxima de pessoas/numero de assentos
+        private int capacidade; // capacidade maxima de pessoas/numero de assentos
         private int numsala; // numero da sala
         private boolean cabines; // a sala tem ou não cabines individuais
 
         /* construtor da classe interna */
 
         public SalaSilenciosa(int numsala, boolean cabines) {
-            SalaSilenciosa.capacidade = 3;
+            this.capacidade = 3;
             this.numsala = numsala;
             this.cabines = cabines;
 
@@ -132,7 +132,7 @@ public class ReservaSala {
             return numsala;
         }
 
-        public static int getcapacidade() {
+        public  int getcapacidade() {
             return capacidade;
         }
 
@@ -143,7 +143,7 @@ public class ReservaSala {
     }
 
     public class SalaMultimidia {// atributos públicos estão sujeitos à possíveis mudanças
-        private static int capacidade; // capacidade maxima de pessoas
+        private int capacidade; // capacidade maxima de pessoas
         private int numsala; // numero da sala
         private int computadores;// quantidade de computadores disponíveis para uso
         private boolean apresentacao; // a sala tem ou não equipamento de apresentação disponível
@@ -151,7 +151,7 @@ public class ReservaSala {
 
         /* construtor da classe interna */
         public SalaMultimidia(int numsala, int computadores, boolean apresentacao, String recursos) {
-            SalaMultimidia.capacidade = 15;
+            this.capacidade = 15;
             this.numsala = numsala;
             this.computadores = computadores;
             this.apresentacao = apresentacao;
@@ -160,7 +160,7 @@ public class ReservaSala {
 
         /* getters dos atributos privados classe interna */
 
-        public static int getcapacidade() {
+        public int getcapacidade() {
             return capacidade;
         }
 

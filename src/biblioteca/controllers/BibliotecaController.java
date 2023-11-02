@@ -7,6 +7,7 @@ import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.manutencaoPackage.Manutencao;
+import biblioteca.models.CReflectionPackage.CReflection;
 //import biblioteca.models.multimidiaPackage.DVD_Video;
 //import biblioteca.models.multimidiaPackage.LivroEletronico;
 //import biblioteca.models.multimidiaPackage.LivroFisico;
@@ -14,6 +15,7 @@ import biblioteca.models.manutencaoPackage.Manutencao;
 import biblioteca.models.emprestimoPackage.*;
 import biblioteca.models.equipamentosPackage.Equipamentos;
 import biblioteca.models.pessoasPackage.Pessoa;
+import java.util.Scanner;
 //import biblioteca.models.pessoasPackage.Professor;
 //import biblioteca.models.pessoasPackage.AlunoGraduacao;
 //import biblioteca.models.pessoasPackage.AlunoPosGraduacao;
@@ -24,6 +26,10 @@ public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
 
     void emprestarItem(Pessoa membro, Multimidia item)throws BloqueioMembroException;
+
+    void reflectionatributos(Scanner scanner);
+
+    void reflectionmetodos(Scanner scanner);
 
     void reservaritem(Pessoa membro, Multimidia item);
 

@@ -10,6 +10,8 @@ import java.time.temporal.ChronoUnit;
 
 import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
+import java.util.Scanner;
+import biblioteca.models.CReflectionPackage.CReflection;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.reservaSalaPackage.ReservaSala;
 import biblioteca.models.reservaSalaPackage.ReservaSalaException;
@@ -104,6 +106,36 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             }
         }
         return null;
+    }
+    @Override
+    public void reflectionatributos(Scanner scanner){
+        CReflection reflection = new CReflection();
+        System.out.println("escolha uma opção:");
+        System.out.println("1. listar atributos de Membros");
+        System.out.println("2. listar atributos de Multimidia");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        if(opcao==1){
+            reflection.listFields(Pessoa.class);
+        }else if(opcao==2){
+            reflection.listFields(Multimidia.class);
+        }
+
+    }
+    @Override
+     public void reflectionmetodos(Scanner scanner){
+        CReflection reflection = new CReflection();
+        System.out.println("escolha uma opção:");
+        System.out.println("1. listar métodos de Membros");
+        System.out.println("2. listar métodos de Multimidia");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        if(opcao==1){
+            reflection.listMethods(Pessoa.class);
+        }else if(opcao==2){
+            reflection.listMethods(Multimidia.class);
+        }
+        
     }
 
     @Override
