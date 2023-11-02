@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
+import java.util.Scanner;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.reservaSalaPackage.ReservaSala;
 import biblioteca.models.reservaSalaPackage.ReservaSalaException;
