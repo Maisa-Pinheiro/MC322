@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import java.util.Scanner;
+import biblioteca.models.CReflectionPackage.CReflection;
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.reservaSalaPackage.ReservaSala;
 import biblioteca.models.reservaSalaPackage.ReservaSalaException;
@@ -122,7 +123,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     }
     @Override
-     public void reflectionmetodos(Scanner Scanner){
+     public void reflectionmetodos(Scanner scanner){
         CReflection reflection = new CReflection();
         System.out.println("escolha uma opção:");
         System.out.println("1. listar métodos de Membros");

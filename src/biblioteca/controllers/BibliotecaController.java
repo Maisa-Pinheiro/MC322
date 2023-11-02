@@ -7,6 +7,7 @@ import java.util.Set;
 
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.manutencaoPackage.Manutencao;
+import biblioteca.models.CReflectionPackage.CReflection;
 //import biblioteca.models.multimidiaPackage.DVD_Video;
 //import biblioteca.models.multimidiaPackage.LivroEletronico;
 //import biblioteca.models.multimidiaPackage.LivroFisico;
@@ -28,7 +29,7 @@ public interface BibliotecaController {
 
     void reflectionatributos(Scanner scanner);
 
-    void reflectionmetodos(Scanner Scanner);
+    void reflectionmetodos(Scanner scanner);
 
     void reservaritem(Pessoa membro, Multimidia item);
 

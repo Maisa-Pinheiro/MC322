@@ -184,7 +184,7 @@ public class BibliotecaMain {
             System.out.println("4. Remover Item"); // remover multimidia do acervo
             System.out.println("5. Empréstimo de Itens"); // realizar o emprestimo dos itens
             System.out.println("6. Renovação de Empréstimos"); // renovar o emprestimo de itens
-            System.out.println("7. Reservas de Itens"); // reversar itens
+            System.out.println("7. Reservas"); // reversar itens
             System.out.println("8. Voltar");
             System.out.println();
             System.out.println();
@@ -446,19 +446,19 @@ public class BibliotecaMain {
                 int capacidadeMax = 0;
                 switch (sala) {
                     case 1:
-                        capacidadeMax = SalaIndividual.getcapacidade();
+                        capacidadeMax = 2;
                         break;
 
                     case 2:
-                        capacidadeMax = SalaGrupo.getcapacidade();
+                        capacidadeMax = 11;
                         break;
 
                     case 3:
-                        capacidadeMax = SalaSilenciosa.getcapacidade();
+                        capacidadeMax = 4;
                         break;
 
                     case 4:
-                        capacidadeMax = SalaMultimidia.getcapacidade();
+                        capacidadeMax = 16;
                         break;
                 }
 
