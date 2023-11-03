@@ -1363,22 +1363,26 @@ public class BibliotecaMain {
         }
     }
 
-    /* Implementação para uso do Java Reflection - empressões em tempo de execução do programa */
+    /*
+     * Implementação para uso do Java Reflection - empressões em tempo de execução
+     * do programa
+     */
     private static void listaratributosemetodos(Scanner scanner) {
-        
+
         System.out.println("1. Listar atributos");
         System.out.println("2. Listar métodos");
         System.out.println("Escolha uma opção: ");
         int id = scanner.nextInt();
         scanner.nextLine();
-        
-        if(id == 1){
+
+        if (id == 1) {
             bibliotecaController.reflectionatributos(scanner);
-        }else if(id == 2){
+        } else if (id == 2) {
             bibliotecaController.reflectionmetodos(scanner);
         }
-        
+
     }
+
     private static void removerMembro(Scanner scanner) {
         // Lógica para remover um membro
         System.out.print("Digite o ID do membro que deseja remover da lista: ");
@@ -1418,5 +1422,4 @@ public class BibliotecaMain {
         System.out.println("Gerando Relatório de Itens Mais Populares");
     }
 
-    
 }
