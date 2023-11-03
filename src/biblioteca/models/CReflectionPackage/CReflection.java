@@ -3,8 +3,6 @@ package biblioteca.models.CReflectionPackage;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import biblioteca.models.pessoasPackage.NovaPessoaException;
-
 public class CReflection {
 
     /* Listando e imprimindo os metodos */
@@ -15,7 +13,7 @@ public class CReflection {
 
             /* Vefiricando se a classe possui algum metodo */
             if (metodos.length == 0) {
-                throw new NovaPessoaException("A classe não possui metodos disponiveis.\n");
+                throw new listMethodsException("A classe não possui metodos disponiveis.\n");
             }
 
             /* Se houver metodos disponiveis, imprime eles */
@@ -39,7 +37,7 @@ public class CReflection {
 
             /* Vefiricando se a classe possui algum metodo */
             if (campos.length == 0) {
-                throw new NovaPessoaException("A classe não possui atributos disponiveis.\n");
+                throw new listFieldsException("A classe não possui atributos disponiveis.\n");
             }
             /* Se houver atributos disponiveis, imprime eles */
             else {
@@ -54,6 +52,7 @@ public class CReflection {
         }
     }
 
+    /* Utilização do metodo invoke para instanciar um objeto em tempo de execução */
     public static void invokeMethod(Class<?> classe, String methodName) {
         try {
             // Obtém o construtor padrão da classe
