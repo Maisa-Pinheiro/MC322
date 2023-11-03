@@ -2,6 +2,12 @@ package biblioteca.models.CReflectionPackage;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
+
+import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.multimidiaPackage.Multimidia;
+import biblioteca.models.pessoasPackage.Pessoa;
+import biblioteca.models.reservaSalaPackage.Sala;
 
 public class CReflection {
 
@@ -69,6 +75,50 @@ public class CReflection {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /*
+     * Função para imprimir itens de uma lista qualquer
+     * é capaz de aceitar imprimir itens da lista de membros,
+     * sala de estudos e lista de emprestimos
+     */
+
+    public static void printListaGenerica(List<?> lista) {
+        for (Object item : lista) {
+            /* se a lista desejada for de membros */
+            if (item instanceof Pessoa) {
+                Pessoa membro = (Pessoa) item;
+                System.out.println("\nInformações do Membro:");
+                System.out.println("\nNome: " + membro.getnome());
+                System.out.println("\nNumero de identiciação da biblioteca: " + membro.getid());
+                System.out.println("\n");
+            }
+            /* se a lista desejada for de Multimidia */
+            else if (item instanceof Multimidia) {
+                Multimidia multi = (Multimidia) item;
+                System.out.println("\nInformações do item Multimidia:");
+                System.out.println("\nDescrição do item: " + multi.gettitulo());
+                System.out.println("\nNumero de identiciação da biblioteca: " + multi.getid());
+                System.out.println("\n");
+            }
+            /* se a lista desejada for de Salas de Estudos */
+            else if (item instanceof Sala) {
+                Sala sala = (Sala) item;
+                System.out.println("\nInformações da Sala de Estudos:");
+                System.out.println("\nDescrição da sala: " + sala.getnomeSala());
+                System.out.println("\nNumero de identiciação da sala: " + sala.getidSala());
+                System.out.println("\nLocal da sala: " + sala.getlocalSala());
+                System.out.println("\n");
+            }
+            /* se a lista desejada for de Emprestimos */
+            else if (item instanceof Emprestimo) {
+                Emprestimo emprestimo = (Emprestimo) item;
+                System.out.println("\nInformações sobre o emprestimo:");
+                System.out.println("\nDescrição do item emprestado: " + emprestimo.getMultimidia().gettitulo());
+                System.out.println("\nNome e identificação da pessoa que realizou o emprestimo: " + emprestimo.getpessoa().getnome() + " " + emprestimo.getpessoa().getid());
+                System.out.println("\nNumero de registro do emprestimo: " + emprestimo.getregistro());
+            }
         }
     }
 

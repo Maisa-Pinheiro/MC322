@@ -158,8 +158,8 @@ public class Emprestimo {
         return multimidia;
     }
 
-    public String getpessoa() {
-        return pessoa.getnome();
+    public Pessoa getpessoa() {
+        return pessoa;
     }
 
     public void SetemprestimosSemRepeticao(Emprestimo emprestimo){
