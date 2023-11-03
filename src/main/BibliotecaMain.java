@@ -1363,6 +1363,7 @@ public class BibliotecaMain {
         }
     }
 
+    /*  */
     private static void listaratributosemetodos(Scanner scanner) {
         
         System.out.println("1. Listar atributos");
