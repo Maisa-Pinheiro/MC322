@@ -108,21 +108,23 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         return null;
     }
     @Override
+    /* Chamada metodo reflection para atributos de membros e multimidia */
     public void reflectionatributos(Scanner scanner){
         CReflection reflection = new CReflection();
-        System.out.println("escolha uma opção:");
+        System.out.println("Escolha uma opção:");
         System.out.println("1. listar atributos de Membros");
         System.out.println("2. listar atributos de Multimidia");
         int opcao = scanner.nextInt();
         scanner.nextLine();
-        if(opcao==1){
+        if(opcao == 1){
             reflection.listFields(Pessoa.class);
-        }else if(opcao==2){
+        }else if(opcao == 2){
             reflection.listFields(Multimidia.class);
         }
 
     }
     @Override
+    /* Chamada metodo reflection para metodos de membros e multimidia */
      public void reflectionmetodos(Scanner scanner){
         CReflection reflection = new CReflection();
         System.out.println("escolha uma opção:");
@@ -130,9 +132,9 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         System.out.println("2. listar métodos de Multimidia");
         int opcao = scanner.nextInt();
         scanner.nextLine();
-        if(opcao==1){
+        if(opcao == 1){
             reflection.listMethods(Pessoa.class);
-        }else if(opcao==2){
+        }else if(opcao == 2){
             reflection.listMethods(Multimidia.class);
         }
         

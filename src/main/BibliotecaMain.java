@@ -1363,7 +1363,7 @@ public class BibliotecaMain {
         }
     }
 
-    /*  */
+    /* Implementação para uso do Java Reflection - empressões em tempo de execução do programa */
     private static void listaratributosemetodos(Scanner scanner) {
         
         System.out.println("1. Listar atributos");
@@ -1372,9 +1372,9 @@ public class BibliotecaMain {
         int id = scanner.nextInt();
         scanner.nextLine();
         
-        if(id==1){
+        if(id == 1){
             bibliotecaController.reflectionatributos(scanner);
-        }else if(id==2){
+        }else if(id == 2){
             bibliotecaController.reflectionmetodos(scanner);
         }
         
