@@ -1409,17 +1409,17 @@ public class BibliotecaMain {
     }
 
     private static  void printgenericList(Scanner scanner){
-        CReflection reflection = new CReflection();
+        //CReflection reflection = new CReflection();
         System.out.println("1. listar Membros");
         System.out.println("2. listar Multimidia");
         System.out.println("Escolha uma opção:");
         int opcao = scanner.nextInt();
         scanner.nextLine();
         if(opcao == 1){
-            reflection.printListaGenerica(membroController.listarMembros());
+            CReflection.printListaGenerica(membroController.listarMembros());
         }else if(opcao == 2){
 
-            reflection.printListaGenerica(bibliotecaController.consultarItensDisponiveis());
+            CReflection.printListaGenerica(bibliotecaController.consultarItensDisponiveis());
         }
     }
 
