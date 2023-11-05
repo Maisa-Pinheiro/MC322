@@ -107,41 +107,40 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         }
         return null;
     }
+
     @Override
     /* Chamada metodo reflection para atributos de membros e multimidia */
-    public void reflectionatributos(Scanner scanner){
+    public void reflectionatributos(Scanner scanner) {
         CReflection reflection = new CReflection();
         System.out.println("Escolha uma opção:");
         System.out.println("1. listar atributos de Membros");
         System.out.println("2. listar atributos de Multimidia");
         int opcao = scanner.nextInt();
         scanner.nextLine();
-        if(opcao == 1){
+        if (opcao == 1) {
             reflection.listFields(Pessoa.class);
-        }else if(opcao == 2){
+        } else if (opcao == 2) {
             reflection.listFields(Multimidia.class);
         }
 
     }
+
     @Override
     /* Chamada metodo reflection para metodos de membros e multimidia */
-     public void reflectionmetodos(Scanner scanner){
+    public void reflectionmetodos(Scanner scanner) {
         CReflection reflection = new CReflection();
         System.out.println("escolha uma opção:");
         System.out.println("1. listar métodos de Membros");
         System.out.println("2. listar métodos de Multimidia");
         int opcao = scanner.nextInt();
         scanner.nextLine();
-        if(opcao == 1){
+        if (opcao == 1) {
             reflection.listMethods(Pessoa.class);
-        }else if(opcao == 2){
+        } else if (opcao == 2) {
             reflection.listMethods(Multimidia.class);
         }
-    
-    }
 
-    
-    
+    }
 
     @Override
     public void emprestarItem(Pessoa membro, Multimidia item) throws BloqueioMembroException {
@@ -236,7 +235,8 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                 /* se a capacidade maxima de pessoas para a sala for atingida */
                 if (pessoas >= capaciadade) {
                     System.out.println("\n");
-                    throw new ReservaSalaException("O número de pessoas está acima da capacidade máxima da sala, tente outra sala.\n");
+                    throw new ReservaSalaException(
+                            "O número de pessoas está acima da capacidade máxima da sala, tente outra sala.\n");
                 } else {
                     ReservaSala reserva = new ReservaSala(id, data, hora, duracao);
 

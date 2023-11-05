@@ -576,44 +576,40 @@ public class BibliotecaMain {
         switch (tipo) {
             case 1:
 
-            System.out.print("ISBN: ");
-            if (scanner.hasNextLong()) {
-                long isbn = scanner.nextLong();
-                if (isbn >= Long.MIN_VALUE && isbn <= Long.MAX_VALUE) {
-                   // System.out.println("Número longo válido: " + isbn);
+                System.out.print("ISBN: ");
+                if (scanner.hasNextLong()) {
+                    long isbn = scanner.nextLong();
+                    if (isbn >= Long.MIN_VALUE && isbn <= Long.MAX_VALUE) {
+                        // System.out.println("Número longo válido: " + isbn);
 
-                    for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
-                    if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
-                        System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
-                        isbn = scanner.nextLong();
-                        return;
+                        for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
+                            if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
+                                System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
+                                isbn = scanner.nextLong();
+                                return;
+                            }
+
+                            System.out.print("Edição: ");
+                            int edicao = scanner.nextInt();
+                            scanner.nextLine();
+
+                            System.out.print("Local: ");
+                            String local = scanner.nextLine();
+
+                            System.out.print("Estado de Conservação: ");
+                            String estado = scanner.nextLine();
+
+                            novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade,
+                                    copias,
+                                    copiasdisp, isbn, edicao, local, estado, categoriaselecionada);
+
+                        }
+                    } else {
+                        System.out.println("Número longo fora do intervalo aceitável.");
                     }
-
-
-
-                System.out.print("Edição: ");
-                int edicao = scanner.nextInt();
-                scanner.nextLine();
-
-                System.out.print("Local: ");
-                String local = scanner.nextLine();
-
-                System.out.print("Estado de Conservação: ");
-                String estado = scanner.nextLine();
-
-                novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
-                        copiasdisp, isbn, edicao, local, estado, categoriaselecionada);
-
-                }
                 } else {
-                    System.out.println("Número longo fora do intervalo aceitável.");
+                    System.out.println("Entrada inválida. Insira um número longo válido.");
                 }
-            } else {
-                System.out.println("Entrada inválida. Insira um número longo válido.");
-            }
-
-                
-                        
 
                 break;
             case 2:
@@ -1408,17 +1404,16 @@ public class BibliotecaMain {
 
     }
 
-    private static  void printgenericList(Scanner scanner){
-        //CReflection reflection = new CReflection();
+    private static void printgenericList(Scanner scanner) {
+        // CReflection reflection = new CReflection();
         System.out.println("1. listar Membros");
         System.out.println("2. listar Multimidia");
         System.out.println("Escolha uma opção:");
         int opcao = scanner.nextInt();
         scanner.nextLine();
-        if(opcao == 1){
+        if (opcao == 1) {
             CReflection.printListaGenerica(membroController.listarMembros());
-        }else if(opcao == 2){
-
+        } else if (opcao == 2) {
             CReflection.printListaGenerica(bibliotecaController.consultarItensDisponiveis());
         }
     }
