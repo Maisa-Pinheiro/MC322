@@ -103,6 +103,7 @@ abstract public class Multimidia {
     }
     
     
+    
 
     private void inicializarCategoriasDisponiveis() {
         for (Categoria categoria : Categoria.values()) {

@@ -6,6 +6,7 @@ import biblioteca.controllers.*;
 import biblioteca.models.multimidiaPackage.*;
 import biblioteca.models.pessoasPackage.*;
 import biblioteca.models.pessoasPackage.Pessoa.Perfil;
+import biblioteca.models.CReflectionPackage.CReflection;
 import biblioteca.models.comentariosPackage.*;
 import biblioteca.models.equipamentosPackage.*;
 import biblioteca.models.equipamentosPackage.Equipamentos.AudioVisual;
@@ -245,6 +246,7 @@ public class BibliotecaMain {
                 case 1:
                     List<Pessoa> membros = membroController.listarMembros();
                     membroView.mostrarListaMembros(membros);
+
                     break;
                 case 2:
                     adicionarMembro(scanner);
@@ -274,7 +276,9 @@ public class BibliotecaMain {
             System.out.println("5. Gerar Estatísticas de Uso por Perfil de Membro");
             System.out.println("6. Gerar Relatório de Itens Mais Populares");
             System.out.println("7. Listar Atributos e métodos");
-            System.out.println("8.Voltar");
+            System.out.println("8. Imprimir lista genérica");
+            System.out.println("9. Invocar método");
+            System.out.println("10. Voltar");
             System.out.println();
             System.out.println();
             System.out.print("Escolha uma opção: ");
@@ -305,6 +309,12 @@ public class BibliotecaMain {
                     listaratributosemetodos(scanner);
                     break;
                 case 8:
+                    printgenericList(scanner);
+                    break;
+                case 9:
+                    relatorioController.chamarmetodo(scanner, bibliotecaController, membroController);
+                    break;
+                case 10:
                     return;
                 default:
                     System.out.println("Opção inválida. Por favor, escolha novamente.");
@@ -566,16 +576,20 @@ public class BibliotecaMain {
         switch (tipo) {
             case 1:
 
-                System.out.print("ISBN: ");
+            System.out.print("ISBN: ");
+            if (scanner.hasNextLong()) {
                 long isbn = scanner.nextLong();
+                if (isbn >= Long.MIN_VALUE && isbn <= Long.MAX_VALUE) {
+                   // System.out.println("Número longo válido: " + isbn);
 
-                for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
+                    for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
                     if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
                         System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
                         isbn = scanner.nextLong();
                         return;
                     }
-                }
+
+
 
                 System.out.print("Edição: ");
                 int edicao = scanner.nextInt();
@@ -589,6 +603,17 @@ public class BibliotecaMain {
 
                 novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
                         copiasdisp, isbn, edicao, local, estado, categoriaselecionada);
+
+                }
+                } else {
+                    System.out.println("Número longo fora do intervalo aceitável.");
+                }
+            } else {
+                System.out.println("Entrada inválida. Insira um número longo válido.");
+            }
+
+                
+                        
 
                 break;
             case 2:
@@ -1381,6 +1406,21 @@ public class BibliotecaMain {
             bibliotecaController.reflectionmetodos(scanner);
         }
 
+    }
+
+    private static  void printgenericList(Scanner scanner){
+        CReflection reflection = new CReflection();
+        System.out.println("1. listar Membros");
+        System.out.println("2. listar Multimidia");
+        System.out.println("Escolha uma opção:");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        if(opcao == 1){
+            reflection.printListaGenerica(membroController.listarMembros());
+        }else if(opcao == 2){
+
+            reflection.printListaGenerica(bibliotecaController.consultarItensDisponiveis());
+        }
     }
 
     private static void removerMembro(Scanner scanner) {

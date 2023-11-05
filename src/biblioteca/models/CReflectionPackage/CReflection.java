@@ -59,16 +59,10 @@ public class CReflection {
     }
 
     /* Utilização do metodo invoke para instanciar um objeto em tempo de execução */
-    public static void invokeMethod(Class<?> classe, String methodName) {
+    public static void invokeMethod(Object objeto, String methodName) {
         try {
-            // Obtém o construtor padrão da classe
-            var construtor = classe.getDeclaredConstructor();
-
-            // Cria uma instância da classe usando o construtor padrão
-            Object objeto = construtor.newInstance();
-
-            // Obtém o método com base no nome fornecido
-            Method method = classe.getDeclaredMethod(methodName);
+             // Obtém o método com base no nome fornecido
+            Method method = objeto.getClass().getDeclaredMethod(methodName);
 
             // Invoca o método no objeto
             method.invoke(objeto);

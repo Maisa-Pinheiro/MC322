@@ -137,8 +137,11 @@ public class BibliotecaControllerImpl implements BibliotecaController {
         }else if(opcao == 2){
             reflection.listMethods(Multimidia.class);
         }
-        
+    
     }
+
+    
+    
 
     @Override
     public void emprestarItem(Pessoa membro, Multimidia item) throws BloqueioMembroException {
