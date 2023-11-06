@@ -72,7 +72,7 @@ public class BibliotecaMain {
             System.out.println("4 - Usuário Externo");
             System.out.println();
             System.out.println();
-            System.out.print("Selecione o seu perfil: ");
+            System.out.print("Selecione o seu perfil: (para testes favor escolher 3)");
             idPerfil = scanner.nextInt();
             scanner.nextLine();
 
@@ -82,11 +82,11 @@ public class BibliotecaMain {
             try {
                 /* login do membro */
                 /* e-mail do membro */
-                System.out.print("E-mail: ");
+                System.out.print("E-mail: (para testes favor inserir adm@dac.unicamp.br)");
                 String emailLogin = scanner.nextLine();
 
                 /* senha do membro */
-                System.out.print("Senha: ");
+                System.out.print("Senha:(para testes favor inserir 1234) ");
                 int senhaLogin = scanner.nextInt();
                 scanner.nextLine();
 
@@ -577,17 +577,18 @@ public class BibliotecaMain {
             case 1:
 
                 System.out.print("ISBN: ");
+                long isbn;
                 if (scanner.hasNextLong()) {
-                    long isbn = scanner.nextLong();
-                    if (isbn >= Long.MIN_VALUE && isbn <= Long.MAX_VALUE) {
-                        // System.out.println("Número longo válido: " + isbn);
-
-                        for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
-                            if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
-                                System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
-                                isbn = scanner.nextLong();
-                                return;
+                   isbn = scanner.nextLong();
+                        if(Multimidia.listarItens()!= null){
+                            for (Multimidia item : Multimidia.listarItens()) {
+                                if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
+                                    System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
+                                    isbn = scanner.nextLong();
+                                    return;
+                                }
                             }
+                        }
 
                             System.out.print("Edição: ");
                             int edicao = scanner.nextInt();
@@ -602,11 +603,11 @@ public class BibliotecaMain {
                             novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade,
                                     copias,
                                     copiasdisp, isbn, edicao, local, estado, categoriaselecionada);
+                            bibliotecaController.addItemDisponivel(novoItem);
 
-                        }
-                    } else {
-                        System.out.println("Número longo fora do intervalo aceitável.");
-                    }
+                        
+                    
+                    
                 } else {
                     System.out.println("Entrada inválida. Insira um número longo válido.");
                 }
@@ -628,6 +629,7 @@ public class BibliotecaMain {
 
                 novoItem = new LivroEletronico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
                         copiasdisp, formato, stringurl, requisitos, data, categoriaselecionada);
+                bibliotecaController.addItemDisponivel(novoItem);
 
                 break;
             case 3:
@@ -644,6 +646,7 @@ public class BibliotecaMain {
 
                 novoItem = new CD_Audio(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,
                         faixas, duration, estadocon, categoriaselecionada);
+                bibliotecaController.addItemDisponivel(novoItem);
                 break;
             case 4:
                 System.out
@@ -662,6 +665,7 @@ public class BibliotecaMain {
 
                 novoItem = new DVD_Video(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
                         copiasdisp, elenco, durationdvd, legenda, estadocons, categoriaselecionada);
+                bibliotecaController.addItemDisponivel(novoItem);
                 break;
             case 5:
                 System.out.print("Local: ");
@@ -678,13 +682,14 @@ public class BibliotecaMain {
 
                 novoItem = new Outros(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,
                         tipoitem, formatooutro, localoutro, estadoc, categoriaselecionada);
+                bibliotecaController.addItemDisponivel(novoItem);
                 break;
             default:
                 System.out.println("Tipo de item inválido. Nenhum item adicionado.");
                 return;
         }
 
-        bibliotecaController.addItemDisponivel(novoItem);
+        
         System.out.println("Novo item adicionado com sucesso!");
     }
 

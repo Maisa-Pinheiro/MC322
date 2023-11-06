@@ -11,6 +11,7 @@ public class MembroControllerImpl implements MembroController {
     public MembroControllerImpl() {
         membros = new ArrayList<>();
     }
+    
 
     @Override
     public List<Pessoa> listarMembros() {
@@ -26,6 +27,8 @@ public class MembroControllerImpl implements MembroController {
         }
         return null; // Retorna null se a pessoa não for encontrada
     }
+
+
 
 
     /* função para remover membro da lista de membros */

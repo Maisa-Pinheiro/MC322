@@ -59,16 +59,17 @@ public class CReflection {
     }
 
     /* Utilização do metodo invoke para instanciar um objeto em tempo de execução */
-    public static void invokeMethod(Object objeto, String methodName) {
+    public Object invokeMethod(Object objeto, String methodName) {
         try {
-             // Obtém o método com base no nome fornecido
+            // Obtém o método com base no nome fornecido
             Method method = objeto.getClass().getDeclaredMethod(methodName);
-
-            // Invoca o método no objeto
-            method.invoke(objeto);
-
+    
+            // Invoca o método no objeto e retorna o resultado
+            return method.invoke(objeto);
+    
         } catch (Exception e) {
             e.printStackTrace();
+            return null; // Você pode retornar um valor padrão ou null em caso de erro
         }
     }
 
@@ -117,3 +118,5 @@ public class CReflection {
     }
 
 }
+
+

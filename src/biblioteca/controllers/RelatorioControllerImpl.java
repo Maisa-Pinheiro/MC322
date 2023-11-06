@@ -46,30 +46,42 @@ public class RelatorioControllerImpl implements RelatorioController {
         throw new UnsupportedOperationException("Unimplemented method 'gerarRelatorioItensPopulares'");
     }
     @Override
-    public void chamarmetodo(Scanner scanner, BibliotecaController biblioteca, MembroController membro){
-        CReflection reflection = new CReflection();
-        System.out.println("Escolha uma classe:");
-        System.out.println("1.Membros");
-        System.out.println("2.Multimidia");
-        int opcao = scanner.nextInt();
-        scanner.nextLine();
-        if(opcao == 1){
-            System.out.println("Escolha um método:");
-            reflection.listMethods(Pessoa.class);
-            String metodo = scanner.nextLine();
-            List<Multimidia> lista = biblioteca.consultarItensDisponiveis();
+    public void chamarmetodo(Scanner scanner, BibliotecaController biblioteca, MembroController membro) {
+    CReflection reflection = new CReflection();
+    System.out.println("Escolha uma classe:");
+    System.out.println("1.Multimidia");
+    System.out.println("2.Membros");
+    int opcao = scanner.nextInt();
+    scanner.nextLine();
+    if (opcao == 1) {
+        System.out.println("Escolha um método:");
+        List<Multimidia> lista = biblioteca.consultarItensDisponiveis();
+        if (!lista.isEmpty()) {
             Object objeto = lista.get(0);
-            reflection.invokeMethod(objeto, metodo);
-            
-        }else if(opcao == 2){
-            System.out.println("Escolha um método:");
-            reflection.listMethods(Multimidia.class);
+            reflection.listMethods(objeto.getClass()); // Obtém a classe do primeiro elemento da lista
             String metodo = scanner.nextLine();
-            List<Pessoa> lista= membro.listarMembros();
-            Object objeto = lista.get(0);
-            reflection.invokeMethod(objeto,metodo);
+            Object resultado = reflection.invokeMethod(objeto, metodo);
+            System.out.println("Resultado do método: " + resultado); // Exibe o resultado
+        } else {
+            System.out.println("A lista de itens multimídia está vazia.");
         }
-
+    } else if (opcao == 2) {
+        System.out.println("Escolha um método:");
+        List<Pessoa> lista = membro.listarMembros();
+        if (!lista.isEmpty()) {
+            Object objeto = lista.get(0);
+            reflection.listMethods(objeto.getClass()); // Obtém a classe do primeiro elemento da lista
+            String metodo = scanner.nextLine();
+            Object resultado = reflection.invokeMethod(objeto, metodo);
+            System.out.println("Resultado do método: " + resultado); // Exibe o resultado
+        } else {
+            System.out.println("A lista de membros está vazia.");
+        }
     }
+}
+
+    
+    
+    
     // Lógica para geração de relatórios
 }

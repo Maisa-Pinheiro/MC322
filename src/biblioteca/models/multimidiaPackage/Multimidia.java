@@ -6,12 +6,17 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+
 import biblioteca.models.renovacaoReservaPackage.Renovacao;
 import biblioteca.models.comentariosPackage.Comentario;
 import biblioteca.models.emprestimoPackage.Emprestimo;
+import biblioteca.models.pessoasPackage.Pessoa;
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
 abstract public class Multimidia {
+
 
     public enum Categoria {
         POESIA, ROMANCE, ACAO, FICCAO, FANTASIA // mais categorias serão adicionadas posteriormente
@@ -31,6 +36,7 @@ abstract public class Multimidia {
     private int numCopias; // número de cópias que tem esse item
     public int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
     private Map<Integer, Multimidia> mapMultimidia;
+    private static List<Multimidia> listaMultimidia;
     private List<Comentario> comentarios; // comentários de usuários a respeito da obra
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
@@ -60,6 +66,9 @@ abstract public class Multimidia {
         this.reservas = new LinkedList<>();
         this.categoria = categoria;
         inicializarCategoriasDisponiveis();
+        if (listaMultimidia == null) {
+            Multimidia.listaMultimidia = new ArrayList<>();
+        }
         this.dano = false;
     }
 
@@ -106,6 +115,7 @@ abstract public class Multimidia {
     
 
     private void inicializarCategoriasDisponiveis() {
+        categoriasDisponiveis = new HashSet<>(); 
         for (Categoria categoria : Categoria.values()) {
             categoriasDisponiveis.add(categoria);
         }
@@ -186,5 +196,50 @@ abstract public class Multimidia {
     public void addNovaMultimidia(int id, Multimidia multimidia) {
         mapMultimidia.put(id, multimidia);
     }
+
+    /* Metodo para adicionar pessoa a lista */
+    public static void addmultimidia(Multimidia item) {
+        int id = item.getid();
+        for (Multimidia itemm : listaMultimidia) {
+            if (itemm.getid() == id) {
+                System.out.println(
+                        "Erro: Não é possivel adicionar este item, já existe um item com o mesmo ID");
+                return;
+            }
+        }
+        listaMultimidia.add(item);
+    }
+
+    public static List<Multimidia> listarItens() {
+        return listaMultimidia;
+    }
+
+    
+    public Multimidia buscaItemporID(int id) {
+        for (Multimidia item : listaMultimidia) {
+            if (item.getid() == id) {
+                return item; /* Se encontrar, retona o item*/
+            }
+        }
+        return null; /* Se não encontrar, retona NULL */
+    }
+
+    /* Metodo para remover da lista */
+    public static void removerItemLista(int id) {
+        /* cirando um iterador para percorrer a lista */
+        Iterator<Multimidia> iterator = listaMultimidia.iterator();
+        /* enquanto o interador tiver um próximo (não chegou ao fim da lista) */
+        while (iterator.hasNext()) {
+            Multimidia item = iterator.next();
+            if (item.getid() == id) {
+                iterator.remove();
+                System.out.println("Item com ID: " + id + " foi removido com sucesso.\n");
+                return;
+            }
+        }
+        System.out.println("Item com ID " + id + " não encontrado na lista.");
+    }
+
+
 
 }

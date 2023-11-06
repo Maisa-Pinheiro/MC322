@@ -43,6 +43,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     private void inicializarCategorias() {
         for (Multimidia item : itens) {
             categoriasusadas.add(item.getcategoria());
+
         }
     }
 
@@ -53,7 +54,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     @Override
     public List<Multimidia> consultarItensDisponiveis() {
-        return itens;
+        return Multimidia.listarItens();
     }
 
     @Override
@@ -63,17 +64,20 @@ public class BibliotecaControllerImpl implements BibliotecaController {
 
     @Override
     public void addItemDisponivel(Multimidia item) {
+        Multimidia.addmultimidia(item);
         itens.add(item);
     }
 
     @Override
     public void removerItemDispoinvel(int id) {
+        
         for (Multimidia item : itens) {
             if (id == item.getid()) {
                 item = null;
                 itens.remove(item);
             }
         }
+        Multimidia.removerItemLista(id);
     }
 
     @Override
