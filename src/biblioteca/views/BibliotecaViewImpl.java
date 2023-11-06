@@ -8,6 +8,7 @@ import biblioteca.models.multimidiaPackage.Multimidia;
 public class BibliotecaViewImpl implements BibliotecaView {
     private BibliotecaController bibliotecaController;
 
+
     public BibliotecaViewImpl(BibliotecaController controller) {
         bibliotecaController = controller;
     }
@@ -15,8 +16,10 @@ public class BibliotecaViewImpl implements BibliotecaView {
     @Override
     public void mostrarItensDisponiveis(List<Multimidia> itens) {
         for (Multimidia item : itens) {
+            System.out.println("\nLista de itens da biblioteca: \n");
             System.out.println("Título: " + item.gettitulo() + ", ID: " + item.getid()); 
         }
+        System.out.println("-------------------------------------------------------------------------------------\n");
     }
 
     @Override
