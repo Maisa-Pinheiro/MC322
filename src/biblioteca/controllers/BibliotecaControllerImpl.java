@@ -53,18 +53,19 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public List<Multimidia> consultarItensDisponiveis() {
-        return Multimidia.listarItens();
+    public List<Multimidia> consultarItensDisponiveis(){
+        return itens;
     }
 
     @Override
-    public void addemprestimo(Emprestimo emprestimo) {
+    public void addemprestimo(Emprestimo emprestimo, RelatorioController relatorio) {
         emprestimos.add(emprestimo);
+        relatorio.addhistorico(emprestimo);
+
     }
 
     @Override
     public void addItemDisponivel(Multimidia item) {
-        Multimidia.addmultimidia(item);
         itens.add(item);
     }
 
@@ -77,7 +78,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                 itens.remove(item);
             }
         }
-        Multimidia.removerItemLista(id);
+        
     }
 
     @Override
@@ -147,7 +148,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public void emprestarItem(Pessoa membro, Multimidia item) throws BloqueioMembroException {
+    public void emprestarItem(Pessoa membro, Multimidia item, RelatorioController relatorio) throws BloqueioMembroException {
 
         Boolean liberado = membro.getpodeemprestar();
 
@@ -162,7 +163,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
             membro.novoEmprestimo(emprestimo);
             emprestimo.SetemprestimosSemRepeticao(emprestimo); // set para garantir que um item não seja emprestado para
                                                                // dois membros ao mesmo tempo.
-            addemprestimo(emprestimo);
+            addemprestimo(emprestimo, relatorio);
             System.out.println("O item foi emprestado com sucesso.");
         } else {
             throw new IllegalArgumentException("o item não está disponível no momento");
@@ -268,7 +269,7 @@ public class BibliotecaControllerImpl implements BibliotecaController {
     }
 
     @Override
-    public void devolverItem(Pessoa membro, Multimidia item, boolean dano) throws BloqueioMembroException {
+    public void devolverItem(Pessoa membro, Multimidia item, boolean dano, RelatorioController relatorio) throws BloqueioMembroException {
         boolean emprestado = false;
 
         // Verifique se o item está na lista de empréstimos da pessoa
@@ -315,10 +316,10 @@ public class BibliotecaControllerImpl implements BibliotecaController {
                                     throw new ItemDanificadoException(
                                             "O item está danificado e não pode ser emprestado.");
                                 } else {
-                                    emprestarItem(item.getreservas().get(0).getpessoa(), item);
+                                    emprestarItem(item.getreservas().get(0).getpessoa(), item, relatorio);
                                 }
                             } else {
-                                emprestarItem(item.getreservas().get(0).getpessoa(), item);
+                                emprestarItem(item.getreservas().get(0).getpessoa(), item, relatorio);
                             }
                         } catch (BloqueioMembroException e) {
                             System.out.println("Erro ao emprestar o item: " + e.getMessage());

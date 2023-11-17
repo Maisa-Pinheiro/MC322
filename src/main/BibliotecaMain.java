@@ -382,7 +382,7 @@ public class BibliotecaMain {
 
         try {
             bibliotecaController.emprestarItem(membroController.buscarMembroPorIdentificacao(iduser),
-                    bibliotecaController.retornaritem(iditem));
+                    bibliotecaController.retornaritem(iditem), relatorioController);
         } catch (BloqueioMembroException e) {
             System.out.println("Erro ao emprestar o item: " + e.getMessage());
         }
@@ -580,8 +580,8 @@ public class BibliotecaMain {
                 long isbn;
                 if (scanner.hasNextLong()) {
                    isbn = scanner.nextLong();
-                        if(Multimidia.listarItens()!= null){
-                            for (Multimidia item : Multimidia.listarItens()) {
+                        if(bibliotecaController.consultarItensDisponiveis()!= null){
+                            for (Multimidia item : bibliotecaController.consultarItensDisponiveis()) {
                                 if (item instanceof LivroFisico && ((LivroFisico) item).getisbn() == isbn) {
                                     System.out.println("Já existe um livro com o mesmo ISBN. Favor inserir um novo.");
                                     isbn = scanner.nextLong();

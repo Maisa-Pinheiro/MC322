@@ -1,14 +1,31 @@
 package biblioteca.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import biblioteca.models.CReflectionPackage.CReflection;
+import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
 import biblioteca.models.pessoasPackage.Pessoa;
 import biblioteca.views.RelatorioView;
 
 public class RelatorioControllerImpl implements RelatorioController {
+    private List<Emprestimo> historicoEmprestimo; 
+
+    public void RelatorioController(){
+        this.historicoEmprestimo = new ArrayList<>();
+    }
+
+    @Override
+    public void addhistorico(Emprestimo emprestimo){
+        historicoEmprestimo.add(emprestimo);
+    }
+
+    @Override
+    public List<Emprestimo> gethistoricoEmprestimo() {
+        return historicoEmprestimo;
+    }
 
     @Override
     public void gerarRelatorioAtividadesMembros(RelatorioView view) {
