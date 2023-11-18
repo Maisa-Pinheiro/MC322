@@ -13,9 +13,9 @@ public class LivroEletronico extends Multimidia {
     public LivroEletronico(String titulo,  String autor, String editora, int anoPublicacao,
             String sinopse, String capa, boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis, String formato, String urlstring, String requisitosLeitura,
-            LocalDate dataDisponibilidade, Categoria categoria) {
+            LocalDate dataDisponibilidade, Categoria categoria, String local) {
         super(titulo,  autor, editora, anoPublicacao, sinopse, capa, disponibilidade,
-                numCopias, numCopiasDisponiveis, categoria);
+                numCopias, numCopiasDisponiveis, categoria, local);
         this.formato = formato;
         try {
             this.url = new URL(urlstring);

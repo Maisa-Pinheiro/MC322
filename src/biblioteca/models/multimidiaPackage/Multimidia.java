@@ -15,7 +15,7 @@ import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.pessoasPackage.Pessoa;
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
-abstract public class Multimidia {
+public class Multimidia {
 
 
     public enum Categoria {
@@ -37,12 +37,13 @@ abstract public class Multimidia {
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
     private boolean dano;
+    private String local;
     private LinkedList<Renovacao> reservas; // lista com a ordem de reservas do livro em questão
     // membros ao mesmo tempo.
 
     public Multimidia(String titulo, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
-            Categoria categoria) {
+            Categoria categoria, String local) {
         if (anoPublicacao < 0 || numCopias < 0 || numCopiasDisponiveis < 0 || numCopiasDisponiveis > numCopias) {
             throw new DadosInvalidosException("Dados de multimídia inválidos.");
         }
@@ -61,6 +62,7 @@ abstract public class Multimidia {
         this.categoria = categoria;
         inicializarCategoriasDisponiveis();
         this.dano = false;
+        this.local = local;
     }
 
     public void settitulo(String titulo){
@@ -79,6 +81,9 @@ abstract public class Multimidia {
     }
     public void seteditora(String editora){
         this.editora = editora;
+    }
+    public void setlocal(String local){
+        this.local = local;
     }
     public void setanoPublicacao(int anoPublicacao){
         this.anoPublicacao = anoPublicacao;

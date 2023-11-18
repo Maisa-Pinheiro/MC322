@@ -8,7 +8,6 @@ import java.util.Set;
 public class LivroFisico extends Multimidia {
     private long isbn; // International Standard Book Number
     private int edicao;
-    private String local; // localização do livro (estante e prateleira)
     private String estadoConsevacao; // estado de conservação do livro físico
 
     // Mantenha um conjunto de ISBNs já utilizados
@@ -16,9 +15,9 @@ public class LivroFisico extends Multimidia {
 
     public LivroFisico(String titulo,  String autor, String editora, int anoPublicacao,
             String sinopse, String capa, boolean disponibilidade, int numCopias,
-            int numCopiasDisponiveis, long isbn, int edicao, String local, String estadoConsevacao, Categoria categoria) {
+            int numCopiasDisponiveis, long isbn, int edicao, String estadoConsevacao, Categoria categoria, String local) {
         super(titulo,  autor, editora, anoPublicacao, sinopse, capa, disponibilidade,
-                numCopias, numCopiasDisponiveis, categoria);
+                numCopias, numCopiasDisponiveis, categoria, local);
 
         // Verifique se o ISBN já está em uso
         if (isbnsUtilizados.contains(isbn)) {
@@ -30,7 +29,6 @@ public class LivroFisico extends Multimidia {
         this.isbn = isbn;
         this.edicao = edicao;
         this.edicao = edicao;
-        this.local = local;
         this.estadoConsevacao = estadoConsevacao;
     }
 
@@ -49,14 +47,7 @@ public class LivroFisico extends Multimidia {
     public void setedicao(int edicao){
         this.edicao = edicao;
     }
-    
-    public String getlocal() {
-        return local;
-    }
 
-    public void setlocal(String local){
-        this.local = local;
-    }
 
     public String getestadoConsevacao() {
         return estadoConsevacao;

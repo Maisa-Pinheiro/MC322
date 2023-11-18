@@ -558,7 +558,11 @@ public class BibliotecaMain {
         System.out.print("Categoria(somente letras maiúsculas): ");
         String categoriauser = scanner.nextLine();
         Multimidia.Categoria categoriaselecionada = null;
-        ;
+        
+
+        System.out.print("Local de Armazenagem(para livros eletrônicos considerar N/A): ");
+        String local= scanner.nextLine();
+        
 
         for (Multimidia.Categoria categoria : Multimidia.Categoria.values()) {
             if (categoria.name().equals(categoriauser)) {
@@ -594,15 +598,13 @@ public class BibliotecaMain {
                             int edicao = scanner.nextInt();
                             scanner.nextLine();
 
-                            System.out.print("Local: ");
-                            String local = scanner.nextLine();
 
                             System.out.print("Estado de Conservação: ");
                             String estado = scanner.nextLine();
 
                             novoItem = new LivroFisico(titulo, autor, editora, ano, sinopse, capa, disponibilidade,
                                     copias,
-                                    copiasdisp, isbn, edicao, local, estado, categoriaselecionada);
+                                    copiasdisp, isbn, edicao, estado, categoriaselecionada,local);
                             bibliotecaController.addItemDisponivel(novoItem);
 
                         
@@ -628,7 +630,7 @@ public class BibliotecaMain {
                 String requisitos = scanner.nextLine();
 
                 novoItem = new LivroEletronico(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
-                        copiasdisp, formato, stringurl, requisitos, data, categoriaselecionada);
+                        copiasdisp, formato, stringurl, requisitos, data, categoriaselecionada,local);
                 bibliotecaController.addItemDisponivel(novoItem);
 
                 break;
@@ -645,7 +647,7 @@ public class BibliotecaMain {
                 String estadocon = scanner.nextLine();
 
                 novoItem = new CD_Audio(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,
-                        faixas, duration, estadocon, categoriaselecionada);
+                        faixas, duration, estadocon, categoriaselecionada, local);
                 bibliotecaController.addItemDisponivel(novoItem);
                 break;
             case 4:
@@ -664,26 +666,13 @@ public class BibliotecaMain {
                 String legenda = scanner.nextLine();
 
                 novoItem = new DVD_Video(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias,
-                        copiasdisp, elenco, durationdvd, legenda, estadocons, categoriaselecionada);
+                        copiasdisp, elenco, durationdvd, legenda, estadocons, categoriaselecionada,local);
                 bibliotecaController.addItemDisponivel(novoItem);
                 break;
             case 5:
-                System.out.print("Local: ");
-                String localoutro = scanner.nextLine();
-
-                System.out.print("Formato: ");
-                String formatooutro = scanner.nextLine();
-
-                System.out.print("Tipo: ");
-                String tipoitem = scanner.nextLine();
-
-                System.out.print("Estado de Conservação: ");
-                String estadoc = scanner.nextLine();
-
-                novoItem = new Outros(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp,
-                        tipoitem, formatooutro, localoutro, estadoc, categoriaselecionada);
-                bibliotecaController.addItemDisponivel(novoItem);
+                novoItem = new Multimidia(titulo, autor, editora, ano, sinopse, capa, disponibilidade, copias, copiasdisp, categoriaselecionada, local);
                 break;
+            
             default:
                 System.out.println("Tipo de item inválido. Nenhum item adicionado.");
                 return;
@@ -701,7 +690,7 @@ public class BibliotecaMain {
 
         System.out.println("Selecione o que deseja editar:");
         System.out.println(
-                "1- título, 2- autor, 3- editora, 4- ano de publicação, 5- sinopse, 6- capa, 7- disponibilidade, 8- numero de cópias, 9 - numero de cópias disponíveis, 10 - categoria, 11- outro");
+                "1- título, 2- autor, 3- editora, 4- ano de publicação, 5- sinopse, 6- capa, 7- disponibilidade, 8- numero de cópias, 9 - numero de cópias disponíveis, 10 - categoria, 11 -Local");
         int opcao = scanner.nextInt();
         scanner.nextLine();
 
@@ -780,172 +769,9 @@ public class BibliotecaMain {
 
                 break;
             case 11:
-                if (bibliotecaController.retornaritem(id) instanceof LivroFisico) {
-                    System.out.println("Este item é um Livro Físico. Selecione o que deseja editar:");
-                    System.out.println("1- ISBN, 2- Edição, 3- Local, 4- Estado de conservação");
-                    int opcao1 = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (opcao1) {
-                        case 1:
-                            System.out.println("Insira o novo ISBN.");
-                            int isbn = scanner.nextInt();
-                            scanner.nextLine();
-                            ((LivroFisico) bibliotecaController.retornaritem(id)).setisbn(isbn);
-                            break;
-                        case 2:
-                            System.out.println("Insira a nova Edição.");
-                            int edicao = scanner.nextInt();
-                            scanner.nextLine();
-                            ((LivroFisico) bibliotecaController.retornaritem(id)).setedicao(edicao);
-                            break;
-                        case 3:
-                            System.out.println("Insira o novo local.");
-                            String local = scanner.nextLine();
-                            ((LivroFisico) bibliotecaController.retornaritem(id)).setlocal(local);
-                            break;
-                        case 4:
-                            System.out.println("Insira o estado de conservação.");
-                            String estado = scanner.nextLine();
-                            ((LivroFisico) bibliotecaController.retornaritem(id)).setestadoConservacao(estado);
-                            break;
-                        default:
-                            System.out.println("Opção inválida, item não editado");
-                            return;
-                    }
-
-                } else if (bibliotecaController.retornaritem(id) instanceof LivroEletronico) {
-                    System.out.println("Este item é um Livro Eletrônico. Selecione o que deseja editar:");
-                    System.out.println("1- URL, 2- Formato, 3- Requisitos de leituta, 4 - Data de disponibilidade:");
-                    int opcao2 = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (opcao2) {
-                        case 1:
-                            System.out.println("Insira a nova URL.");
-                            String stringurl = scanner.nextLine();
-                            try {
-                                URL url = new URL(stringurl);
-                                ((LivroEletronico) bibliotecaController.retornaritem(id)).setUrl(url);
-
-                            } catch (MalformedURLException e) {
-
-                                System.err.println("A URL fornecida é inválida.");
-                                e.printStackTrace();
-                            }
-                            break;
-                        case 2:
-                            System.out.println("Insira o novo formato.");
-                            String formato = scanner.nextLine();
-                            ((LivroEletronico) bibliotecaController.retornaritem(id)).setformato(formato);
-                            break;
-                        case 3:
-                            System.out.println("Insira os novos requisitos de leitura.");
-                            String requisitos = scanner.nextLine();
-                            ((LivroEletronico) bibliotecaController.retornaritem(id)).setrequisitosLeitura(requisitos);
-                            break;
-                        case 4:
-                            System.out.println("Insira a nova data de disponibilidade (Formato: ano-mês-dia).");
-                            String dataString = scanner.nextLine();
-                            LocalDate data = LocalDate.parse(dataString);
-                            ((LivroEletronico) bibliotecaController.retornaritem(id)).setDataDisponibilidade(data);
-                            break;
-                        default:
-                            System.out.println("Opção inválida, item não editado");
-                            return;
-                    }
-                } else if (bibliotecaController.retornaritem(id) instanceof CD_Audio) {
-                    System.out.println("Este item é um CD. Selecione o que deseja editar");
-                    System.out.println("1- Lista de faixas, 2- Duração, 3- Estado de conservação");
-                    int opcao1 = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (opcao1) {
-                        case 1:
-                            System.out.println("Insira a nova lista de faixas.");
-                            String lista = scanner.nextLine();
-                            ((CD_Audio) bibliotecaController.retornaritem(id)).setlistaFaixas(lista);
-                            break;
-                        case 2:
-                            System.out.println(
-                                    "Insira a nova duração.(formato: PT10H30M ='10h e 30 min', inserindo a quantidade de tempo correta) ");
-                            String durationinput = scanner.nextLine();
-                            Duration durationcd = Duration.parse(durationinput);
-                            ((CD_Audio) bibliotecaController.retornaritem(id)).setDuracao(durationcd);
-                            break;
-                        case 3:
-                            System.out.println("Insira o novo estado de conservação.");
-                            String estadoc = scanner.nextLine();
-                            ((CD_Audio) bibliotecaController.retornaritem(id)).setestadoConservacao(estadoc);
-                            break;
-                        default:
-                            System.out.println("Opção inválida, item não editado");
-                            return;
-                    }
-                } else if (bibliotecaController.retornaritem(id) instanceof DVD_Video) {
-                    System.out.println("Este item é um DVD. Selecione o que deseja editar");
-                    System.out.println("1- Elenco, 2- Duração, 3- Legendas, 4- Estado de conservação");
-                    int opcao1 = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (opcao1) {
-                        case 1:
-                            System.out.println("Insira o novo elenco.");
-                            String elenco = scanner.nextLine();
-                            ((DVD_Video) bibliotecaController.retornaritem(id)).setelenco(elenco);
-                            break;
-                        case 2:
-                            System.out.println(
-                                    "Insira a nova Duracao(formato: PT10H30M ='10h e 30 min', inserindo a quantidade de tempo correta) .");
-                            String duration = scanner.nextLine();
-                            Duration durationdvd = Duration.parse(duration);
-                            ((DVD_Video) bibliotecaController.retornaritem(id)).setDuracao(durationdvd);
-                            ;
-                            break;
-                        case 3:
-                            System.out.println("Insira as novas opções de legenda.");
-                            String legenda = scanner.nextLine();
-                            ((DVD_Video) bibliotecaController.retornaritem(id)).setlegendasAudio(legenda);
-                            break;
-                        case 4:
-                            System.out.println("Insira o novo estado de conservação.");
-                            String estadocon = scanner.nextLine();
-                            ((DVD_Video) bibliotecaController.retornaritem(id)).setestadoConservacao(estadocon);
-                            break;
-                        default:
-                            System.out.println("Opção inválida, item não editado");
-                            return;
-                    }
-                } else if (bibliotecaController.retornaritem(id) instanceof Outros) {
-                    System.out
-                            .println("Este item não se encaixa nas opções anteriores. Selecione o que deseja editar: ");
-                    System.out.println("1- Tipo, 2- Formato, 3- Local, 4- Estado de Conservação");
-                    int opcao1 = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (opcao1) {
-                        case 1:
-                            System.out.println("Insira o novo tipo.");
-                            String tipo = scanner.nextLine();
-                            ((Outros) bibliotecaController.retornaritem(id)).settipo(tipo);
-                            break;
-                        case 2:
-                            System.out.println("Insira o novo formato.");
-                            String formatooutro = scanner.nextLine();
-                            ((Outros) bibliotecaController.retornaritem(id)).setformato(formatooutro);
-                            break;
-                        case 3:
-                            System.out.println("Insira o novo local.");
-                            String localoutro = scanner.nextLine();
-                            ((Outros) bibliotecaController.retornaritem(id)).setlocal(localoutro);
-                            break;
-                        case 4:
-                            System.out.println("Insira o estado de conservação.");
-                            String estadooutro = scanner.nextLine();
-                            ((Outros) bibliotecaController.retornaritem(id)).setestadoConservacao(estadooutro);
-                            break;
-                        default:
-                            System.out.println("Opção inválida, item não editado");
-                            return;
-                    }
-                } else {
-                    System.out.println("Erro, verifique se o múmero do id está correto.");
-                }
+                System.out.println("Insira o novo local de armazenamento do item.");
+                String local= scanner.nextLine();
+                bibliotecaController.retornaritem(id).setlocal(local);
                 break;
             default:
                 System.out.println("Opção inválida, nenhum item editado");
