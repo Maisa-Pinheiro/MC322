@@ -27,6 +27,7 @@ import java.util.Scanner;
 public interface BibliotecaController {
     List<Multimidia> consultarItensDisponiveis();
 
+    
     void emprestarItem(Pessoa membro, Multimidia item, RelatorioController relatorio) throws BloqueioMembroException;
 
     void reflectionatributos(Scanner scanner);
