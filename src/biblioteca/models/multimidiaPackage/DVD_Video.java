@@ -11,9 +11,9 @@ public class DVD_Video extends Multimidia {
      public DVD_Video(String titulo,  String autor, String editora, int anoPublicacao,
             String sinopse, String capa,  boolean disponibilidade, int numCopias,
             int numCopiasDisponiveis,
-            String elenco, Duration duracao, String legendasAudio, String estadoConservacao, Categoria categoria) {
+            String elenco, Duration duracao, String legendasAudio, String estadoConservacao, Categoria categoria, String local) {
         super(titulo,  autor, editora, anoPublicacao, sinopse, capa, disponibilidade,
-                numCopias, numCopiasDisponiveis, categoria);
+                numCopias, numCopiasDisponiveis, categoria, local);
         if (numCopias < 0 || numCopiasDisponiveis < 0 || numCopiasDisponiveis > numCopias) {
             throw new DadosInvalidosException("Dados de DVD de vídeo inválidos.");
         }

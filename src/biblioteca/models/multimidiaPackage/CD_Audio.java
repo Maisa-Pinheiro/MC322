@@ -9,8 +9,8 @@ public class CD_Audio extends Multimidia {
 
     public CD_Audio(String titulo,  String autor, String editora, int anoPublicacao,
             String sinopse, String capa, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
-            String listaFaixas, Duration duracao, String estadoConservacao, Categoria categoria) {
-        super(titulo,  autor, editora, anoPublicacao, sinopse, capa, disponibilidade, numCopias, numCopiasDisponiveis, categoria);
+            String listaFaixas, Duration duracao, String estadoConservacao, Categoria categoria, String local) {
+        super(titulo,  autor, editora, anoPublicacao, sinopse, capa, disponibilidade, numCopias, numCopiasDisponiveis, categoria, local);
         if (numCopias < 0 || numCopiasDisponiveis < 0 || numCopiasDisponiveis > numCopias) {
             throw new DadosInvalidosException("Dados de CD de áudio inválidos.");
         }

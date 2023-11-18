@@ -10,7 +10,7 @@ import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.multimidiaPackage.Multimidia;
 
 /* classe "mãe" */
-public abstract class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe,
+abstract public class Pessoa { // como agora os empréstimnos foram transferidos diretamente para a classe mãe,
                                // ela passa a ser abstrata
     private String nome;
     private LocalDate data;// Data de Registro

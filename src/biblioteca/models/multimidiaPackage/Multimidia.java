@@ -15,7 +15,7 @@ import biblioteca.models.emprestimoPackage.Emprestimo;
 import biblioteca.models.pessoasPackage.Pessoa;
 
 /*classe principal "Multimidia" que ira conter subclasses - Abstrata, pois só há intanciação da suas subclasses*/
-abstract public class Multimidia {
+public class Multimidia {
 
 
     public enum Categoria {
@@ -30,23 +30,20 @@ abstract public class Multimidia {
     private int anoPublicacao; // o ano referente a publicação da obra
     private String sinopse; // resumo conciso e breve do objeto em questão
     private String capa; // no futuro uma classe será implementada no lugar desse atibuto
-    private List<Emprestimo> historicoEmprestimo; // a ideia desse atributo é implementar algo para conter o historico de
-                                        // emprestimo objeto multimidia do acervo
     public boolean disponibilidade; // true se a cópia em questão está disponível, false se não está
     private int numCopias; // número de cópias que tem esse item
     public int numCopiasDisponiveis; // número de copias (ou licensas) desse titulo que estão disponiveis
-    private Map<Integer, Multimidia> mapMultimidia;
-    private static List<Multimidia> listaMultimidia;
     private List<Comentario> comentarios; // comentários de usuários a respeito da obra
     private Categoria categoria;// ação, fantasia, romance, biografia, etc
     private Set<Categoria> categoriasDisponiveis;
     private boolean dano;
+    private String local;
     private LinkedList<Renovacao> reservas; // lista com a ordem de reservas do livro em questão
     // membros ao mesmo tempo.
 
     public Multimidia(String titulo, String autor, String editora, int anoPublicacao, String sinopse,
             String capa, boolean disponibilidade, int numCopias, int numCopiasDisponiveis,
-            Categoria categoria) {
+            Categoria categoria, String local) {
         if (anoPublicacao < 0 || numCopias < 0 || numCopiasDisponiveis < 0 || numCopiasDisponiveis > numCopias) {
             throw new DadosInvalidosException("Dados de multimídia inválidos.");
         }
@@ -57,19 +54,15 @@ abstract public class Multimidia {
         this.anoPublicacao = anoPublicacao;
         this.sinopse = sinopse;
         this.capa = capa;
-        this.historicoEmprestimo = new ArrayList<>();
         this.disponibilidade = disponibilidade;
         this.numCopias = numCopias;
         this.numCopiasDisponiveis = numCopiasDisponiveis;
-        this.mapMultimidia = new HashMap<>();
         this.comentarios = new ArrayList<>();
         this.reservas = new LinkedList<>();
         this.categoria = categoria;
         inicializarCategoriasDisponiveis();
-        if (listaMultimidia == null) {
-            Multimidia.listaMultimidia = new ArrayList<>();
-        }
         this.dano = false;
+        this.local = local;
     }
 
     public void settitulo(String titulo){
@@ -88,6 +81,9 @@ abstract public class Multimidia {
     }
     public void seteditora(String editora){
         this.editora = editora;
+    }
+    public void setlocal(String local){
+        this.local = local;
     }
     public void setanoPublicacao(int anoPublicacao){
         this.anoPublicacao = anoPublicacao;
@@ -110,8 +106,6 @@ abstract public class Multimidia {
     public void setcategoria(Categoria categoria){
         this.categoria = categoria;
     }
-    
-    
     
 
     private void inicializarCategoriasDisponiveis() {
@@ -169,10 +163,6 @@ abstract public class Multimidia {
         return capa;
     }
 
-    public List<Emprestimo> gethistoricoEmprestimo() {
-        return historicoEmprestimo;
-    }
-
     public int getnumCopias() {
         return numCopias;
     }
@@ -187,57 +177,6 @@ abstract public class Multimidia {
 
     public void addcomentario(Comentario comentario) {
         comentarios.add(comentario);
-    }
-
-    public void addhistorico(Emprestimo emprestimo){
-        historicoEmprestimo.add(emprestimo);
-    }
-
-    public void addNovaMultimidia(int id, Multimidia multimidia) {
-        mapMultimidia.put(id, multimidia);
-    }
-
-    /* Metodo para adicionar pessoa a lista */
-    public static void addmultimidia(Multimidia item) {
-        int id = item.getid();
-        for (Multimidia itemm : listaMultimidia) {
-            if (itemm.getid() == id) {
-                System.out.println(
-                        "Erro: Não é possivel adicionar este item, já existe um item com o mesmo ID");
-                return;
-            }
-        }
-        listaMultimidia.add(item);
-    }
-
-    public static List<Multimidia> listarItens() {
-        return listaMultimidia;
-    }
-
-    
-    public Multimidia buscaItemporID(int id) {
-        for (Multimidia item : listaMultimidia) {
-            if (item.getid() == id) {
-                return item; /* Se encontrar, retona o item*/
-            }
-        }
-        return null; /* Se não encontrar, retona NULL */
-    }
-
-    /* Metodo para remover da lista */
-    public static void removerItemLista(int id) {
-        /* cirando um iterador para percorrer a lista */
-        Iterator<Multimidia> iterator = listaMultimidia.iterator();
-        /* enquanto o interador tiver um próximo (não chegou ao fim da lista) */
-        while (iterator.hasNext()) {
-            Multimidia item = iterator.next();
-            if (item.getid() == id) {
-                iterator.remove();
-                System.out.println("Item com ID: " + id + " foi removido com sucesso.\n");
-                return;
-            }
-        }
-        System.out.println("Item com ID " + id + " não encontrado na lista.");
     }
 
 
