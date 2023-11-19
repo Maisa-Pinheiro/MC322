@@ -2,6 +2,7 @@ package biblioteca.models.recursosMultimidiaPackage;
 
 import java.time.LocalDate;
 
+
 public class RecursoMultimidia {
 
     private int id; // número de identificação para o recurso de multimidia
@@ -37,7 +38,7 @@ public class RecursoMultimidia {
     }
 
     /* definição das classes internas */
-    public class Audio {
+    public class Audio implements ItemMultimidia {
         private String categoria; // qual a categoria do item de Audio (Ex.: infantil, adulto, estudos, etc.)
         private String programa; // se necessitar, qual é o programa usado para acessar o recurso de Audio
         private LocalDate data; // data de gravação do recurso
@@ -63,9 +64,19 @@ public class RecursoMultimidia {
         public LocalDate getdata() {
             return data;
         }
+
+        @Override
+        public String getCategoria() {
+            throw new UnsupportedOperationException("Unimplemented method 'getCategoria'");
+        }
+
+        @Override
+        public String getPrograma() {
+            throw new UnsupportedOperationException("Unimplemented method 'getPrograma'");
+        }
     }
 
-    public class Video {
+    public class Video implements ItemMultimidia{
         private String categoria; // qual a categoria do item de Video (Ex.: infantil, adulto, estudos, etc.)
         private String programa; // se necessitar, qual é o programa usado para acessar o recurso de Video
         private String qualidadeImagem; // qualidade da imagem do recurso de video
@@ -90,6 +101,16 @@ public class RecursoMultimidia {
 
         public String getqualidadeImagem() {
             return qualidadeImagem;
+        }
+
+        @Override
+        public String getCategoria() {
+            throw new UnsupportedOperationException("Unimplemented method 'getCategoria'");
+        }
+
+        @Override
+        public String getPrograma() {
+            throw new UnsupportedOperationException("Unimplemented method 'getPrograma'");
         }
     }
 
